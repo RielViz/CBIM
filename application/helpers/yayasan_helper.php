@@ -4,6 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 if (!function_exists('aset')) {
     function aset($path)
     {
+        $real_path = FCPATH . $path;
+        if (file_exists($real_path)) {
+            $ver = filemtime($real_path);
+            return base_url($path) . '?v=' . $ver;
+        }
         return base_url($path);
     }
 }

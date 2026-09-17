@@ -195,24 +195,35 @@ class Page extends CI_Controller
 
     public function kegiatan($params = null)
     {
-        $data = $this->_get_common_data('kegiatan', 'Kegiatan - Yayasan CBIM', 'Video Kegiatan');
-        $this->load->view('templates/pages/header', $data);
-        $data_kontak = $this->m_data->get_data_where("jenis_konten='kontak'", 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where("jenis_konten='alamat'", 'konten')->result_array();
-
-        if ($params == null) {
-            $data_main_video = $this->m_data->get_data_limit('id_video', 'video_kegiatan')->result_array();
-        } else {
-            $where = "id_video=" . base64_decode(hex2bin($params));
-            $data_main_video = $this->m_data->get_data_where($where, 'video_kegiatan')->result_array();
-        }
+        $data = $this->_get_common_data('kegiatan', 'Kegiatan - Yayasan CBIM', 'Kegiatan Yayasan CBIM Kupang');
+        
         $data_all_video = $this->m_data->get_data('video_kegiatan')->result_array();
+        $video_mapped = [];
+        foreach ($data_all_video as $v) {
+            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $v['link'], $match);
+            $ytId = isset($match[1]) ? $match[1] : '';
+            $video_mapped[] = [
+                'id' => $v['id_video'],
+                'youtube_id' => $ytId,
+                'thumb' => $ytId ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg" : '',
+                'judul' => $v['judul_video'],
+                'deskripsi' => $v['deskripsi'],
+                'tanggal' => ''
+            ];
+        }
+        $data['video'] = $video_mapped;
+
+        $data_galeri = $this->m_data->get_data('galeri')->result_array();
+        $galeri_mapped = [];
+        foreach ($data_galeri as $g) {
+            $galeri_mapped[] = [
+                'foto' => $g['foto'],
+                'judul' => $g['judul_foto']
+            ];
+        }
+        $data['galeri'] = $galeri_mapped;
         
-        $data['data_main_video'] = $data_main_video;
-        $data['data_all_video'] = $data_all_video;
-        $data['data_kontak'] = $data_kontak;
-        $data['data_alamat'] = $data_alamat;
-        
+        $this->load->view('templates/pages/header', $data);
         $this->load->view('pages/kegiatan', $data);
         $this->load->view('templates/pages/footer', $data);
     }
@@ -264,6 +275,49 @@ class Page extends CI_Controller
 
         $this->load->view('templates/pages/header', $data);
         $this->load->view('struktur', $data);
+        $this->load->view('templates/pages/footer', $data);
+    }
+
+    public function profil()
+    {
+        $data = $this->_get_common_data('profil', 'Profil Yayasan - Yayasan CBIM', 'Profil, Visi, Misi, dan Legalitas Yayasan CBIM');
+        
+        $konten_raw = $this->m_data->get_data('konten')->result_array();
+        $konten = [];
+        foreach ($konten_raw as $k) {
+            $konten[$k['jenis_konten']] = [
+                'judul' => ucfirst($k['jenis_konten']),
+                'sub_judul' => $k['sub_judul_konten'] ?? '',
+                'isi' => $k['isi_konten']
+            ];
+        }
+        $data['konten'] = $konten;
+
+        $this->load->view('templates/pages/header', $data);
+        $this->load->view('pages/profil', $data);
+        $this->load->view('templates/pages/footer', $data);
+    }
+
+    public function jejaring()
+    {
+        $data = $this->_get_common_data('jejaring', 'Unit Pendidikan & Layanan - Yayasan CBIM', 'Unit Pendidikan dan Layanan Masyarakat Yayasan CBIM');
+        
+        $data['pendidikan'] = [
+            ['internal' => true, 'slug_unit' => 'tk', 'jenjang' => 'TK', 'nama' => 'TK K Citra Bangsa', 'deskripsi' => 'Pendidikan anak usia dini.', 'tautan' => ''],
+            ['internal' => true, 'slug_unit' => 'sd', 'jenjang' => 'SD', 'nama' => 'SD K Citra Bangsa', 'deskripsi' => 'Pendidikan dasar.', 'tautan' => ''],
+            ['internal' => false, 'slug_unit' => 'smp', 'jenjang' => 'SMP', 'nama' => 'SMP K Citra Bangsa', 'deskripsi' => 'Pendidikan menengah pertama.', 'tautan' => 'http://smpkcitrabangsa.com/'],
+            ['internal' => false, 'slug_unit' => 'sma', 'jenjang' => 'SMA', 'nama' => 'SMA K Citra Bangsa', 'deskripsi' => 'Pendidikan menengah atas.', 'tautan' => 'https://smakcitrabangsa.sch.id/'],
+            ['internal' => false, 'slug_unit' => 'ucb', 'jenjang' => 'Universitas', 'nama' => 'Universitas Citra Bangsa', 'deskripsi' => 'Pendidikan tinggi unggul.', 'tautan' => 'https://ucb.ac.id/']
+        ];
+
+        $data['layanan'] = [
+            ['nama' => 'Layanan Kesehatan', 'deskripsi' => 'Klinik kesehatan yayasan', 'jenjang' => 'Umum'],
+            ['nama' => 'Pelatihan Bahasa', 'deskripsi' => 'Kursus bahasa asing', 'jenjang' => 'Umum'],
+            ['nama' => 'Pelatihan Guru', 'deskripsi' => 'Peningkatan kapasitas pendidik', 'jenjang' => 'Pendidik']
+        ];
+
+        $this->load->view('templates/pages/header', $data);
+        $this->load->view('pages/jejaring', $data);
         $this->load->view('templates/pages/footer', $data);
     }
 }

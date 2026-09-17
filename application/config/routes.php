@@ -64,6 +64,18 @@ $route['tk/(:any)'] = 'tk/$1';
 // Struktur Organisasi
 $route['struktur'] = 'page/struktur';
 
+// Profil & Jejaring
+$route['profil'] = 'page/profil';
+$route['jejaring'] = 'page/jejaring';
+
+// Informasi
+$route['berita'] = 'page/berita';
+$route['berita/(:any)'] = 'page/berita/$1';
+$route['kegiatan'] = 'page/kegiatan';
+$route['kegiatan/(:any)'] = 'page/kegiatan/$1';
+$route['galeri'] = 'page/galeri';
+$route['galeri/(:any)'] = 'page/galeri/$1';
+
 // Sitemap XML
 $route['sitemap\.xml'] = 'sitemap';
 

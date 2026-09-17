@@ -34,9 +34,16 @@
             e.stopPropagation();
             var buka = btn.getAttribute('aria-expanded') === 'true';
             tutupSemuaLaci(item);
-            btn.setAttribute('aria-expanded', buka ? 'false' : 'true');
-            if (buka) { lac.removeAttribute('data-buka'); }
-            else      { lac.setAttribute('data-buka', '1'); }
+            
+            // Di layar lebar, jika tombol diklik, biarkan tetap terbuka (jangan ditutup)
+            // karena pengguna mungkin mengklik untuk memastikan menu terbuka setelah di-hover.
+            if (buka && layarSempit()) {
+                btn.setAttribute('aria-expanded', 'false');
+                lac.removeAttribute('data-buka');
+            } else {
+                btn.setAttribute('aria-expanded', 'true');
+                lac.setAttribute('data-buka', '1');
+            }
         });
 
         // Di layar lebar, laci ikut terbuka saat kursor lewat. Di layar sempit

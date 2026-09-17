@@ -151,15 +151,14 @@ img, svg { max-width: 100%; }
 .menu__tautan[aria-expanded="true"] .menu__panah { transform: rotate(180deg); }
 
 .laci {
-    position: absolute; top: calc(100% + 6px); left: 0; z-index: 90;
+    position: absolute; top: 100%; left: 0; z-index: 90;
     min-width: 260px; padding: 8px;
-    background: var(--putih); border: 1px solid var(--garis);
+    margin-top: -1px;
+    border-top: 7px solid transparent;
+    background-clip: padding-box;
+    background-color: var(--putih); border-left: 1px solid var(--garis); border-right: 1px solid var(--garis); border-bottom: 1px solid var(--garis);
     border-radius: var(--r-besar); box-shadow: 0 12px 30px rgba(22,35,63,.14);
     display: none;
-}
-.laci::before {
-    content: ""; position: absolute;
-    bottom: 100%; left: 0; right: 0; height: 16px;
 }
 .laci[data-buka="1"] { display: block; }
 .laci a {

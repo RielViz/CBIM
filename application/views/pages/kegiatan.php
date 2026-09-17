@@ -1,144 +1,109 @@
 <?php
-// Helper to extract YouTube Video ID
-if (!function_exists('extractYouTubeVideoId')) {
-    function extractYouTubeVideoId($youtubeLink)
-    {
-        $urlComponents = parse_url($youtubeLink);
-
-        if (isset($urlComponents['host']) && ($urlComponents['host'] === 'www.youtube.com' || $urlComponents['host'] === 'youtube.com')) {
-            parse_str($urlComponents['query'] ?? '', $queryParams);
-            return isset($queryParams['v']) ? $queryParams['v'] : '';
-        } elseif (isset($urlComponents['host']) && $urlComponents['host'] === 'youtu.be') {
-            $pathSegments = explode('/', $urlComponents['path']);
-            return end($pathSegments);
-        } else {
-            return false;
-        }
-    }
-}
+defined('BASEPATH') or exit('No direct script access allowed');
+$pertama = !empty($video) ? $video[0] : NULL;
+$jumlah  = count($video);
 ?>
+<section class="kepala-hal">
+    <div class="wadah">
+        <p class="remah"><a href="<?= base_url(); ?>">Beranda</a> &rsaquo; Kegiatan</p>
+        <h1>Kegiatan Yayasan</h1>
+        <p>
+            Rekaman acara, kunjungan, dan kegiatan di lingkungan yayasan.
+            <?php if ($jumlah): ?><?= $jumlah; ?> video tersedia.<?php endif; ?>
+        </p>
+    </div>
+</section>
 
-<!--begin::Landing hero spacer-->
-<div class="d-flex flex-column flex-center w-100 min-h-1px min-h-lg-1px px-9"></div>
-<!--end::Landing hero spacer-->
-</div>
-<!--end::Wrapper-->
-</div>
-<!--end::Header Section-->
+<section class="blok blok--putih">
+    <div class="wadah">
+        <?php if (empty($video)): ?>
+            <div class="hampa">
+                <?= ikon('main', 44); ?>
+                <h3>Belum ada video kegiatan</h3>
+                <p>Video akan muncul di sini begitu admin menambahkannya lewat panel.</p>
+                <?php if (!empty($pengaturan['youtube'])): ?>
+                    <p style="margin-top:20px">
+                        <a class="tbl tbl--garis tbl--kecil" href="<?= html_escape($pengaturan['youtube']); ?>"
+                           target="_blank" rel="noopener">Kunjungi YouTube yayasan</a>
+                    </p>
+                <?php endif; ?>
+            </div>
 
-<!--begin::Video Kegiatan Page-->
-<div class="py-12 py-lg-18">
-    <div class="container">
-        <!--begin::Section Header-->
-        <div class="cbim-section-header">
-            <h2 class="fs-2hx text-dark" id="video-kegiatan-page" data-kt-scroll-offset="{default: 125, lg: 150}">
-                Video Kegiatan
-            </h2>
-            <p class="section-subtitle">Dokumentasi kegiatan Yayasan Citra Bina Insan Mandiri</p>
-        </div>
-        <!--end::Section Header-->
+        <?php else: ?>
+            <!-- Pemutar di kiri, daftar putar di kanan. Pengunjung bisa melihat
+                 video apa saja yang tersedia tanpa menggulir ke bawah dulu. -->
+            <div class="tonton" id="layarVideo">
+                <div class="tonton__utama">
+                    <div class="layar">
+                        <iframe id="bingkaiVideo"
+                                src="https://www.youtube-nocookie.com/embed/<?= html_escape($pertama['youtube_id']); ?>?rel=0"
+                                title="Pemutar video kegiatan"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen loading="lazy"></iframe>
+                    </div>
 
-        <?php if (count($data_all_video) > 0 && count($data_main_video) > 0) : ?>
-            <?php $mainVideoId = extractYouTubeVideoId($data_main_video[0]['link']); ?>
-
-            <!--begin::Main Video Player-->
-            <div class="cbim-fade-item" data-aos="fade-up" data-aos-duration="800">
-                <div class="cbim-video-main">
-                    <?php if ($mainVideoId) : ?>
-                        <iframe
-                            src="https://www.youtube.com/embed/<?= $mainVideoId; ?>?rel=0"
-                            title="<?= htmlspecialchars($data_main_video[0]['judul_video']); ?>"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen>
-                        </iframe>
-                    <?php else : ?>
-                        <div class="d-flex align-items-center justify-content-center" style="height: 500px; background: var(--cbim-dark);">
-                            <div class="text-center">
-                                <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
-                                <p class="text-white mt-3">Link video tidak valid</p>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    <div class="video-info">
-                        <h3><?= $mainVideoId ? htmlspecialchars($data_main_video[0]['judul_video']) : '<em>Link video tidak valid!</em>'; ?></h3>
-                        <?php if (!empty($data_main_video[0]['deskripsi'])) : ?>
-                            <p><?= strip_tags(substr($data_main_video[0]['deskripsi'], 0, 200)); ?></p>
+                    <div class="tonton__meta">
+                        <span class="kicir kicir--gelap" style="margin:0">Sedang diputar</span>
+                        <?php if (!empty($pertama['tanggal'])): ?>
+                            <span style="font-size:.88rem;color:var(--teks-redup)"><?= tanggal_id($pertama['tanggal']); ?></span>
                         <?php endif; ?>
                     </div>
+
+                    <h2 id="judulVideo" style="font-size:1.5rem;margin-bottom:.35em"><?= html_escape($pertama['judul']); ?></h2>
+                    <p id="deskripsiVideo" style="color:var(--teks-redup);max-width:none"><?= html_escape($pertama['deskripsi']); ?></p>
                 </div>
-            </div>
-            <!--end::Main Video Player-->
 
-            <!--begin::Video Playlist Grid-->
-            <?php if (count($data_all_video) > 1) : ?>
-                <div class="mt-8 mb-6">
-                    <div class="d-flex align-items-center justify-content-between mb-6">
-                        <h4 class="fw-bolder text-dark mb-0">
-                            <i class="bi bi-collection-play me-2 text-cbim-primary"></i>
-                            Daftar Video Lainnya
-                        </h4>
-                        <span class="badge badge-light-primary fs-7 fw-bold px-3 py-2">
-                            <?= count($data_all_video); ?> Video
-                        </span>
+                <?php if ($jumlah > 1): ?>
+                <aside class="antrean">
+                    <div class="antrean__kepala">
+                        <strong>Daftar video</strong>
+                        <span class="antrean__jumlah"><?= $jumlah; ?> video</span>
                     </div>
-
-                    <div class="row g-5">
-                        <?php foreach ($data_all_video as $key => $video) :
-                            $videoId = extractYouTubeVideoId($video['link']);
-                            $thumbnail = $videoId ? "https://img.youtube.com/vi/{$videoId}/hqdefault.jpg" : '';
-                            $isActive = ($video['id_video'] == $data_main_video[0]['id_video']);
-                        ?>
-                            <div class="col-sm-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="<?= ($key % 4) * 80; ?>">
-                                <a href="<?= base_url('page/kegiatan/') . bin2hex(base64_encode($video['id_video'])); ?>" class="text-decoration-none">
-                                    <div class="cbim-video-card <?= $isActive ? 'active-video' : ''; ?>">
-                                        <div class="video-thumbnail">
-                                            <?php if ($thumbnail) : ?>
-                                                <img src="<?= $thumbnail; ?>"
-                                                     alt="<?= htmlspecialchars($video['judul_video']); ?>"
-                                                     loading="lazy" decoding="async" />
-                                            <?php else : ?>
-                                                <div class="d-flex align-items-center justify-content-center h-100">
-                                                    <i class="bi bi-film text-muted" style="font-size: 2rem;"></i>
-                                                </div>
-                                            <?php endif; ?>
-                                            <div class="play-overlay">
-                                                <div class="play-btn-circle">
-                                                    <i class="bi bi-play-fill"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="video-card-body">
-                                            <h5>
-                                                <?php if ($isActive) : ?>
-                                                    <i class="bi bi-broadcast text-cbim-primary me-1"></i>
-                                                <?php endif; ?>
-                                                <?= $videoId ? htmlspecialchars($video['judul_video']) : '<em>Link tidak valid</em>'; ?>
-                                            </h5>
-                                            <?php if (!empty($video['deskripsi'])) : ?>
-                                                <div class="video-desc"><?= strip_tags(substr($video['deskripsi'], 0, 80)); ?>...</div>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                    <div class="antrean__isi">
+                        <?php foreach ($video as $i => $v): ?>
+                            <button type="button" class="antre tayang"
+                                    data-yt="<?= html_escape($v['youtube_id']); ?>"
+                                    data-judul="<?= html_escape($v['judul']); ?>"
+                                    data-deskripsi="<?= html_escape($v['deskripsi']); ?>"
+                                    aria-current="<?= $i === 0 ? 'true' : 'false'; ?>">
+                                <span class="antre__gambar">
+                                    <img src="<?= html_escape($v['thumb']); ?>" alt="" loading="lazy" decoding="async">
+                                    <span class="antre__main"><?= ikon('main', 20); ?></span>
+                                </span>
+                                <span class="antre__isi">
+                                    <span class="antre__judul"><?= html_escape($v['judul']); ?></span>
+                                    <span class="antre__no">Video <?= $i + 1; ?> dari <?= $jumlah; ?></span>
+                                </span>
+                            </button>
                         <?php endforeach; ?>
                     </div>
-                </div>
-            <?php endif; ?>
-            <!--end::Video Playlist Grid-->
-
-        <?php else : ?>
-            <!--begin::Empty State-->
-            <div class="text-center py-20">
-                <div class="mb-6">
-                    <i class="bi bi-camera-video" style="font-size: 4rem; color: var(--cbim-gray-200);"></i>
-                </div>
-                <h3 class="text-muted fw-bold fs-3">Belum Ada Video</h3>
-                <p class="text-muted fs-6">Video kegiatan akan segera ditampilkan di sini.</p>
+                </aside>
+                <?php endif; ?>
             </div>
-            <!--end::Empty State-->
         <?php endif; ?>
-
     </div>
-</div>
-<!--end::Video Kegiatan Page-->
+</section>
+
+<?php if (!empty($galeri)): ?>
+<section class="blok blok--krem">
+    <div class="wadah">
+        <div class="kepala-blok masuk" style="display:flex;justify-content:space-between;align-items:end;max-width:none;gap:20px;flex-wrap:wrap">
+            <div>
+                <span class="kicir kicir--gelap">Dokumentasi foto</span>
+                <h2>Galeri kegiatan</h2>
+                <span class="garis-emas"></span>
+            </div>
+            <a class="tbl tbl--garis tbl--kecil" href="<?= base_url('galeri'); ?>">Galeri lengkap</a>
+        </div>
+
+        <div class="galeri-bata">
+            <?php foreach (array_slice($galeri, 0, 8) as $g): ?>
+                <figure class="bingkai masuk" style="pointer-events:none">
+                    <img src="<?= base_url('uploads/galeri/' . $g['foto']); ?>"
+                         alt="<?= html_escape($g['judul']); ?>" loading="lazy" decoding="async">
+                </figure>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
