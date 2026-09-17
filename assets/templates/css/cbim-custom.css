@@ -1,0 +1,484 @@
+/* ============================================================
+   CBIM Custom Styles
+   Yayasan Citra Bina Insan Mandiri — Brand Overrides
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   1. CSS Custom Properties (Design Tokens)
+   FE-06: Typographic Scale & Brand Colors
+   ---------------------------------------------------------- */
+:root {
+    /* Typography Scale */
+    --font-h1: 28px;
+    --font-h2: 22px;
+    --font-h3: 18px;
+    --font-body: 15px;
+    --font-caption: 13px;
+
+    /* Font Weights — only 400 and 700 */
+    --fw-normal: 400;
+    --fw-bold: 700;
+
+    /* Brand Colors — CBIM */
+    --cbim-primary: #20AA3E;
+    --cbim-primary-dark: #188A32;
+    --cbim-secondary: #03A588;
+    --cbim-accent: #FFD80C;
+    --cbim-gradient: linear-gradient(90deg, var(--cbim-primary) 0%, var(--cbim-secondary) 100%);
+
+    /* Neutral Colors */
+    --cbim-dark: #1B1B28;
+    --cbim-text: #333333;
+    --cbim-text-muted: #6B7280;
+    --cbim-bg-light: #F9FAFB;
+}
+
+/* ----------------------------------------------------------
+   2. Smooth Scroll & Scroll Padding
+   FE-02: scroll-behavior: smooth
+   FE-03: scroll-padding-top for sticky navbar
+   ---------------------------------------------------------- */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Prevent navbar from covering anchor targets */
+}
+
+/* ----------------------------------------------------------
+   3. Typography Application
+   FE-06: Consistent hierarchy across all pages
+   ---------------------------------------------------------- */
+h1, .fs-2hx {
+    font-size: var(--font-h1) !important;
+    font-weight: var(--fw-bold) !important;
+    line-height: 1.3;
+}
+
+h2, .fs-2x {
+    font-size: var(--font-h2) !important;
+    font-weight: var(--fw-bold) !important;
+    line-height: 1.35;
+}
+
+h3, .fs-2 {
+    font-size: var(--font-h3) !important;
+    font-weight: var(--fw-bold) !important;
+    line-height: 1.4;
+}
+
+body, p, .fs-4, .fs-5 {
+    font-size: var(--font-body) !important;
+    font-weight: var(--fw-normal);
+    line-height: 1.6;
+}
+
+small, .fs-6, .fs-7, caption, .text-caption {
+    font-size: var(--font-caption) !important;
+    font-weight: var(--fw-normal);
+}
+
+/* Bold variants */
+.fw-bolder, .fw-boldest, strong, b {
+    font-weight: var(--fw-bold) !important;
+}
+
+.fw-bold {
+    font-weight: var(--fw-normal) !important;
+}
+
+/* Hero title override — keep larger on desktop */
+.fs-lg-3x {
+    font-size: var(--font-h1) !important;
+}
+
+@media (min-width: 992px) {
+    h1, .fs-2hx {
+        font-size: 32px !important;
+    }
+    .fs-lg-3x {
+        font-size: 40px !important;
+    }
+}
+
+/* ----------------------------------------------------------
+   4. Fade-In Animation (IntersectionObserver driven)
+   FE-02: CSS @keyframes for reveal on scroll
+   ---------------------------------------------------------- */
+@keyframes cbimFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cbimFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.cbim-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.cbim-reveal.cbim-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for children */
+.cbim-reveal-delay-1 { transition-delay: 0.1s; }
+.cbim-reveal-delay-2 { transition-delay: 0.2s; }
+.cbim-reveal-delay-3 { transition-delay: 0.3s; }
+.cbim-reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ----------------------------------------------------------
+   5. Sticky Navbar Active State
+   FE-03: Highlight active menu link
+   ---------------------------------------------------------- */
+#kt_landing_menu .menu-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+#kt_landing_menu .menu-link.active {
+    color: var(--cbim-primary) !important;
+}
+
+#kt_landing_menu .menu-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: var(--cbim-gradient);
+    border-radius: 2px;
+}
+
+/* Sticky header backdrop */
+.landing-header[data-kt-sticky="on"] {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ----------------------------------------------------------
+   6. Brand Color Overrides (Metronic)
+   FE-07: Override primary/secondary with CBIM brand
+   ---------------------------------------------------------- */
+.btn-primary {
+    background-color: var(--cbim-primary) !important;
+    border-color: var(--cbim-primary) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--cbim-primary-dark) !important;
+    border-color: var(--cbim-primary-dark) !important;
+}
+
+.btn-success {
+    background-color: var(--cbim-primary) !important;
+    border-color: var(--cbim-primary) !important;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: var(--cbim-primary-dark) !important;
+    border-color: var(--cbim-primary-dark) !important;
+}
+
+.text-primary {
+    color: var(--cbim-primary) !important;
+}
+
+.text-hover-primary:hover {
+    color: var(--cbim-primary) !important;
+}
+
+/* Landing dark bg */
+.landing-dark-bg {
+    background-color: var(--cbim-dark) !important;
+}
+
+/* ----------------------------------------------------------
+   7. Cookie Consent Banner
+   BE-10: Styling
+   ---------------------------------------------------------- */
+.cbim-cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: rgba(27, 27, 40, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: transform 0.4s ease-out;
+    border-top: 2px solid var(--cbim-primary);
+}
+
+.cbim-cookie-banner.cbim-cookie-show {
+    transform: translateY(0);
+}
+
+.cbim-cookie-banner .cbim-cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cbim-cookie-banner .cbim-cookie-text {
+    color: #d1d5db;
+    font-size: var(--font-body);
+    flex: 1;
+    min-width: 250px;
+}
+
+.cbim-cookie-banner .cbim-cookie-text a {
+    color: var(--cbim-primary);
+    text-decoration: underline;
+}
+
+.cbim-cookie-banner .cbim-cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.cbim-cookie-banner .cbim-cookie-accept {
+    background: var(--cbim-primary);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: var(--font-body);
+    font-weight: var(--fw-bold);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cbim-cookie-banner .cbim-cookie-accept:hover {
+    background: var(--cbim-primary-dark);
+}
+
+.cbim-cookie-banner .cbim-cookie-reject {
+    background: transparent;
+    color: #d1d5db;
+    border: 1px solid #6B7280;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: var(--font-body);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.cbim-cookie-banner .cbim-cookie-reject:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+/* ----------------------------------------------------------
+   8. Language Switcher
+   FE-08: Style for language toggle button
+   ---------------------------------------------------------- */
+.cbim-lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 4px;
+    margin-left: 8px;
+}
+
+.cbim-lang-btn {
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    font-size: var(--font-caption);
+    font-weight: var(--fw-bold);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.cbim-lang-btn.active {
+    background: var(--cbim-primary);
+    color: #fff;
+}
+
+.cbim-lang-btn:hover:not(.active) {
+    color: #fff;
+}
+
+/* When header is sticky, different styling */
+[data-kt-sticky="on"] .cbim-lang-switcher {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-kt-sticky="on"] .cbim-lang-btn {
+    color: #6B7280;
+}
+
+[data-kt-sticky="on"] .cbim-lang-btn.active {
+    background: var(--cbim-primary);
+    color: #fff;
+}
+
+/* ----------------------------------------------------------
+   9. Contact Form
+   BE-07: Contact form styles
+   ---------------------------------------------------------- */
+.cbim-contact-form {
+    max-width: 100%;
+}
+
+.cbim-contact-form .form-control {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: var(--font-body);
+    transition: border-color 0.2s;
+}
+
+.cbim-contact-form .form-control:focus {
+    border-color: var(--cbim-primary);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(32, 170, 62, 0.15);
+    color: #fff;
+}
+
+.cbim-contact-form .form-control::placeholder {
+    color: #6B7280;
+}
+
+.cbim-contact-form textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.cbim-contact-form .btn-submit {
+    background: var(--cbim-gradient);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-size: var(--font-body);
+    font-weight: var(--fw-bold);
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.cbim-contact-form .btn-submit:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.cbim-contact-form .btn-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ----------------------------------------------------------
+   10. Accessibility Enhancements
+   FE-05: Focus styles, skip link, contrast fixes
+   ---------------------------------------------------------- */
+
+/* Skip to content link */
+.cbim-skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 10000;
+    padding: 12px 24px;
+    background: var(--cbim-primary);
+    color: #fff;
+    text-decoration: none;
+    font-weight: var(--fw-bold);
+    border-radius: 0 0 8px 8px;
+    transition: top 0.2s;
+}
+
+.cbim-skip-link:focus {
+    top: 0;
+}
+
+/* Enhanced focus outlines for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--cbim-primary);
+    outline-offset: 2px;
+}
+
+/* Improve contrast on dark backgrounds */
+.landing-dark-bg .text-gray-600 {
+    color: #B0B8C8 !important; /* Meets 4.5:1 on dark bg */
+}
+
+.landing-dark-bg .text-gray-700 {
+    color: #C4CAD4 !important; /* Meets 4.5:1 on dark bg */
+}
+
+.text-muted {
+    color: #6B7280 !important; /* Meets 4.5:1 on white bg */
+}
+
+/* Ensure all interactive elements show pointer cursor */
+a[href],
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.menu-link {
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------------
+   11. Privacy Policy Page
+   BE-10: Styles
+   ---------------------------------------------------------- */
+.cbim-privacy-page {
+    padding: 40px 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cbim-privacy-page h2 {
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--cbim-text);
+}
+
+.cbim-privacy-page p,
+.cbim-privacy-page li {
+    color: var(--cbim-text-muted);
+    margin-bottom: 8px;
+}
+
+.cbim-privacy-page ul {
+    padding-left: 24px;
+}

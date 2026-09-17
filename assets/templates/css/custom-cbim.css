@@ -1,0 +1,1185 @@
+/**
+ * Yayasan Citra Bina Insan Mandiri (CBIM)
+ * Custom Stylesheet - Brand Identity, Responsiveness, Typography, Accessibility & Interactive Components
+ */
+
+:root {
+    /* FE-06: Typographic Scale */
+    --font-h1: 28px;
+    --font-h2: 22px;
+    --font-h3: 18px;
+    --font-body: 15px;
+    --font-caption: 13px;
+    --font-weight-regular: 400;
+    --font-weight-bold: 700;
+
+    /* FE-07: CBIM Brand Identity Colors */
+    --cbim-primary: #890C25;
+    --cbim-primary-dark: #660519;
+    --cbim-primary-light: #B71A34;
+    --cbim-gold: #FFD80C;
+    --cbim-gold-hover: #E5C200;
+    --cbim-dark: #110C2D;
+    --cbim-dark-soft: #1E1B38;
+    --cbim-gray-100: #F8F9FA;
+    --cbim-gray-200: #EFF2F5;
+    --cbim-gray-600: #7E8299;
+    --cbim-gray-800: #3F4254;
+    --cbim-border: #E4E6EF;
+    --cbim-radius: 12px;
+    --cbim-shadow-sm: 0 2px 8px rgba(17, 12, 45, 0.06);
+    --cbim-shadow-md: 0 8px 24px rgba(17, 12, 45, 0.12);
+    --cbim-shadow-lg: 0 16px 40px rgba(17, 12, 45, 0.18);
+}
+
+/* FE-02: Global Smooth Scroll & Base Typography */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: var(--font-body);
+    font-weight: var(--font-weight-regular);
+    color: var(--cbim-gray-800);
+    overflow-x: hidden;
+}
+
+h1, .h1 {
+    font-size: var(--font-h1) !important;
+    font-weight: var(--font-weight-bold) !important;
+    line-height: 1.35;
+}
+
+h2, .h2 {
+    font-size: var(--font-h2) !important;
+    font-weight: var(--font-weight-bold) !important;
+    line-height: 1.4;
+}
+
+h3, .h3 {
+    font-size: var(--font-h3) !important;
+    font-weight: var(--font-weight-bold) !important;
+    line-height: 1.45;
+}
+
+small, .caption-text {
+    font-size: var(--font-caption) !important;
+}
+
+/* FE-05: WCAG 2.1 AA Accessibility */
+.skip-to-content {
+    position: absolute;
+    top: -60px;
+    left: 20px;
+    background: var(--cbim-primary);
+    color: #ffffff !important;
+    padding: 10px 18px;
+    z-index: 99999;
+    font-weight: var(--font-weight-bold);
+    border-radius: 0 0 8px 8px;
+    transition: top 0.2s ease-in-out;
+    text-decoration: none;
+    box-shadow: var(--cbim-shadow-md);
+}
+
+.skip-to-content:focus {
+    top: 0;
+    outline: 3px solid var(--cbim-gold);
+}
+
+:focus-visible {
+    outline: 3px solid var(--cbim-primary) !important;
+    outline-offset: 3px !important;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--cbim-primary) !important;
+    outline-offset: 2px !important;
+}
+
+/* High Contrast Link & Text Tweaks */
+.text-cbim-primary {
+    color: var(--cbim-primary) !important;
+}
+
+.bg-cbim-primary {
+    background-color: var(--cbim-primary) !important;
+}
+
+.btn-cbim-primary {
+    background-color: var(--cbim-primary) !important;
+    color: #ffffff !important;
+    border: none;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.btn-cbim-primary:hover,
+.btn-cbim-primary:focus {
+    background-color: var(--cbim-primary-dark) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(137, 12, 37, 0.25);
+}
+
+/* FE-03: Sticky Navbar with Active State & Scroll Offset */
+section[id], div[id] {
+    scroll-margin-top: 90px;
+}
+
+.cbim-sticky-header {
+    position: sticky !important;
+    top: 0;
+    z-index: 1020;
+    background: rgba(255, 255, 255, 0.96) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 18px rgba(17, 12, 45, 0.08);
+    transition: all 0.3s ease;
+}
+
+.cbim-nav-link {
+    font-weight: 600;
+    color: var(--cbim-dark) !important;
+    position: relative;
+    padding: 10px 16px !important;
+    font-size: 15px;
+    transition: color 0.2s ease;
+}
+
+.cbim-nav-link:hover {
+    color: var(--cbim-primary) !important;
+}
+
+.cbim-nav-link.active,
+.cbim-nav-link.cbim-nav-active {
+    color: var(--cbim-primary) !important;
+}
+
+.cbim-nav-link.active::after,
+.cbim-nav-link.cbim-nav-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 16px;
+    right: 16px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cbim-primary) 0%, var(--cbim-gold) 100%);
+    border-radius: 2px;
+}
+
+/* FE-02: Micro-animations and Section Fade-in */
+@keyframes cbimFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cbim-fade-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.cbim-fade-item.cbim-in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* FE-01: Mobile Responsiveness (360px, 390px, 430px) */
+.cbim-table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--cbim-radius);
+    border: 1px solid var(--cbim-border);
+    margin-bottom: 1.5rem;
+}
+
+.cbim-table-responsive table {
+    width: 100%;
+    min-width: 580px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+    /* Mobile Viewports: 360px, 390px, 430px */
+    .container {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    h1, .h1 {
+        font-size: 22px !important;
+    }
+
+    h2, .h2 {
+        font-size: 19px !important;
+    }
+
+    h3, .h3 {
+        font-size: 16px !important;
+    }
+
+    /* Cards Structure Organisasi */
+    .cbim-org-card {
+        margin-bottom: 16px;
+    }
+
+    .cbim-org-card img {
+        height: 220px !important;
+        object-fit: cover;
+    }
+
+    /* Hero section */
+    .min-h-350px {
+        min-h: 280px !important;
+    }
+
+    /* Table responsive mobile hint */
+    .cbim-table-responsive::after {
+        content: '← Geser tabel untuk melihat selengkapnya →';
+        display: block;
+        text-align: center;
+        font-size: 11px;
+        color: var(--cbim-gray-600);
+        padding: 6px;
+        background: var(--cbim-gray-100);
+        border-top: 1px solid var(--cbim-border);
+    }
+}
+
+/* FE-08: i18n Switcher Pill */
+.cbim-lang-switch {
+    display: inline-flex;
+    align-items: center;
+    background: var(--cbim-gray-200);
+    border-radius: 30px;
+    padding: 4px;
+    border: 1px solid var(--cbim-border);
+}
+
+.cbim-lang-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--cbim-gray-600);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cbim-lang-btn.active {
+    background: var(--cbim-primary);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(137, 12, 37, 0.3);
+}
+
+/* INT-01: Sitewide Search in Navbar */
+.cbim-search-wrapper {
+    position: relative;
+    max-width: 280px;
+    width: 100%;
+}
+
+.cbim-search-input {
+    width: 100%;
+    border-radius: 30px;
+    padding: 10px 18px 10px 40px;
+    font-size: 14px;
+    border: 1px solid var(--cbim-border);
+    background: #ffffff;
+    transition: all 0.25s ease;
+}
+
+.cbim-search-input:focus {
+    border-color: var(--cbim-primary);
+    box-shadow: 0 0 0 3px rgba(137, 12, 37, 0.12);
+    outline: none !important;
+}
+
+.cbim-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--cbim-gray-600);
+    pointer-events: none;
+}
+
+.cbim-search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-radius: var(--cbim-radius);
+    box-shadow: var(--cbim-shadow-md);
+    border: 1px solid var(--cbim-border);
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 1050;
+    display: none;
+    margin-top: 8px;
+}
+
+.cbim-search-item {
+    display: block;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--cbim-gray-200);
+    color: var(--cbim-dark);
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.cbim-search-item:last-child {
+    border-bottom: none;
+}
+
+.cbim-search-item:hover,
+.cbim-search-item:focus {
+    background: var(--cbim-gray-100);
+    color: var(--cbim-primary);
+}
+
+/* INT-04: Footer Newsletter */
+.cbim-newsletter-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--cbim-radius);
+    padding: 24px;
+}
+
+.cbim-newsletter-input {
+    border-radius: 8px 0 0 8px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.cbim-newsletter-input:focus {
+    background: rgba(255,255,255,0.15);
+    color: #ffffff;
+    border-color: var(--cbim-gold);
+}
+
+.cbim-newsletter-btn {
+    border-radius: 0 8px 8px 0;
+    background: var(--cbim-gold);
+    color: var(--cbim-dark);
+    font-weight: 700;
+    border: none;
+}
+
+.cbim-newsletter-btn:hover {
+    background: var(--cbim-gold-hover);
+}
+
+/* BE-10: Cookie Consent Banner */
+.cbim-cookie-banner {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: var(--cbim-radius);
+    box-shadow: var(--cbim-shadow-lg);
+    border: 1px solid var(--cbim-border);
+    padding: 20px 24px;
+    z-index: 9999;
+    display: none;
+    animation: cbimFadeInUp 0.4s ease forwards;
+}
+
+@media (max-width: 576px) {
+    .cbim-cookie-banner {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        padding: 16px;
+    }
+}
+
+/* INT-05: Floating Chatbot FAQ & WhatsApp Connect */
+.cbim-float-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.cbim-chat-toggle-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--cbim-primary) 0%, #B71A34 100%);
+    color: #ffffff;
+    border: none;
+    box-shadow: var(--cbim-shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cbim-chat-toggle-btn:hover {
+    transform: scale(1.08);
+    box-shadow: var(--cbim-shadow-lg);
+}
+
+.cbim-chat-popup {
+    width: 360px;
+    max-width: calc(100vw - 32px);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: var(--cbim-shadow-lg);
+    border: 1px solid var(--cbim-border);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    animation: cbimFadeInUp 0.3s ease forwards;
+}
+
+.cbim-chat-header {
+    background: linear-gradient(135deg, var(--cbim-primary-dark) 0%, var(--cbim-primary) 100%);
+    color: #ffffff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cbim-chat-body {
+    padding: 16px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.cbim-faq-btn {
+    width: 100%;
+    text-align: left;
+    background: var(--cbim-gray-100);
+    border: 1px solid var(--cbim-border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cbim-dark);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.cbim-faq-btn:hover {
+    background: #ffffff;
+    border-color: var(--cbim-primary);
+    color: var(--cbim-primary);
+}
+
+.cbim-faq-answer {
+    display: none;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--cbim-gray-800);
+    padding: 8px 12px 14px;
+    background: #ffffff;
+    border-left: 3px solid var(--cbim-primary);
+    margin-bottom: 10px;
+}
+
+/* INT-02: Multi-step PPDB Styles */
+.cbim-stepper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.cbim-stepper::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    right: 40px;
+    height: 3px;
+    background: var(--cbim-border);
+    z-index: 1;
+}
+
+.cbim-step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+}
+
+.cbim-step-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid var(--cbim-border);
+    color: var(--cbim-gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin: 0 auto 8px;
+    transition: all 0.3s ease;
+}
+
+.cbim-step.active .cbim-step-circle {
+    border-color: var(--cbim-primary);
+    background: var(--cbim-primary);
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(137, 12, 37, 0.15);
+}
+
+.cbim-step.completed .cbim-step-circle {
+    border-color: #50CD89;
+    background: #50CD89;
+    color: #ffffff;
+}
+
+.cbim-step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cbim-gray-600);
+}
+
+.cbim-step.active .cbim-step-label {
+    color: var(--cbim-primary);
+}
+
+.cbim-step-panel {
+    display: none;
+}
+
+.cbim-step-panel.active {
+    display: block;
+    animation: cbimFadeInUp 0.3s ease forwards;
+}
+
+/* =========================================================
+   CBIM Section Headers
+   ========================================================= */
+.cbim-section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.cbim-section-header h2 {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 12px;
+}
+
+.cbim-section-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cbim-primary) 0%, var(--cbim-gold) 100%);
+    border-radius: 2px;
+}
+
+.cbim-section-header .section-subtitle {
+    color: var(--cbim-gray-600);
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+/* =========================================================
+   CBIM News / Berita Cards
+   ========================================================= */
+.cbim-news-featured {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--cbim-dark);
+    margin-bottom: 2.5rem;
+    box-shadow: var(--cbim-shadow-lg);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.cbim-news-featured:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(17, 12, 45, 0.25);
+}
+
+.cbim-news-featured .featured-img {
+    width: 100%;
+    height: 420px;
+    min-height: 300px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cbim-news-featured:hover .featured-img {
+    transform: scale(1.03);
+}
+
+.cbim-news-featured .featured-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(17, 12, 45, 0.92) 0%,
+        rgba(17, 12, 45, 0.55) 40%,
+        rgba(17, 12, 45, 0.1) 70%,
+        transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem 2.5rem;
+}
+
+.cbim-news-featured .featured-overlay .cbim-badge-date {
+    margin-bottom: 12px;
+}
+
+.cbim-news-featured .featured-overlay h3 {
+    color: #ffffff !important;
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+
+.cbim-news-featured .featured-overlay p {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cbim-news-featured .featured-overlay .btn-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--cbim-gold);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: gap 0.25s ease;
+}
+
+.cbim-news-featured .featured-overlay .btn-read-more:hover {
+    gap: 10px;
+    color: #ffffff;
+}
+
+/* News Card Grid Item */
+.cbim-news-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--cbim-border);
+    box-shadow: var(--cbim-shadow-sm);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cbim-news-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--cbim-primary) 0%, var(--cbim-gold) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.cbim-news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--cbim-shadow-md);
+    border-color: transparent;
+}
+
+.cbim-news-card:hover::before {
+    opacity: 1;
+}
+
+.cbim-news-card .card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+    min-height: 180px;
+    flex-shrink: 0;
+}
+
+.cbim-news-card .card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cbim-news-card:hover .card-img-wrapper img {
+    transform: scale(1.08);
+}
+
+.cbim-news-card .card-img-wrapper .img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(17, 12, 45, 0.15) 100%);
+    transition: background 0.3s ease;
+}
+
+.cbim-news-card:hover .card-img-wrapper .img-overlay {
+    background: linear-gradient(180deg, transparent 30%, rgba(137, 12, 37, 0.2) 100%);
+}
+
+.cbim-news-card .card-body-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.cbim-news-card .card-body-content h4 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    line-height: 1.45;
+    margin-bottom: 10px;
+    color: var(--cbim-dark);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s ease;
+}
+
+.cbim-news-card:hover .card-body-content h4 {
+    color: var(--cbim-primary);
+}
+
+.cbim-news-card .card-body-content .excerpt {
+    color: var(--cbim-gray-600);
+    font-size: 14px;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+.cbim-news-card .card-footer-content {
+    padding: 14px 20px;
+    border-top: 1px solid var(--cbim-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cbim-news-card .card-footer-content .read-more-link {
+    color: var(--cbim-primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.cbim-news-card .card-footer-content .read-more-link:hover {
+    gap: 8px;
+    color: var(--cbim-primary-dark);
+}
+
+/* Badge Tanggal */
+.cbim-badge-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: linear-gradient(135deg, var(--cbim-primary) 0%, var(--cbim-primary-light) 100%);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+}
+
+.cbim-badge-date.badge-light {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+/* =========================================================
+   CBIM Video / Kegiatan Cards
+   ========================================================= */
+.cbim-video-main {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--cbim-shadow-lg);
+    background: var(--cbim-dark);
+    margin-bottom: 2rem;
+}
+
+.cbim-video-main iframe {
+    width: 100%;
+    height: 500px;
+    display: block;
+    border: none;
+}
+
+.cbim-video-main .video-info {
+    padding: 24px 28px;
+    background: linear-gradient(135deg, var(--cbim-dark) 0%, var(--cbim-dark-soft) 100%);
+}
+
+.cbim-video-main .video-info h3 {
+    color: #ffffff !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px;
+}
+
+.cbim-video-main .video-info p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Video Card */
+.cbim-video-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid var(--cbim-border);
+    box-shadow: var(--cbim-shadow-sm);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    height: 100%;
+    cursor: pointer;
+}
+
+.cbim-video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--cbim-shadow-md);
+    border-color: var(--cbim-primary);
+}
+
+.cbim-video-card .video-thumbnail {
+    position: relative;
+    height: 200px;
+    min-height: 160px;
+    overflow: hidden;
+    background: var(--cbim-dark);
+}
+
+.cbim-video-card .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    min-height: 160px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.cbim-video-card:hover .video-thumbnail img {
+    transform: scale(1.08);
+    filter: brightness(0.7);
+}
+
+.cbim-video-card .video-thumbnail .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cbim-video-card:hover .video-thumbnail .play-overlay {
+    opacity: 1;
+}
+
+.cbim-video-card .video-thumbnail .play-btn-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--cbim-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(137, 12, 37, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.cbim-video-card:hover .video-thumbnail .play-btn-circle {
+    transform: scale(1.1);
+}
+
+.cbim-video-card .video-thumbnail .play-btn-circle i {
+    color: #ffffff;
+    font-size: 22px;
+    margin-left: 3px;
+}
+
+.cbim-video-card .video-card-body {
+    padding: 16px 18px;
+}
+
+.cbim-video-card .video-card-body h5 {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: var(--cbim-dark);
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s ease;
+}
+
+.cbim-video-card:hover .video-card-body h5 {
+    color: var(--cbim-primary);
+}
+
+.cbim-video-card .video-card-body .video-desc {
+    color: var(--cbim-gray-600);
+    font-size: 13px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Active video card */
+.cbim-video-card.active-video {
+    border-color: var(--cbim-primary);
+    box-shadow: 0 0 0 3px rgba(137, 12, 37, 0.15), var(--cbim-shadow-sm);
+}
+
+/* =========================================================
+   CBIM Gallery Grid
+   ========================================================= */
+.cbim-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.cbim-gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    height: 260px;
+    box-shadow: var(--cbim-shadow-sm);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cbim-gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--cbim-shadow-md);
+}
+
+.cbim-gallery-item img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cbim-gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.cbim-gallery-item .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        0deg,
+        rgba(17, 12, 45, 0.85) 0%,
+        rgba(17, 12, 45, 0.3) 50%,
+        transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cbim-gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.cbim-gallery-item .gallery-overlay .gallery-title {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.cbim-gallery-item .gallery-overlay .gallery-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cbim-gallery-item .gallery-overlay .gallery-icon i {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+/* Homepage preview section link */
+.cbim-view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--cbim-primary);
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    padding: 10px 24px;
+    border: 2px solid var(--cbim-primary);
+    border-radius: 50px;
+    transition: all 0.25s ease;
+}
+
+.cbim-view-all-link:hover {
+    background: var(--cbim-primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(137, 12, 37, 0.25);
+}
+
+/* =========================================================
+   Responsive: Gallery & Video
+   ========================================================= */
+@media (max-width: 768px) {
+    .cbim-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .cbim-gallery-item {
+        height: 200px;
+    }
+
+    .cbim-gallery-item img {
+        min-height: 200px;
+    }
+
+    .cbim-news-featured .featured-img {
+        height: 280px;
+        min-height: 220px;
+    }
+
+    .cbim-news-featured .featured-overlay {
+        padding: 1.5rem;
+    }
+
+    .cbim-news-featured .featured-overlay h3 {
+        font-size: 1.2rem !important;
+    }
+
+    .cbim-video-main iframe {
+        height: 250px;
+    }
+
+    .cbim-video-card .video-thumbnail {
+        height: 160px;
+    }
+
+    .cbim-news-card .card-img-wrapper {
+        height: 180px;
+    }
+
+    .cbim-news-card .card-img-wrapper img {
+        min-height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cbim-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .cbim-gallery-item {
+        height: 160px;
+    }
+
+    .cbim-gallery-item img {
+        min-height: 160px;
+    }
+
+    .cbim-news-featured .featured-img {
+        height: 220px;
+        min-height: 180px;
+    }
+
+    .cbim-news-card .card-img-wrapper {
+        height: 160px;
+    }
+
+    .cbim-news-card .card-img-wrapper img {
+        min-height: 160px;
+    }
+}
