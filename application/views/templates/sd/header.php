@@ -1,490 +1,795 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <title><?= isset($title) ? html_escape($title) : 'SD K Citra Bangsa — Yayasan CBIM'; ?></title>
+    <link rel="shortcut icon" href="<?= base_url(); ?>assets/templates/media/logos/logo-cbim.png" />
+    <meta name="description" content="<?= isset($subsite_meta['deskripsi']) ? html_escape($subsite_meta['deskripsi']) : 'SD K Citra Bangsa, Kupang. Di bawah naungan Yayasan Citra Bina Insan Mandiri (YCBIM).'; ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?= isset($title) ? $title : 'SD K Citra Bangsa Mandiri - Yayasan CBIM Kupang'; ?></title>
-    <meta name="description" content="Website Resmi SD Kristen Citra Bangsa Mandiri Kupang - Lembaga Pendidikan Dasar Unggulan Yayasan Citra Bina Insan Mandiri (YCBIM)" />
-    <meta name="keywords" content="SD K Citra Bangsa, SD Citra Bangsa Mandiri, YCBIM, Yayasan Citra Bina Insan Mandiri, UCB, Sekolah Dasar Kupang, PPDB SD Kupang" />
-    <link rel="shortcut icon" href="<?= base_url(); ?>assets/templates/media/logos/sd.png" />
-    
-    <!-- Google Fonts: Poppins, Outfit, Plus Jakarta Sans (Unified with UCB / Yayasan) -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- AOS Animation -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            /* Base Theme: Universitas Citra Bangsa (UCB) & Yayasan CBIM */
-            --cbim-primary: #890C25;       /* UCB Crimson Maroon */
-            --cbim-primary-light: #B71A34; /* Vibrant Crimson */
-            --cbim-primary-dark: #660519;  /* Deep Maroon */
-            --cbim-primary-subtle: #FDF2F4;
-            --cbim-secondary: #110C2D;    /* UCB Dark Slate */
-            --cbim-gold: #FFD80C;         /* UCB Gold Accent */
-            --cbim-gold-dark: #FFB800;
-            --cbim-gold-subtle: #FFFDE6;
-            --cbim-green: #09A24F;        /* UCB Theme Green */
-            --cbim-green-subtle: #E8F8EE;
-            --cbim-bg: #FDFBFB;
-            --cbim-card-shadow: 0 10px 30px rgba(17, 12, 45, 0.07);
-            --cbim-hover-shadow: 0 16px 36px rgba(137, 12, 37, 0.18);
-        }
+    /* ============================================================
+       TOKEN DESAIN
+       ============================================================ */
+    :root {
+        --kertas:      #FFF7EC;
+        --kertas-tua:  #FBEBD6;
+        --langit:      #BFE7FF;
+        --langit-muda: #E6F5FF;
+        --tinta:       #3B3355;
+        --tinta-muda:  #6B6285;
+        --kuning:      #FFC53D;
+        --merah:       #EE5D4E;
+        --biru:        #2E9BD6;
+        --hijau:       #57B979;
+        --ungu:        #9B7EDE;
+        --malam:       #2A2450;
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #334155;
-            background-color: var(--cbim-bg);
-            overflow-x: hidden;
-        }
+        --lebar: 1120px;
+        --radius-l: 34px;
+        --radius-m: 22px;
 
-        h1, h2, h3, h4, h5, h6, .brand-font {
-            font-family: 'Outfit', sans-serif;
-        }
+        --font-judul: "Baloo 2", "Trebuchet MS", sans-serif;
+        --font-isi:   "Nunito", "Segoe UI", sans-serif;
+    }
 
-        /* Top Announcement Bar (UCB Crimson & Gold Gradient) */
-        .topbar-sd {
-            background: linear-gradient(90deg, #660519 0%, #890C25 40%, #B71A34 75%, #FFD80C 100%);
-            color: #ffffff;
-            font-size: 0.875rem;
-            font-weight: 600;
-            padding: 0.45rem 1rem;
-        }
+    /* ============================================================
+       DASAR
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
 
-        /* ============================================================
-           SD NAVBAR — Matching TK style (custom, non-Bootstrap)
-           ============================================================ */
-        .sd-header {
-            position: sticky;
-            top: 0;
-            z-index: 60;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
-            border-bottom: 3px solid var(--cbim-primary);
-            transition: box-shadow .2s ease;
-        }
-        .sd-header.melayang { box-shadow: 0 6px 24px rgba(17, 12, 45, 0.12); }
+    html { scroll-behavior: smooth; }
 
-        .sd-header__isi {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 10px 0;
-            max-width: 1200px;
-            margin-inline: auto;
-            padding-inline: 22px;
-        }
-        .sd-header__logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: #334155;
-        }
-        .sd-header__logo img { height: 50px; width: auto; object-fit: contain; transition: transform .3s ease; }
-        .sd-header__logo:hover img { transform: scale(1.05); }
-        .sd-header__nama {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 1.05rem;
-            line-height: 1.15;
-        }
-        .sd-header__nama small {
-            display: block;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 600;
-            font-size: .72rem;
-            color: var(--cbim-primary);
-            letter-spacing: 0.5px;
-        }
+    body {
+        margin: 0;
+        background: var(--kertas);
+        color: var(--tinta);
+        font-family: var(--font-isi);
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+    }
 
-        .sd-nav { display: flex; align-items: center; gap: 4px; }
-        .sd-nav a {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: #334155;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: all 0.25s ease;
-            position: relative;
-        }
-        .sd-nav a:hover {
-            color: var(--cbim-primary);
-            background-color: var(--cbim-primary-subtle);
-        }
-        .sd-nav a.aktif {
-            color: var(--cbim-primary);
-            background-color: var(--cbim-primary-subtle);
-        }
-        .sd-nav a.aktif::after {
-            content: '';
+    h1, h2, h3, h4 {
+        font-family: var(--font-judul);
+        font-weight: 700;
+        line-height: 1.15;
+        margin: 0 0 .5em;
+        letter-spacing: -.01em;
+    }
+    h1 { font-size: clamp(2.1rem, 6.2vw, 3.9rem); font-weight: 800; }
+    h2 { font-size: clamp(1.8rem, 4.4vw, 2.8rem); }
+    h3 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); }
+
+    p { margin: 0 0 1rem; max-width: 66ch; }
+
+    a { color: var(--biru); }
+
+    img, svg { max-width: 100%; }
+
+    :focus-visible {
+        outline: 3px solid var(--ungu);
+        outline-offset: 3px;
+        border-radius: 6px;
+    }
+
+    .tk-wadah {
+        width: 100%;
+        max-width: var(--lebar);
+        margin-inline: auto;
+        padding-inline: 22px;
+    }
+
+    .tk-lewati {
+        position: absolute; left: -9999px;
+        background: var(--tinta); color: #fff;
+        padding: 12px 20px; border-radius: 0 0 14px 0; z-index: 999;
+    }
+    .tk-lewati:focus { left: 0; top: 0; }
+
+    /* ============================================================
+       TOMBOL
+       ============================================================ */
+    .tk-tombol {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-judul);
+        font-weight: 700;
+        font-size: 1.12rem;
+        text-decoration: none;
+        padding: 14px 30px 16px;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .tk-tombol--utama {
+        background: var(--merah);
+        color: #fff;
+        box-shadow: 0 6px 0 #C7402F;
+    }
+    .tk-tombol--utama:hover,
+    .tk-tombol--utama:focus-visible {
+        transform: translateY(2px);
+        box-shadow: 0 4px 0 #C7402F;
+    }
+    .tk-tombol--kedua {
+        background: #fff;
+        color: var(--tinta);
+        box-shadow: 0 6px 0 rgba(59,51,85,.18);
+    }
+    .tk-tombol--kedua:hover,
+    .tk-tombol--kedua:focus-visible {
+        transform: translateY(2px);
+        box-shadow: 0 4px 0 rgba(59,51,85,.18);
+    }
+    .tk-tombol--kuning {
+        background: var(--kuning);
+        color: #4A3200;
+        box-shadow: 0 6px 0 #D69F1E;
+    }
+    .tk-tombol--kuning:hover,
+    .tk-tombol--kuning:focus-visible {
+        transform: translateY(2px);
+        box-shadow: 0 4px 0 #D69F1E;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .tk-header {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        background: rgba(255,247,236,.92);
+        backdrop-filter: blur(8px);
+        transition: box-shadow .2s ease;
+    }
+    .tk-header.melayang { box-shadow: 0 6px 24px rgba(59,51,85,.12); }
+
+    .tk-header__isi {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 12px 0;
+    }
+    .tk-header__logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta); }
+    .tk-header__logo img { height: 46px; width: auto; }
+    .tk-header__nama { font-family: var(--font-judul); font-weight: 700; font-size: 1.05rem; line-height: 1.1; }
+    .tk-header__nama small { display: block; font-family: var(--font-isi); font-weight: 600; font-size: .72rem; color: var(--tinta-muda); }
+
+    .tk-nav { display: flex; align-items: center; gap: 4px; }
+    .tk-nav a {
+        font-family: var(--font-judul);
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--tinta);
+        text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 999px;
+    }
+    .tk-nav a:hover { background: var(--kuning); }
+    .tk-nav a[aria-current="page"] { background: var(--kuning); }
+
+    .tk-header__aksi { display: flex; align-items: center; gap: 10px; }
+    .tk-header__aksi .tk-tombol { padding: 10px 22px 12px; font-size: 1rem; }
+
+    .tk-burger {
+        display: none;
+        background: #fff;
+        border: none;
+        width: 46px; height: 46px;
+        border-radius: 14px;
+        box-shadow: 0 4px 0 rgba(59,51,85,.15);
+        cursor: pointer;
+        padding: 0;
+        place-items: center;
+    }
+    .tk-burger span {
+        display: block; width: 20px; height: 2.5px;
+        background: var(--tinta); border-radius: 2px; margin: 3px auto;
+        transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .2s ease;
+        transform-origin: center;
+    }
+
+    @media (max-width: 900px) {
+        .tk-burger { display: grid; }
+        .tk-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+        .tk-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .tk-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+        .tk-nav {
             position: absolute;
-            bottom: 2px;
-            left: 25%;
-            right: 25%;
-            height: 3px;
-            background-color: var(--cbim-primary);
-            border-radius: 4px;
-        }
-
-        .sd-header__aksi { display: flex; align-items: center; gap: 10px; }
-
-        .sd-burger {
-            display: none;
-            background: #fff;
-            border: none;
-            width: 46px; height: 46px;
-            border-radius: 14px;
-            box-shadow: 0 4px 0 rgba(17, 12, 45, .12);
-            cursor: pointer;
-            padding: 0;
-            place-items: center;
-        }
-        .sd-burger span {
-            display: block; width: 20px; height: 2.5px;
-            background: #334155; border-radius: 2px; margin: 3px auto;
-            transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .2s ease;
-            transform-origin: center;
-        }
-
-        @media (max-width: 900px) {
-            .sd-burger { display: grid; }
-            .sd-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
-            .sd-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-            .sd-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
-            .sd-nav {
-                position: absolute;
-                top: 100%; left: 0; right: 0;
-                flex-direction: column;
-                align-items: stretch;
-                background: #ffffff;
-                gap: 2px;
-                box-shadow: 0 12px 24px rgba(17, 12, 45, .14);
-                display: flex;
-                max-height: 0;
-                overflow: hidden;
-                opacity: 0;
-                padding: 0 22px;
-                transition: max-height .4s cubic-bezier(.4,0,.2,1),
-                            opacity .3s ease,
-                            padding .35s cubic-bezier(.4,0,.2,1);
-                z-index: 100;
-            }
-            .sd-nav.terbuka {
-                max-height: 400px;
-                opacity: 1;
-                padding: 10px 22px 22px;
-            }
-            .sd-nav a {
-                padding: 13px 16px;
-                border-radius: 10px;
-                transform: translateY(-10px);
-                opacity: 0;
-                transition: transform .3s cubic-bezier(.4,0,.2,1),
-                            opacity .3s ease,
-                            background .12s ease;
-            }
-            .sd-nav.terbuka a {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            .sd-nav.terbuka a:nth-child(1) { transition-delay: .06s; }
-            .sd-nav.terbuka a:nth-child(2) { transition-delay: .12s; }
-            .sd-nav.terbuka a:nth-child(3) { transition-delay: .18s; }
-            .sd-nav.terbuka a:nth-child(4) { transition-delay: .24s; }
-            .sd-nav.terbuka a:nth-child(5) { transition-delay: .30s; }
-            .sd-header__nama small { display: none; }
-            .sd-header__aksi .btn-sd-back { display: none; }
-        }
-
-        /* Buttons (UCB Maroon & Gold) */
-        .btn-cbim-primary {
-            background: linear-gradient(135deg, #890C25 0%, #B71A34 100%);
-            color: #ffffff !important;
-            font-weight: 700;
-            border: none;
-            padding: 0.65rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: 0 4px 14px rgba(137, 12, 37, 0.35);
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .btn-cbim-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(137, 12, 37, 0.48);
-            background: linear-gradient(135deg, #660519 0%, #890C25 100%);
-            color: #ffffff;
-        }
-
-        .btn-cbim-gold {
-            background: linear-gradient(135deg, #FFD80C 0%, #FFB800 100%);
-            color: #110C2D !important;
-            font-weight: 800;
-            border: none;
-            padding: 0.65rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: 0 4px 14px rgba(255, 216, 12, 0.4);
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .btn-cbim-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(255, 216, 12, 0.55);
-            color: #110C2D;
-        }
-
-        .btn-cbim-outline {
-            border: 2px solid var(--cbim-primary);
-            color: var(--cbim-primary) !important;
-            font-weight: 700;
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            background: transparent;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .btn-cbim-outline:hover {
-            background-color: var(--cbim-primary);
-            color: #ffffff !important;
-            box-shadow: 0 4px 15px rgba(137, 12, 37, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .btn-sd-back {
-            background: transparent;
-            border: 2px solid #334155;
-            color: #334155 !important;
-            font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            transition: all 0.25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            text-decoration: none;
-        }
-        .btn-sd-back:hover {
-            background: #334155;
-            color: #ffffff !important;
-        }
-
-        /* Banner Hero & Section Backgrounds */
-        .bg-sd-hero {
-            background: linear-gradient(135deg, rgba(17, 12, 45, 0.94) 0%, rgba(137, 12, 37, 0.90) 50%, rgba(183, 26, 52, 0.85) 100%), 
-                        url('<?= base_url(); ?>assets/templates/media/logos/new-crop.png') center/cover no-repeat;
-            color: white;
-            position: relative;
-        }
-
-        .bg-sd-page-header {
-            background: linear-gradient(135deg, #110C2D 0%, #890C25 60%, #B71A34 100%);
-            color: white;
-            position: relative;
-        }
-
-        /* Feature Cards */
-        .card-sd {
-            border: none;
-            border-radius: 20px;
-            background: white;
-            box-shadow: var(--cbim-card-shadow);
-            transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+            top: 100%; left: 0; right: 0;
+            flex-direction: column;
+            align-items: stretch;
+            background: var(--kertas);
+            gap: 2px;
+            box-shadow: 0 12px 24px rgba(59,51,85,.14);
+            display: flex;
+            max-height: 0;
             overflow: hidden;
+            opacity: 0;
+            padding: 0 22px;
+            transition: max-height .4s cubic-bezier(.4,0,.2,1),
+                        opacity .3s ease,
+                        padding .35s cubic-bezier(.4,0,.2,1);
         }
+        .tk-nav.terbuka {
+            max-height: 350px;
+            opacity: 1;
+            padding: 10px 22px 22px;
+        }
+        .tk-nav a {
+            padding: 13px 16px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: transform .3s cubic-bezier(.4,0,.2,1),
+                        opacity .3s ease,
+                        background .12s ease;
+        }
+        .tk-nav.terbuka a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .tk-nav.terbuka a:nth-child(1) { transition-delay: .06s; }
+        .tk-nav.terbuka a:nth-child(2) { transition-delay: .12s; }
+        .tk-nav.terbuka a:nth-child(3) { transition-delay: .18s; }
+        .tk-nav.terbuka a:nth-child(4) { transition-delay: .24s; }
+        .tk-header__nama small { display: none; }
+        .tk-header__aksi .tk-tombol--kedua { display: none; }
+    }
 
-        .card-sd:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--cbim-hover-shadow);
-        }
+    /* ============================================================
+       HERO HALAMAN
+       ============================================================ */
+    .tk-hero {
+        position: relative;
+        background: linear-gradient(180deg, var(--langit) 0%, var(--langit-muda) 62%, #F3FBFF 100%);
+        overflow: hidden;
+        padding: clamp(44px, 7vw, 80px) 0 0;
+        text-align: center;
+    }
+    .tk-hero__teks { position: relative; z-index: 3; max-width: 760px; margin-inline: auto; }
+    .tk-hero h1 { color: var(--tinta); text-wrap: balance; }
+    .tk-hero__sub {
+        font-size: clamp(1.05rem, 2.1vw, 1.28rem);
+        color: #4C4467;
+        margin-inline: auto;
+        max-width: 54ch;
+        margin-bottom: 30px;
+    }
+    .tk-hero__aksi { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 
-        .badge-cbim-red {
-            background-color: var(--cbim-primary-subtle);
-            color: var(--cbim-primary);
-            font-weight: 700;
-            padding: 0.45rem 1.2rem;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            border: 1px solid rgba(137, 12, 37, 0.2);
-        }
+    .tk-matahari { position: absolute; top: 30px; right: 6%; width: 130px; height: 130px; z-index: 1; }
+    .tk-matahari__sinar { transform-origin: 50% 50%; animation: putar 90s linear infinite; }
+    @keyframes putar { to { transform: rotate(360deg); } }
 
-        .badge-cbim-gold {
-            background-color: var(--cbim-gold-subtle);
-            color: #92400E;
-            font-weight: 700;
-            padding: 0.45rem 1.2rem;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 216, 12, 0.3);
-        }
+    .tk-awan { position: absolute; z-index: 1; fill: #fff; opacity: .9; }
+    .tk-awan--1 { top: 60px;  left: 4%;  width: 120px; }
+    .tk-awan--2 { top: 150px; left: 26%; width: 78px; opacity: .7; }
+    .tk-awan--3 { top: 96px;  right: 30%; width: 96px; opacity: .75; }
 
-        .badge-cbim-green {
-            background-color: var(--cbim-green-subtle);
-            color: var(--cbim-green);
-            font-weight: 700;
-            padding: 0.45rem 1.2rem;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-size: 0.85rem;
-            border: 1px solid rgba(9, 162, 79, 0.2);
-        }
+    .tk-bukit { display: block; width: 100%; margin-top: -20px; position: relative; z-index: 2; }
 
-        /* Floating Badge */
-        .floating-badge {
-            animation: floating 3s ease-in-out infinite;
-        }
+    @media (max-width: 700px) {
+        .tk-matahari { width: 82px; height: 82px; top: 14px; right: 5%; }
+        .tk-awan--2, .tk-awan--3 { display: none; }
+        .tk-awan--1 { width: 74px; top: 130px; opacity: .65; }
+    }
 
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-            100% { transform: translateY(0px); }
-        }
+    /* ============================================================
+       TEPI KERTAS BERGUNTING
+       ============================================================ */
+    .tk-gunting { display: block; width: 100%; height: 34px; }
 
-        /* Breadcrumb Bar */
-        .breadcrumb-sd {
-            background-color: white;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #E2E8F0;
-        }
+    /* ============================================================
+       BAGIAN
+       ============================================================ */
+    .tk-bagian { padding: clamp(56px, 8vw, 96px) 0; }
+    .tk-bagian--kertas-tua { background: var(--kertas-tua); }
+    .tk-bagian--putih { background: #fff; }
 
-        .breadcrumb-sd a {
-            color: var(--cbim-primary);
-            text-decoration: none;
-            font-weight: 600;
-        }
+    .tk-judul-bagian { max-width: 40ch; margin-bottom: 44px; }
+    .tk-judul-bagian p { color: var(--tinta-muda); font-size: 1.08rem; margin-bottom: 0; }
+    .tk-judul-bagian--tengah { margin-inline: auto; text-align: center; }
+    .tk-judul-bagian--tengah p { margin-inline: auto; }
 
-        .breadcrumb-sd a:hover {
-            text-decoration: underline;
+    .tk-coret { display: block; width: 148px; height: 12px; margin: 6px 0 18px; }
+    .tk-judul-bagian--tengah .tk-coret { margin-inline: auto; }
+
+    /* ============================================================
+       GRID & KARTU
+       ============================================================ */
+    .tk-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 26px;
+    }
+    .tk-grid-2 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 26px;
+    }
+    .tk-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 26px;
+    }
+    .tk-kartu {
+        background: #fff;
+        border-radius: var(--radius-l);
+        padding: 34px 30px 30px;
+        box-shadow: 0 10px 0 rgba(59,51,85,.07);
+    }
+    .tk-kartu h3 { margin-bottom: .35em; }
+    .tk-kartu p { color: var(--tinta-muda); margin-bottom: 0; font-size: 1.02rem; }
+    .tk-kartu__ikon {
+        width: 74px; height: 74px;
+        border-radius: 50%;
+        display: grid; place-items: center;
+        margin-bottom: 20px;
+    }
+    .tk-kartu__ikon--kuning { background: #FFF0C9; }
+    .tk-kartu__ikon--biru   { background: #D6EDFA; }
+    .tk-kartu__ikon--hijau  { background: #DBF0E2; }
+    .tk-kartu__ikon--merah  { background: #FDDDD9; }
+    .tk-kartu__ikon--ungu   { background: #EDE5F9; }
+    .tk-kartu--tengah { text-align: center; }
+    .tk-kartu--tengah .tk-kartu__ikon { margin-inline: auto; }
+
+    /* ============================================================
+       TENTANG
+       ============================================================ */
+    .tk-tentang {
+        display: grid;
+        grid-template-columns: 1.15fr .85fr;
+        gap: 52px;
+        align-items: center;
+    }
+    @media (max-width: 860px) { .tk-tentang { grid-template-columns: 1fr; gap: 40px; } }
+
+    .tk-tempel {
+        position: relative;
+        background: #fff;
+        border-radius: 8px;
+        padding: 34px 30px 30px;
+        transform: rotate(-1.2deg);
+        box-shadow: 0 14px 30px rgba(59,51,85,.12);
+    }
+    .tk-tempel::before {
+        content: "";
+        position: absolute;
+        top: -13px; left: 50%;
+        width: 128px; height: 30px;
+        transform: translateX(-50%) rotate(-2.5deg);
+        background: rgba(255,197,61,.62);
+        border-left: 1px dashed rgba(0,0,0,.10);
+        border-right: 1px dashed rgba(0,0,0,.10);
+    }
+    .tk-tempel p:last-child { margin-bottom: 0; }
+    .tk-tempel--lurus { transform: none; }
+
+    .tk-angka {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 30px;
+    }
+    .tk-angka div {
+        background: var(--kertas);
+        border-radius: var(--radius-m);
+        padding: 20px 22px;
+    }
+    .tk-angka strong {
+        display: block;
+        font-family: var(--font-judul);
+        font-size: 2rem;
+        line-height: 1.1;
+        color: var(--merah);
+    }
+    .tk-angka span { font-size: .95rem; color: var(--tinta-muda); }
+
+    /* ============================================================
+       JADWAL HARIAN
+       ============================================================ */
+    .tk-jam {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 34px;
+    }
+    .tk-jam button {
+        font-family: var(--font-judul);
+        font-weight: 700;
+        font-size: 1.02rem;
+        color: var(--tinta);
+        background: #fff;
+        border: 2.5px solid rgba(59,51,85,.10);
+        border-radius: 999px;
+        padding: 9px 20px 11px;
+        cursor: pointer;
+        transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .tk-jam button:hover { transform: translateY(-2px); border-color: var(--biru); }
+    .tk-jam button[aria-selected="true"] {
+        background: var(--biru);
+        border-color: var(--biru);
+        color: #fff;
+    }
+
+    .tk-panel {
+        display: grid;
+        grid-template-columns: 130px 1fr;
+        gap: 32px;
+        align-items: center;
+        background: #fff;
+        border-radius: var(--radius-l);
+        padding: 38px 40px;
+        box-shadow: 0 10px 0 rgba(59,51,85,.07);
+        max-width: 800px;
+        margin-inline: auto;
+    }
+    .tk-panel[hidden] { display: none; }
+    .tk-panel h3 { margin-bottom: .3em; }
+    .tk-panel p { margin-bottom: 0; color: var(--tinta-muda); }
+    .tk-panel__doodle {
+        width: 130px; height: 130px;
+        border-radius: 50%;
+        display: grid; place-items: center;
+        background: var(--kertas);
+    }
+    @media (max-width: 640px) {
+        .tk-panel { grid-template-columns: 1fr; text-align: center; padding: 30px 24px; gap: 20px; }
+        .tk-panel__doodle { margin-inline: auto; width: 104px; height: 104px; }
+        .tk-panel p { max-width: none; }
+    }
+
+    /* ============================================================
+       PROGRAM
+       ============================================================ */
+    .tk-program {
+        background: #fff;
+        border-radius: var(--radius-l);
+        padding: 34px 32px 30px;
+        border-top: 9px solid var(--kuning);
+        box-shadow: 0 10px 0 rgba(59,51,85,.07);
+    }
+    .tk-program--biru  { border-top-color: var(--biru); }
+    .tk-program--hijau { border-top-color: var(--hijau); }
+    .tk-program--merah { border-top-color: var(--merah); }
+    .tk-program--ungu  { border-top-color: var(--ungu); }
+    .tk-program p { color: var(--tinta-muda); margin-bottom: 0; }
+    .tk-program ul { margin: 0; padding-left: 20px; color: var(--tinta-muda); }
+    .tk-program li { margin-bottom: 6px; }
+
+    /* ============================================================
+       PAPAN CORET-CORET
+       ============================================================ */
+    .tk-coretan { max-width: 720px; margin-inline: auto; text-align: center; }
+    .tk-papan {
+        background: #fff;
+        border-radius: var(--radius-m);
+        box-shadow: 0 10px 0 rgba(59,51,85,.07);
+        padding: 14px;
+        margin-top: 26px;
+    }
+    .tk-papan canvas {
+        display: block;
+        width: 100%;
+        height: 300px;
+        border-radius: 14px;
+        background: var(--kertas);
+        touch-action: none;
+        cursor: crosshair;
+    }
+    .tk-krayon {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 16px;
+    }
+    .tk-krayon__warna {
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        border: 3px solid transparent;
+        cursor: pointer;
+        padding: 0;
+        transition: transform .12s ease;
+    }
+    .tk-krayon__warna:hover { transform: scale(1.12); }
+    .tk-krayon__warna[aria-pressed="true"] {
+        border-color: var(--tinta);
+        transform: scale(1.12);
+    }
+    .tk-hapus {
+        font-family: var(--font-judul);
+        font-weight: 700;
+        background: var(--kertas-tua);
+        color: var(--tinta);
+        border: none;
+        border-radius: 999px;
+        padding: 9px 20px 11px;
+        cursor: pointer;
+        margin-left: 6px;
+    }
+    .tk-hapus:hover { background: var(--kuning); }
+
+    /* ============================================================
+       TESTIMONI
+       ============================================================ */
+    .tk-testimoni {
+        max-width: 640px;
+        margin-inline: auto;
+        text-align: center;
+    }
+    .tk-testimoni blockquote {
+        margin: 0 0 18px;
+        font-family: var(--font-judul);
+        font-weight: 500;
+        font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+        line-height: 1.45;
+        color: var(--tinta);
+    }
+    .tk-testimoni cite { font-style: normal; font-weight: 700; color: var(--tinta-muda); }
+
+    /* ============================================================
+       AJAKAN
+       ============================================================ */
+    .tk-ajakan {
+        background: var(--kuning);
+        border-radius: var(--radius-l);
+        padding: clamp(34px, 5vw, 56px);
+        text-align: center;
+        color: #4A3200;
+        margin-bottom: -60px;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 16px 34px rgba(59,51,85,.16);
+    }
+    .tk-ajakan h2 { color: #4A3200; }
+    .tk-ajakan p { color: #6B4B08; margin-inline: auto; margin-bottom: 26px; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .tk-footer {
+        background: var(--malam);
+        color: #fff;
+        padding: 110px 0 0;
+    }
+    .tk-footer__grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr 1fr;
+        gap: 44px;
+        padding-bottom: 46px;
+    }
+    @media (max-width: 820px) { .tk-footer__grid { grid-template-columns: 1fr; gap: 34px; } }
+
+    .tk-footer h4 {
+        font-size: 1.05rem;
+        color: var(--kuning);
+        margin-bottom: 16px;
+    }
+    .tk-footer p { color: rgba(255,255,255,.7); font-size: .98rem; }
+    .tk-footer a {
+        color: rgba(255,255,255,.78);
+        text-decoration: none;
+        font-size: .98rem;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 11px;
+    }
+    .tk-footer a:hover { color: var(--kuning); }
+    .tk-footer img.tk-ikon-sosial { height: 19px; width: auto; }
+
+    .tk-footer__bawah {
+        border-top: 1px solid rgba(255,255,255,.12);
+        padding: 22px 0 26px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+        color: rgba(255,255,255,.55);
+        font-size: .9rem;
+    }
+    .tk-footer__bawah img { height: 34px; width: auto; }
+
+    /* ============================================================
+       TOMBOL KE ATAS
+       ============================================================ */
+    .tk-keatas {
+        position: fixed;
+        right: 20px; bottom: 20px;
+        width: 50px; height: 50px;
+        border-radius: 50%;
+        background: var(--merah);
+        color: #fff;
+        border: none;
+        display: grid; place-items: center;
+        cursor: pointer;
+        box-shadow: 0 6px 0 #C7402F;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .2s ease, visibility .2s ease;
+        z-index: 50;
+    }
+    .tk-keatas.tampil { opacity: 1; visibility: visible; }
+
+    /* ============================================================
+       ANIMASI SCROLL-TRIGGERED
+       ============================================================ */
+    .tk-naik {
+        opacity: 0;
+        transform: translateY(44px);
+        transition: opacity 1.2s cubic-bezier(.22,1,.36,1),
+                    transform 1.2s cubic-bezier(.22,1,.36,1);
+    }
+    .tk-naik.tk-tampil { opacity: 1; transform: translateY(0); }
+
+    .tk-muncul {
+        opacity: 0;
+        transform: scale(.82);
+        transition: opacity 1s cubic-bezier(.22,1,.36,1),
+                    transform 1s cubic-bezier(.22,1,.36,1);
+    }
+    .tk-muncul.tk-tampil { opacity: 1; transform: scale(1); }
+
+    .tk-kiri {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 1.2s cubic-bezier(.22,1,.36,1),
+                    transform 1.2s cubic-bezier(.22,1,.36,1);
+    }
+    .tk-kiri.tk-tampil { opacity: 1; transform: translateX(0); }
+
+    .tk-kanan {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 1.2s cubic-bezier(.22,1,.36,1),
+                    transform 1.2s cubic-bezier(.22,1,.36,1);
+    }
+    .tk-kanan.tk-tampil { opacity: 1; transform: translateX(0); }
+
+    .tk-zoom {
+        opacity: 0;
+        transform: scale(.88);
+        transition: opacity 1s ease, transform 1s cubic-bezier(.22,1,.36,1);
+    }
+    .tk-zoom.tk-tampil { opacity: 1; transform: scale(1); }
+
+    /* Staggered delays */
+    .tk-tunda-1 { transition-delay: .18s; }
+    .tk-tunda-2 { transition-delay: .36s; }
+    .tk-tunda-3 { transition-delay: .54s; }
+    .tk-tunda-4 { transition-delay: .72s; }
+    .tk-tunda-5 { transition-delay: .9s; }
+    .tk-tunda-6 { transition-delay: 1.08s; }
+
+    /* Hover effects */
+    .tk-kartu {
+        transition: transform .25s cubic-bezier(.22,1,.36,1),
+                    box-shadow .25s ease;
+    }
+    .tk-kartu:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 36px rgba(59,51,85,.15);
+    }
+    .tk-kartu__ikon {
+        transition: transform .3s cubic-bezier(.22,1,.36,1);
+    }
+    .tk-kartu:hover .tk-kartu__ikon {
+        transform: scale(1.12) rotate(-6deg);
+    }
+    .tk-program {
+        transition: transform .25s cubic-bezier(.22,1,.36,1),
+                    box-shadow .25s ease;
+    }
+    .tk-program:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 32px rgba(59,51,85,.13);
+    }
+    .tk-tempel {
+        transition: transform .3s cubic-bezier(.22,1,.36,1),
+                    box-shadow .3s ease;
+    }
+    .tk-tempel:hover {
+        transform: rotate(0deg) translateY(-4px);
+        box-shadow: 0 20px 40px rgba(59,51,85,.16);
+    }
+    .tk-ajakan {
+        transition: box-shadow .3s ease;
+    }
+    .tk-ajakan:hover {
+        box-shadow: 0 20px 50px rgba(255,197,61,.35);
+    }
+
+    /* Floating decorations */
+    @keyframes tk-melayang {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-14px); }
+    }
+    @keyframes tk-melayang-lambat {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(8deg); }
+    }
+    @keyframes tk-kedip {
+        0%, 100% { opacity: 1; }
+        50% { opacity: .5; }
+    }
+    .tk-dekorasi {
+        position: absolute;
+        pointer-events: none;
+        z-index: 1;
+        font-size: 2rem;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,.12));
+    }
+    .tk-dekorasi--1 { top: 30px; left: 8%; animation: tk-melayang 3.5s ease-in-out infinite; }
+    .tk-dekorasi--2 { top: 80px; right: 10%; animation: tk-melayang-lambat 4s ease-in-out .5s infinite; font-size: 1.6rem; }
+    .tk-dekorasi--3 { bottom: 160px; left: 15%; animation: tk-melayang 3s ease-in-out 1s infinite; font-size: 1.4rem; }
+    .tk-dekorasi--4 { top: 40px; right: 25%; animation: tk-kedip 2.5s ease-in-out infinite; font-size: 1.2rem; }
+    @media (max-width: 700px) {
+        .tk-dekorasi--2, .tk-dekorasi--3, .tk-dekorasi--4 { display: none; }
+        .tk-dekorasi--1 { font-size: 1.4rem; top: 120px; }
+    }
+
+    /* ============================================================
+       HORMATI PREFERENSI GERAK
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+            animation-duration: .001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .001ms !important;
         }
+        .tk-naik, .tk-muncul, .tk-kiri, .tk-kanan, .tk-zoom {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
     </style>
-
-    <!-- ==================================================================
-         PATCH 2026-09-07: partial bersama subsite
-         Berisi shim kelas CSS (fs-7, fw-extrabold, dll), meta og:*,
-         canonical, JSON-LD, GA4 dengan Consent Mode, smooth scroll, dan
-         perbaikan aksesibilitas. Lihat templates/subsite/head_shared.php
-         ================================================================== -->
-    <?php $this->load->view('templates/subsite/head_shared'); ?>
 </head>
+
 <body>
+<a class="tk-lewati" href="#konten">Lewati ke konten utama</a>
 
-    <!-- FE-05 (PATCH): skip link untuk pengguna keyboard & pembaca layar -->
-    <a class="skip-link" href="#konten-utama">Lompat ke konten utama</a>
+<!-- ============================ HEADER ============================ -->
+<header class="tk-header" id="header">
+    <div class="tk-wadah tk-header__isi">
+        <a class="tk-header__logo" href="<?= base_url('sd'); ?>">
+            <img src="<?= base_url(); ?>assets/templates/media/logos/logo-cbim.png" alt="Logo SD K Citra Bangsa">
+            <span class="tk-header__nama">
+                SD K Citra Bangsa
+                <small>Yayasan Citra Bina Insan Mandiri</small>
+            </span>
+        </a>
 
-    <!-- Top Announcement Bar (UCB Crimson & Gold Theme) -->
-    <div class="topbar-sd">
-        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
-            <div class="d-flex align-items-center gap-2">
-                <span class="badge bg-warning text-dark rounded-pill px-2 py-1"><i class="bi bi-bell-fill"></i> INFO PPDB</span>
-                <span>Penerimaan Peserta Didik Baru (PPDB) SD K Citra Bangsa Mandiri TA 2026/2027 Telah Dibuka!</span>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-                <a href="<?= base_url('sd/ppdb'); ?>" class="text-warning fw-extrabold text-decoration-underline">Daftar Online <i class="bi bi-arrow-right-short"></i></a>
-                <span class="text-white opacity-50 d-none d-md-inline">|</span>
-                <span class="d-none d-md-inline"><i class="bi bi-geo-alt-fill text-warning me-1"></i> Kota Kupang, NTT</span>
-            </div>
+        <nav class="tk-nav" id="nav" aria-label="Menu utama">
+            <a href="<?= base_url('sd'); ?>" <?= (isset($active_menu) && $active_menu == 'home') ? 'aria-current="page"' : ''; ?>>Beranda</a>
+            <a href="<?= base_url('sd/profil'); ?>" <?= (isset($active_menu) && $active_menu == 'profil') ? 'aria-current="page"' : ''; ?>>Profil</a>
+            <a href="<?= base_url('sd/fasilitas'); ?>" <?= (isset($active_menu) && $active_menu == 'fasilitas') ? 'aria-current="page"' : ''; ?>>Fasilitas</a>
+            <a href="<?= base_url('sd/kegiatan'); ?>" <?= (isset($active_menu) && $active_menu == 'kegiatan') ? 'aria-current="page"' : ''; ?>>Kegiatan</a>
+            <a href="<?= base_url('sd/ppdb'); ?>" <?= (isset($active_menu) && $active_menu == 'ppdb') ? 'aria-current="page"' : ''; ?>>Pendaftaran</a>
+        </nav>
+
+        <div class="tk-header__aksi">
+            <a href="<?= base_url('sd/ppdb'); ?>" class="tk-tombol tk-tombol--utama">Daftar</a>
+            <a href="<?= base_url(); ?>" class="tk-tombol tk-tombol--kedua">Yayasan</a>
+            <button class="tk-burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </div>
+</header>
 
-    <!-- Main Navigation SD (TK-style navbar) -->
-    <header class="sd-header" id="sdHeader">
-        <div class="sd-header__isi">
-            <a class="sd-header__logo" href="<?= base_url('sd'); ?>">
-                <img src="<?= base_url(); ?>assets/templates/media/logos/sd.png" alt="Logo SD K Citra Bangsa">
-                <span class="sd-header__nama">
-                    SD K CITRA BANGSA
-                    <small>Yayasan Citra Bina Insan Mandiri</small>
-                </span>
-            </a>
-
-            <nav class="sd-nav" id="sdNav" aria-label="Menu utama SD">
-                <a href="<?= base_url('sd'); ?>" <?= (isset($active_menu) && $active_menu == 'home') ? 'class="aktif"' : ''; ?>>
-                    <i class="bi bi-house-door-fill me-1 d-lg-none"></i> Beranda
-                </a>
-                <a href="<?= base_url('sd/profil'); ?>" <?= (isset($active_menu) && $active_menu == 'profil') ? 'class="aktif"' : ''; ?>>
-                    <i class="bi bi-info-circle-fill me-1 d-lg-none"></i> Profil & Visi Misi
-                </a>
-                <a href="<?= base_url('sd/fasilitas'); ?>" <?= (isset($active_menu) && $active_menu == 'fasilitas') ? 'class="aktif"' : ''; ?>>
-                    <i class="bi bi-building me-1 d-lg-none"></i> Fasilitas
-                </a>
-                <a href="<?= base_url('sd/kegiatan'); ?>" <?= (isset($active_menu) && $active_menu == 'kegiatan') ? 'class="aktif"' : ''; ?>>
-                    <i class="bi bi-camera-fill me-1 d-lg-none"></i> Kegiatan & Prestasi
-                </a>
-                <a href="<?= base_url('sd/ppdb'); ?>" <?= (isset($active_menu) && $active_menu == 'ppdb') ? 'class="aktif"' : ''; ?>>
-                    <i class="bi bi-pencil-square me-1 d-lg-none"></i> PPDB Online
-                </a>
-            </nav>
-
-            <div class="sd-header__aksi">
-                <a href="<?= base_url('sd/ppdb'); ?>" class="btn-cbim-primary">
-                    <i class="bi bi-pencil-square"></i> Daftar PPDB
-                </a>
-                <a href="<?= base_url(); ?>" class="btn-sd-back" title="Kembali ke Portal Yayasan CBIM">
-                    <i class="bi bi-grid-fill"></i> Yayasan
-                </a>
-                <button class="sd-burger" id="sdBurger" aria-label="Buka menu" aria-expanded="false" aria-controls="sdNav">
-                    <span></span><span></span><span></span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Navbar toggle script -->
-    <script>
-    (function() {
-        var burger = document.getElementById('sdBurger');
-        var nav = document.getElementById('sdNav');
-        var header = document.getElementById('sdHeader');
-        if (burger && nav) {
-            burger.addEventListener('click', function() {
-                var expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', !expanded);
-                nav.classList.toggle('terbuka');
-            });
-        }
-        // Scroll shadow
-        if (header) {
-            window.addEventListener('scroll', function() {
-                header.classList.toggle('melayang', window.scrollY > 10);
-            });
-        }
-    })();
-    </script>
-
-    <!-- FE-05 (PATCH): landmark <main>. Ditutup di templates/sd/footer.php -->
-    <main id="konten-utama" tabindex="-1">
-
+<main id="konten">

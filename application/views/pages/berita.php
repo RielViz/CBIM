@@ -1,115 +1,80 @@
 <?php
-// Helper for date formatting
-function formatTanggalBerita($tanggal) {
-    if (empty($tanggal)) return '';
-    $bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    $ts = strtotime($tanggal);
-    return date('d', $ts) . ' ' . $bulan[(int)date('m', $ts) - 1] . ' ' . date('Y', $ts);
+defined('BASEPATH') or exit('No direct script access allowed');
+
+if (!function_exists('url_saring')):
+function url_saring($kat, $hal = 1)
+{
+    $q = [];
+    if ($kat !== '') { $q['kategori'] = $kat; }
+    if ($hal > 1)    { $q['hal'] = $hal; }
+    return base_url('berita') . (empty($q) ? '' : '?' . http_build_query($q));
 }
+endif;
 ?>
+<section class="kepala-hal">
+    <div class="wadah">
+        <p class="remah"><a href="<?= base_url(); ?>">Beranda</a> &rsaquo; Berita</p>
+        <h1>Berita Yayasan</h1>
+        <p>Kabar kegiatan, prestasi, dan pengumuman dari lingkungan yayasan.</p>
+    </div>
+</section>
 
-<!--begin::Landing hero spacer-->
-<div class="d-flex flex-column flex-center w-100 min-h-1px min-h-lg-1px px-9"></div>
-<!--end::Landing hero spacer-->
-</div>
-<!--end::Wrapper-->
-</div>
-<!--end::Header Section-->
+<section class="blok blok--putih">
+    <div class="wadah">
+        <nav class="saring" aria-label="Saring berita menurut jenis">
+            <a href="<?= url_saring(''); ?>"<?= $kat_aktif === '' ? ' aria-current="true"' : ''; ?>>
+                Semua <b><?= (int) array_sum($kat_terpakai); ?></b>
+            </a>
+            <?php foreach (kategori_berita() as $kunci => $k):
+                if (empty($kat_terpakai[$kunci])) { continue; } ?>
+                <a href="<?= url_saring($kunci); ?>" class="kat-<?= $kunci; ?>"<?= $kat_aktif === $kunci ? ' aria-current="true"' : ''; ?>>
+                    <?= html_escape($k['label']); ?> <b><?= (int) $kat_terpakai[$kunci]; ?></b>
+                </a>
+            <?php endforeach; ?>
+        </nav>
 
-<!--begin::Berita Page-->
-<div class="py-12 py-lg-18">
-    <div class="container">
-        <!--begin::Section Header-->
-        <div class="cbim-section-header">
-            <h2 class="fs-2hx text-dark" id="berita-page" data-kt-scroll-offset="{default: 125, lg: 150}">
-                Berita & Informasi
-            </h2>
-            <p class="section-subtitle">Kabar terkini seputar Yayasan Citra Bina Insan Mandiri</p>
-        </div>
-        <!--end::Section Header-->
-
-        <?php if (count($data_all_berita) > 0 && count($data_main_berita) > 0) : ?>
-
-            <!--begin::Featured / Hero Berita-->
-            <div class="cbim-fade-item" data-aos="fade-up" data-aos-duration="800">
-                <a href="<?= base_url('page/berita/') . bin2hex(base64_encode($data_main_berita[0]['id_berita'])); ?>" class="text-decoration-none">
-                    <div class="cbim-news-featured">
-                        <img src="<?= base_url('assets/templates/media/news/') . ($data_main_berita[0]['gambar'] ?? ''); ?>"
-                             alt="<?= htmlspecialchars($data_main_berita[0]['judul_berita'] ?? 'Berita'); ?>"
-                             class="featured-img"
-                             style="width:100%;height:420px;object-fit:cover;display:block;"
-                             loading="eager" />
-                        <div class="featured-overlay">
-                            <?php if (!empty($data_main_berita[0]['tanggal_post'])) : ?>
-                                <span class="cbim-badge-date badge-light" style="width: fit-content;">
-                                    <i class="bi bi-calendar3"></i>
-                                    <?= formatTanggalBerita($data_main_berita[0]['tanggal_post']); ?>
-                                </span>
+        <?php if (empty($berita)): ?>
+            <div class="hampa">
+                <h3><?= $kat_aktif === '' ? 'Belum ada berita' : 'Belum ada berita di jenis ini'; ?></h3>
+                <p><?= $kat_aktif === '' ? 'Berita akan muncul di sini begitu admin menuliskannya.' : 'Coba pilih jenis lain, atau lihat semuanya.'; ?></p>
+                <?php if ($kat_aktif !== ''): ?>
+                    <p style="margin-top:20px"><a class="tbl tbl--garis tbl--kecil" href="<?= url_saring(''); ?>">Lihat semua berita</a></p>
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <div class="baris baris--3">
+                <?php foreach ($berita as $b): ?>
+                    <a class="pos kat-<?= html_escape($b['kategori']); ?> masuk"
+                       href="<?= base_url('berita/' . (int) $b['id'] . '/' . $b['slug']); ?>">
+                        <div class="pos__gambar">
+                            <?php if (!empty($b['gambar'])): ?>
+                                <img src="<?= base_url('uploads/berita/' . $b['gambar']); ?>" alt="" loading="lazy" decoding="async">
+                            <?php else: ?>
+                                <div class="pos__polos"><?= ikon('dokumen', 34); ?></div>
                             <?php endif; ?>
-                            <h3><?= htmlspecialchars($data_main_berita[0]['judul_berita'] ?? 'Judul Berita'); ?></h3>
-                            <p><?= strip_tags($data_main_berita[0]['isi_berita'] ?? ''); ?></p>
-                            <span class="btn-read-more">
-                                Baca Selengkapnya <i class="bi bi-arrow-right"></i>
+                        </div>
+                        <div class="pos__isi">
+                            <span class="tag"><?= html_escape(label_kategori($b['kategori'])); ?></span>
+                            <h3><?= html_escape($b['judul']); ?></h3>
+                            <p><?= html_escape(!empty($b['ringkasan']) ? $b['ringkasan'] : potong($b['isi'], 120)); ?></p>
+                            <span class="pos__kaki">
+                                <?= tanggal_id($b['tanggal_post']); ?><?php if (!empty($b['penulis'])): ?> &middot; <?= html_escape($b['penulis']); ?><?php endif; ?>
                             </span>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                <?php endforeach; ?>
             </div>
-            <!--end::Featured Berita-->
 
-            <!--begin::Berita Grid-->
-            <?php if (count($data_all_berita) > 0) : ?>
-                <div class="row g-6 mt-4">
-                    <?php foreach ($data_all_berita as $key => $berita) : ?>
-                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<?= ($key % 3) * 100; ?>">
-                            <a href="<?= base_url('page/berita/') . bin2hex(base64_encode($berita['id_berita'])); ?>" class="text-decoration-none">
-                                <div class="cbim-news-card">
-                                    <div class="card-img-wrapper">
-                                        <img src="<?= base_url('assets/templates/media/news/') . $berita['gambar']; ?>"
-                                             alt="<?= htmlspecialchars($berita['judul_berita']); ?>"
-                                             style="width:100%;height:100%;object-fit:cover;display:block;"
-                                             loading="lazy" decoding="async" />
-                                        <div class="img-overlay"></div>
-                                    </div>
-                                    <div class="card-body-content">
-                                        <?php if (!empty($berita['tanggal_post'])) : ?>
-                                            <span class="cbim-badge-date mb-2">
-                                                <i class="bi bi-calendar3"></i>
-                                                <?= formatTanggalBerita($berita['tanggal_post']); ?>
-                                            </span>
-                                        <?php endif; ?>
-                                        <h4><?= htmlspecialchars($berita['judul_berita'] ?? 'Berita'); ?></h4>
-                                        <div class="excerpt"><?= strip_tags(substr($berita['isi_berita'], 0, 140)); ?>...</div>
-                                    </div>
-                                    <div class="card-footer-content">
-                                        <span class="cbim-badge-date" style="background: var(--cbim-gray-200); color: var(--cbim-gray-600); font-size: 11px;">
-                                            <i class="bi bi-clock"></i>
-                                            <?= !empty($berita['tanggal_update']) ? date('d/m/Y', strtotime($berita['tanggal_update'])) : ''; ?>
-                                        </span>
-                                        <span class="read-more-link">
-                                            Baca <i class="bi bi-arrow-right"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+            <?php if ($total_hal > 1): ?>
+                <nav class="nomor" aria-label="Halaman berita">
+                    <?php if ($hal > 1): ?><a href="<?= url_saring($kat_aktif, $hal - 1); ?>" rel="prev" aria-label="Sebelumnya">&larr;</a><?php endif; ?>
+                    <?php for ($i = 1; $i <= $total_hal; $i++): ?>
+                        <?php if ($i === $hal): ?><span aria-current="page"><?= $i; ?></span>
+                        <?php else: ?><a href="<?= url_saring($kat_aktif, $i); ?>"><?= $i; ?></a><?php endif; ?>
+                    <?php endfor; ?>
+                    <?php if ($hal < $total_hal): ?><a href="<?= url_saring($kat_aktif, $hal + 1); ?>" rel="next" aria-label="Berikutnya">&rarr;</a><?php endif; ?>
+                </nav>
             <?php endif; ?>
-            <!--end::Berita Grid-->
-
-        <?php else : ?>
-            <!--begin::Empty State-->
-            <div class="text-center py-20">
-                <div class="mb-6">
-                    <i class="bi bi-newspaper" style="font-size: 4rem; color: var(--cbim-gray-200);"></i>
-                </div>
-                <h3 class="text-muted fw-bold fs-3">Belum Ada Berita</h3>
-                <p class="text-muted fs-6">Berita dan informasi terbaru akan segera ditampilkan di sini.</p>
-            </div>
-            <!--end::Empty State-->
         <?php endif; ?>
-
     </div>
-</div>
-<!--end::Berita Page-->
+</section>

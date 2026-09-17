@@ -61,6 +61,9 @@ $route['sd/(:any)'] = 'sd/$1';
 $route['tk'] = 'tk';
 $route['tk/(:any)'] = 'tk/$1';
 
+// Struktur Organisasi
+$route['struktur'] = 'page/struktur';
+
 // Sitemap XML
 $route['sitemap\.xml'] = 'sitemap';
 

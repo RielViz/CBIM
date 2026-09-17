@@ -539,7 +539,7 @@
 <!-- ============================ HEADER ============================ -->
 <header class="tk-header" id="header">
     <div class="tk-wadah tk-header__isi">
-        <a class="tk-header__logo" href="index.php">
+        <a class="tk-header__logo" href="<?= base_url('tk'); ?>" >
             <img src="assets/templates/media/logos/logo-cbim.png" alt="Logo TK Kristen Citra Bangsa">
             <span class="tk-header__nama">
                 TK Kristen Citra Bangsa
@@ -548,14 +548,14 @@
         </a>
 
         <nav class="tk-nav" id="nav" aria-label="Menu utama">
-            <a href="index.php">Beranda</a>
-            <a href="profile.php">Profil</a>
-            <a href="program.php">Program</a>
-            <a href="pendaftaran.php" aria-current="page">Pendaftaran</a>
+            <a href="<?= base_url('tk'); ?>" >Beranda</a>
+            <a href="<?= base_url('tk/profil'); ?>" >Profil</a>
+            <a href="<?= base_url('tk/program'); ?>" >Program</a>
+            <a href="<?= base_url('tk/ppdb'); ?>"  aria-current="page">Pendaftaran</a>
         </nav>
 
         <div class="tk-header__aksi">
-            <a href="login.php" class="tk-tombol tk-tombol--kedua">Masuk</a>
+            <a href="<?= base_url('auth'); ?>"  class="tk-tombol tk-tombol--kedua">Masuk</a>
             <button class="tk-burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
             </button>
@@ -683,7 +683,7 @@
 
             <!-- Aksi -->
             <div class="tk-formulir__aksi">
-                <a href="pendaftaran.php" class="tk-tombol tk-tombol--kedua">
+                <a href="<?= base_url('tk/ppdb'); ?>"  class="tk-tombol tk-tombol--kedua">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
                     Kembali
                 </a>
@@ -733,7 +733,7 @@
         </div>
 
         <div class="tk-footer__bawah">
-            <a href="index.php" style="margin:0"><img src="assets/templates/media/logos/logo-cbim.png" alt="Logo Yayasan CBIM"></a>
+            <a href="<?= base_url('tk'); ?>"  style="margin:0"><img src="assets/templates/media/logos/logo-cbim.png" alt="Logo Yayasan CBIM"></a>
             <span>&copy; <?php echo date('Y'); ?> Yayasan Citra Bina Insan Mandiri — Kupang. Seluruh hak cipta dilindungi.</span>
         </div>
     </div>

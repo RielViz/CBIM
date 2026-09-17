@@ -1,149 +1,139 @@
-<!-- Page Banner Kegiatan SD (Unified UCB Maroon & Gold Theme) -->
-<section class="bg-sd-page-header py-5 text-white">
-    <div class="container py-4 text-center" data-aos="fade-up">
-        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill font-semibold mb-2 fs-7">
-            <i class="bi bi-trophy-fill me-1"></i> Prestasi & Momentum
-        </span>
-        <h1 class="fw-extrabold display-5 brand-font mb-2">Kegiatan & Prestasi Siswa SD</h1>
-        <p class="lead opacity-90 mx-auto" style="max-width: 680px;">
+<main id="konten">
+
+<!-- ============================ HERO KEGIATAN ============================ -->
+<section class="tk-hero" style="min-height: 50vh; padding-top: 100px;">
+    <svg class="tk-awan tk-awan--1" viewBox="0 0 120 54" aria-hidden="true"><path d="M22 54c-12 0-22-8-22-19S10 16 22 16c3-9 12-16 22-16 12 0 22 8 25 19 12 1 21 9 21 19 0 9-9 16-21 16H22z"/></svg>
+    <svg class="tk-awan tk-awan--2" viewBox="0 0 120 54" aria-hidden="true"><path d="M22 54c-12 0-22-8-22-19S10 16 22 16c3-9 12-16 22-16 12 0 22 8 25 19 12 1 21 9 21 19 0 9-9 16-21 16H22z"/></svg>
+
+    <!-- Floating Decorations -->
+    <span class="tk-dekorasi tk-dekorasi--1" aria-hidden="true">🏆</span>
+    <span class="tk-dekorasi tk-dekorasi--2" aria-hidden="true">⚽</span>
+
+    <div class="tk-wadah tk-hero__teks">
+        <span class="tk-label tk-label--kuning" style="margin-bottom: 12px; display:inline-block">Prestasi & Momentum</span>
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem)">Kegiatan & Prestasi Siswa SD</h1>
+        <p class="tk-hero__sub">
             Dokumentasi ragam aktivitas belajar seru, pembinaan kepemimpinan, perlombaan akademik & non-akademik, serta keceriaan siswa SD K Citra Bangsa Mandiri.
         </p>
     </div>
+
+    <!-- bukit -->
+    <svg class="tk-bukit" viewBox="0 0 1200 210" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 118c150-34 260 14 400 8s210-46 360-38 190 46 290 40 150-22 150-22v104H0z" fill="#8FD3A3"/>
+        <g fill="#57B979">
+            <circle cx="150" cy="150" r="30"/><rect x="145" y="150" width="10" height="34"/>
+            <circle cx="1010" cy="158" r="24"/><rect x="1006" y="158" width="8" height="28"/>
+        </g>
+        <path d="M0 158c170-24 300 18 470 12s250-32 400-24 180 30 330 24v40H0z" fill="#57B979"/>
+    </svg>
 </section>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb-sd">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 fs-7">
-                <li class="breadcrumb-item"><a href="<?= base_url('sd'); ?>"><i class="bi bi-house-door"></i> Beranda</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Kegiatan & Prestasi</li>
-            </ol>
-        </nav>
+<!-- ============================ AKTIVITAS BERKALA ============================ -->
+<section class="tk-bagian">
+    <div class="tk-wadah">
+        <div class="tk-judul-bagian tk-judul-bagian--tengah tk-naik">
+            <h2>Program Rutin & Momentum Tahunan</h2>
+            <svg class="tk-coret" viewBox="0 0 148 12" aria-hidden="true"><path d="M3 8c22-6 44 3 66-2s52 5 76-2" stroke="#FFC53D" stroke-width="7" stroke-linecap="round" fill="none"/></svg>
+            <p>Ajang pembentukan karakter mandiri, kerjasama, dan keberanian tampil di depan publik.</p>
+        </div>
+
+        <div class="tk-grid-3">
+            <article class="tk-kartu tk-muncul tk-tunda-1">
+                <div class="tk-kartu__ikon tk-kartu__ikon--merah">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#EE5D4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h3>Outbound & Field Trip</h3>
+                <p>Kunjungan belajar luar kelas ke museum, sentra pertanian hidroponik, dan observasi alam untuk memperluas wawasan kontekstual murid.</p>
+            </article>
+
+            <article class="tk-kartu tk-muncul tk-tunda-2">
+                <div class="tk-kartu__ikon tk-kartu__ikon--kuning">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#E0A81E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <h3>Pentas Seni & Budaya NTT</h3>
+                <p>Pertunjukan tari tradisional khas NTT, ansambel musik daerah (sasando, suling, gitar), paduan suara, serta pameran karya seni rupa siswa.</p>
+            </article>
+
+            <article class="tk-kartu tk-muncul tk-tunda-3">
+                <div class="tk-kartu__ikon tk-kartu__ikon--biru">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2E9BD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </div>
+                <h3>Retret Rohani & Bakti Sosial</h3>
+                <p>Penguatan iman dan rasa syukur melalui retreat kerohanian bersama pendeta serta aksi berbagi kasih kepada sesama yang membutuhkan.</p>
+            </article>
+        </div>
     </div>
-</div>
+</section>
 
-<!-- Highlight Kegiatan & Prestasi -->
-<section class="py-5 bg-white">
-    <div class="container py-3">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <span class="badge-cbim-red mb-2">Aktivitas Berkala</span>
-            <h2 class="fw-extrabold text-dark brand-font">Program Rutin & Momentum Tahunan</h2>
-            <p class="text-muted">Ajang pembentukan karakter mandiri, kerjasama, dan keberanian tampil di depan publik.</p>
-        </div>
-
-        <div class="row g-4 mb-5">
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 mb-3 d-inline-block" style="width: max-content;">
-                        <i class="bi bi-tree-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Outbound & Field Trip Edukatif</h5>
-                    <p class="text-muted fs-7 mb-0">Kunjungan belajar luar kelas ke museum, sentra pertanian hidroponik, dan observasi alam untuk memperluas wawasan kontekstual murid.</p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-warning">
-                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning p-3 d-inline-block" style="width: max-content;">
-                        <i class="bi bi-music-note-list fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Pentas Seni & Gelar Budaya NTT</h5>
-                    <p class="text-muted fs-7 mb-0">Pertunjukan tari tradisional khas NTT, ansambel musik daerah (sasando, suling, gitar), paduan suara, serta pameran karya seni rupa siswa.</p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 d-inline-block" style="width: max-content;">
-                        <i class="bi bi-heart-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Retret Rohani & Bakti Sosial</h5>
-                    <p class="text-muted fs-7 mb-0">Penguatan iman dan rasa syukur melalui retreat kerohanian bersama pendeta serta aksi berbagi kasih kepada sesama yang membutuhkan.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Galeri Foto Aktivitas -->
-        <div class="text-center mb-4 pt-4 border-top" data-aos="fade-up">
-            <span class="badge-cbim-gold mb-2">Dokumentasi Visual</span>
-            <h3 class="fw-extrabold text-dark brand-font">Galeri Foto Sekolah</h3>
+<!-- ============================ GALERI ============================ -->
+<section class="tk-bagian" style="background:var(--kertas-tua)">
+    <div class="tk-wadah">
+        <div class="tk-judul-bagian tk-judul-bagian--tengah tk-naik">
+            <h2>Galeri Foto Sekolah</h2>
+            <svg class="tk-coret" viewBox="0 0 148 12" aria-hidden="true"><path d="M3 8c22-6 44 3 66-2s52 5 76-2" stroke="#FFC53D" stroke-width="7" stroke-linecap="round" fill="none"/></svg>
+            <p>Dokumentasi Visual</p>
         </div>
 
         <?php if (!empty($data_galeri)): ?>
-            <div class="row g-4 mb-5">
-                <?php foreach ($data_galeri as $galeri): ?>
-                    <div class="col-md-4 col-lg-3" data-aos="fade-up">
-                        <div class="card card-sd overflow-hidden h-100">
-                            <img src="<?= base_url(); ?>assets/templates/media/galeri/<?= !empty($galeri['foto']) ? $galeri['foto'] : '150-2.jpg'; ?>" class="card-img-top object-fit-cover" style="height: 200px;" alt="<?= $galeri['judul_foto']; ?>" loading="lazy" decoding="async">
-                            <div class="card-body p-3">
-                                <h6 class="fw-bold text-dark mb-0 fs-7 brand-font"><?= $galeri['judul_foto']; ?></h6>
-                            </div>
+            <div class="tk-grid-3">
+                <?php $delay=1; foreach ($data_galeri as $galeri): ?>
+                    <article class="tk-program tk-program--merah tk-muncul tk-tunda-<?= $delay ?>">
+                        <div style="height:200px; margin:-32px -32px 24px; overflow:hidden; border-radius:32px 32px 0 0">
+                            <img src="<?= base_url(); ?>assets/templates/media/galeri/<?= !empty($galeri['foto']) ? htmlspecialchars($galeri['foto']) : '150-2.jpg'; ?>" style="width:100%; height:100%; object-fit:cover" alt="<?= htmlspecialchars($galeri['judul_foto']); ?>">
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                        <h3 style="font-size:1.2rem; line-height:1.3; margin-bottom:0"><?= htmlspecialchars($galeri['judul_foto']); ?></h3>
+                    </article>
+                <?php $delay++; endforeach; ?>
             </div>
         <?php else: ?>
-            <!-- =====================================================================
-                 PATCH 2026-09-07
-                 Blok ini SEBELUMNYA menampilkan tiga prestasi spesifik sebagai
-                 fallback saat tabel galeri kosong: "Juara 1 Olimpiade Sains Kota
-                 Kupang", "Juara Paduan Suara Anak", dan "Juara Lomba Menulis
-                 Cerita & Puisi" -- lengkap dengan nama tim dan tingkat lomba.
-                 Berbeda dengan nomor telepon dummy yang jelas terlihat sebagai
-                 placeholder, klaim seperti ini terbaca sebagai fakta oleh orang
-                 tua calon siswa. Menampilkan prestasi yang belum tentu diraih
-                 adalah risiko reputasi bagi yayasan.
-
-                 Diganti dengan empty state netral. Begitu tim editorial mengisi
-                 galeri lewat panel admin, blok ini otomatis tidak muncul lagi.
-                 ===================================================================== -->
-            <div class="row justify-content-center mb-5" data-aos="fade-up">
-                <div class="col-lg-7">
-                    <div class="card card-sd p-5 text-center border-top border-4 border-warning">
-                        <i class="bi bi-images fs-1 mb-3" style="color: var(--cbim-primary); opacity: .55;" aria-hidden="true"></i>
-                        <h5 class="fw-bold text-dark brand-font mb-2">Dokumentasi Sedang Kami Siapkan</h5>
-                        <p class="text-muted fs-7 mb-4">
-                            Foto-foto kegiatan dan prestasi siswa SD K Citra Bangsa Mandiri
-                            akan segera ditampilkan di halaman ini. Sementara itu, kegiatan
-                            terbaru sekolah dapat diikuti melalui kanal media sosial resmi
-                            Yayasan CBIM.
-                        </p>
-                        <div class="d-flex flex-wrap justify-content-center gap-2">
-                            <a href="https://www.instagram.com/yayasan_cbim" target="_blank" rel="noopener" class="btn btn-cbim-outline btn-sm">
-                                <i class="bi bi-instagram" aria-hidden="true"></i> Instagram Yayasan
-                            </a>
-                            <a href="<?= base_url('sd/ppdb'); ?>" class="btn btn-cbim-primary btn-sm">
-                                <i class="bi bi-pencil-square" aria-hidden="true"></i> Informasi PPDB
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php endif; ?>
-
-        <!-- Berita & Informasi Sekolah -->
-        <?php if (!empty($data_berita)): ?>
-            <div class="pt-4 border-top" data-aos="fade-up">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <div>
-                        <span class="badge-cbim-red mb-1">Warta & Kabar</span>
-                        <h3 class="fw-extrabold text-dark brand-font mb-0">Berita Terkini Yayasan & Sekolah</h3>
-                    </div>
-                </div>
-                <div class="row g-4">
-                    <?php foreach ($data_berita as $berita): ?>
-                        <div class="col-md-6" data-aos="fade-up">
-                            <div class="card card-sd p-3 d-flex flex-row gap-3 align-items-center h-100">
-                                <img src="<?= base_url(); ?>assets/templates/media/news/<?= !empty($berita['gambar']) ? $berita['gambar'] : '150-2.jpg'; ?>" class="rounded-3 object-fit-cover flex-shrink-0" style="width: 120px; height: 120px;" alt="Berita" loading="lazy" decoding="async">
-                                <div>
-                                    <small class="text-danger fw-bold"><i class="bi bi-calendar-event me-1"></i> <?= date('d M Y', strtotime($berita['tanggal_post'])); ?></small>
-                                    <h6 class="fw-bold text-dark mt-1 mb-2 brand-font"><?= $berita['judul_berita']; ?></h6>
-                                    <p class="text-muted fs-7 mb-0 text-truncate" style="max-width: 320px;"><?= strip_tags($berita['isi_berita']); ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+            <div style="max-width: 600px; margin: 0 auto; text-align: center; background: #fff; padding: 40px; border-radius: 32px; border: 4px solid var(--kuning); box-shadow: 0 12px 24px rgba(59,51,85,.12);">
+                <span style="font-size: 3rem; display: block; margin-bottom: 16px;">📷</span>
+                <h3 style="margin-bottom: 16px;">Dokumentasi Sedang Kami Siapkan</h3>
+                <p>
+                    Foto-foto kegiatan dan prestasi siswa SD K Citra Bangsa Mandiri akan segera ditampilkan di halaman ini. Sementara itu, kegiatan terbaru sekolah dapat diikuti melalui kanal media sosial resmi Yayasan CBIM.
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+                    <a href="https://www.instagram.com/yayasan_cbim" target="_blank" rel="noopener" class="tk-tombol tk-tombol--kedua" style="font-size:0.9rem; padding:10px 16px">Instagram Yayasan</a>
+                    <a href="<?= base_url('sd/ppdb'); ?>" class="tk-tombol tk-tombol--utama" style="font-size:0.9rem; padding:10px 16px">Informasi PPDB</a>
                 </div>
             </div>
         <?php endif; ?>
     </div>
 </section>
+
+<!-- ============================ BERITA LENGKAP ============================ -->
+<?php if (!empty($data_berita)): ?>
+<section class="tk-bagian" style="border-top: 1px dashed rgba(59,51,85,.1)">
+    <div class="tk-wadah">
+        <div class="tk-judul-bagian tk-naik">
+            <span class="tk-label tk-label--kuning" style="margin-bottom:8px; display:inline-block">Warta & Kabar</span>
+            <h2 style="margin:0">Berita Terkini Yayasan & Sekolah</h2>
+        </div>
+
+        <div class="tk-grid-2">
+            <?php $delay=1; foreach ($data_berita as $berita): ?>
+            <article class="tk-kartu tk-muncul tk-tunda-<?= $delay ?>" style="display: flex; gap: 16px; align-items: center; padding: 16px;">
+                <div style="width: 120px; height: 120px; flex-shrink: 0; border-radius: 16px; overflow: hidden;">
+                    <img src="<?= base_url(); ?>assets/templates/media/news/<?= !empty($berita['gambar']) ? htmlspecialchars($berita['gambar']) : '150-2.jpg'; ?>" style="width: 100%; height: 100%; object-fit: cover;" alt="">
+                </div>
+                <div>
+                    <small style="color:var(--merah); font-weight:700; display:block; margin-bottom:4px"><?= date('d M Y', strtotime($berita['tanggal_post'])); ?></small>
+                    <h3 style="font-size:1.1rem; line-height:1.2; margin-bottom:8px"><?= htmlspecialchars(strip_tags($berita['judul_berita'])); ?></h3>
+                    <p style="font-size:0.9rem; margin-bottom:0">
+                        <?= htmlspecialchars(mb_substr(trim(strip_tags($berita['isi_berita'])), 0, 80)); ?>&hellip;
+                    </p>
+                </div>
+            </article>
+            <?php $delay++; endforeach; ?>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
+</main>

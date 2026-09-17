@@ -1,136 +1,134 @@
-<!-- Page Banner Fasilitas SD (Unified UCB Maroon & Gold Theme) -->
-<section class="bg-sd-page-header py-5 text-white">
-    <div class="container py-4 text-center" data-aos="fade-up">
-        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill font-semibold mb-2 fs-7">
-            <i class="bi bi-building-check me-1"></i> Sarana & Prasarana
-        </span>
-        <h1 class="fw-extrabold display-5 brand-font mb-2">Fasilitas Belajar & Sarana SD</h1>
-        <p class="lead opacity-90 mx-auto" style="max-width: 680px;">
+<main id="konten">
+
+<!-- ============================ HERO FASILITAS ============================ -->
+<section class="tk-hero" style="min-height: 50vh; padding-top: 100px;">
+    <svg class="tk-awan tk-awan--1" viewBox="0 0 120 54" aria-hidden="true"><path d="M22 54c-12 0-22-8-22-19S10 16 22 16c3-9 12-16 22-16 12 0 22 8 25 19 12 1 21 9 21 19 0 9-9 16-21 16H22z"/></svg>
+    <svg class="tk-awan tk-awan--2" viewBox="0 0 120 54" aria-hidden="true"><path d="M22 54c-12 0-22-8-22-19S10 16 22 16c3-9 12-16 22-16 12 0 22 8 25 19 12 1 21 9 21 19 0 9-9 16-21 16H22z"/></svg>
+
+    <!-- Floating Decorations -->
+    <span class="tk-dekorasi tk-dekorasi--1" aria-hidden="true">🏫</span>
+    <span class="tk-dekorasi tk-dekorasi--2" aria-hidden="true">💻</span>
+
+    <div class="tk-wadah tk-hero__teks">
+        <span class="tk-label tk-label--kuning" style="margin-bottom: 12px; display:inline-block">Sarana & Prasarana</span>
+        <h1 style="font-size: clamp(2rem, 5vw, 3rem)">Fasilitas Belajar & Sarana SD</h1>
+        <p class="tk-hero__sub">
             Lingkungan sekolah yang asri, aman, nyaman, dan dilengkapi teknologi modern untuk mendukung eksplorasi potensi murid secara maksimal.
         </p>
     </div>
+
+    <!-- bukit -->
+    <svg class="tk-bukit" viewBox="0 0 1200 210" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 118c150-34 260 14 400 8s210-46 360-38 190 46 290 40 150-22 150-22v104H0z" fill="#8FD3A3"/>
+        <g fill="#57B979">
+            <circle cx="150" cy="150" r="30"/><rect x="145" y="150" width="10" height="34"/>
+            <circle cx="1010" cy="158" r="24"/><rect x="1006" y="158" width="8" height="28"/>
+        </g>
+        <path d="M0 158c170-24 300 18 470 12s250-32 400-24 180 30 330 24v40H0z" fill="#57B979"/>
+    </svg>
 </section>
 
-<!-- Breadcrumb -->
-<div class="breadcrumb-sd">
-    <div class="container">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 fs-7">
-                <li class="breadcrumb-item"><a href="<?= base_url('sd'); ?>"><i class="bi bi-house-door"></i> Beranda</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Fasilitas & Sarana</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-
-<!-- Fasilitas List -->
-<section class="py-5 bg-white">
-    <div class="container py-3">
-        <div class="text-center mb-5" data-aos="fade-up">
-            <span class="badge-cbim-red mb-2">Standar Kualitas</span>
-            <h2 class="fw-extrabold text-dark brand-font">Fasilitas Unggulan SD K Citra Bangsa Mandiri</h2>
-            <p class="text-muted">Semua fasilitas dirawat secara berkala demi menjamin kenyamanan dan keselamatan seluruh siswa.</p>
+<!-- ============================ DAFTAR FASILITAS ============================ -->
+<section class="tk-bagian">
+    <div class="tk-wadah">
+        <div class="tk-judul-bagian tk-judul-bagian--tengah tk-naik">
+            <h2>Fasilitas Unggulan</h2>
+            <svg class="tk-coret" viewBox="0 0 148 12" aria-hidden="true"><path d="M3 8c22-6 44 3 66-2s52 5 76-2" stroke="#FFC53D" stroke-width="7" stroke-linecap="round" fill="none"/></svg>
+            <p>Semua fasilitas dirawat secara berkala demi menjamin kenyamanan dan keselamatan seluruh siswa.</p>
         </div>
 
-        <div class="row g-4">
-            <!-- 1. Ruang Kelas Multimedia -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-projector-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Ruang Kelas Ber-AC & Multimedia</h5>
-                    <p class="text-muted fs-7 mb-0">Setiap ruang kelas didesain ergonomis, berpendingin udara (AC), dilengkapi proyektor LCD interaktif, papan tulis ganda, serta pencahayaan alami yang optimal.</p>
+        <div class="tk-grid-3">
+            <article class="tk-kartu tk-muncul tk-tunda-1">
+                <div class="tk-kartu__ikon tk-kartu__ikon--merah">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#EE5D4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Ruang Kelas Ber-AC</h3>
+                <p>Setiap ruang kelas didesain ergonomis, berpendingin udara, dilengkapi proyektor LCD interaktif, serta pencahayaan alami.</p>
+            </article>
 
-            <!-- 2. Lab Komputer & Digital Literacy -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-warning">
-                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-laptop-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Lab Komputer & Coding Cilik</h5>
-                    <p class="text-muted fs-7 mb-0">Laboratorium komputer modern dengan perangkat PC terbaru, jaringan internet sehat berfilter, dan perangkat lunak edukasi logika pemrograman pemula.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-2">
+                <div class="tk-kartu__ikon tk-kartu__ikon--kuning">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#E0A81E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Lab Komputer</h3>
+                <p>Laboratorium komputer modern dengan perangkat PC terbaru, jaringan internet, dan perangkat lunak edukasi coding cilik.</p>
+            </article>
 
-            <!-- 3. Perpustakaan & Pojok Literasi -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-book-half fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Perpustakaan & Pojok Baca Digital</h5>
-                    <p class="text-muted fs-7 mb-0">Koleksi ribuan buku cerita edukatif, ensiklopedia anak, buku penunjang kurikulum, ruang baca lesehan karpet yang tenang, dan akses e-library.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-3">
+                <div class="tk-kartu__ikon tk-kartu__ikon--biru">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2E9BD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Perpustakaan & Literasi</h3>
+                <p>Koleksi buku cerita edukatif, ruang baca lesehan karpet yang tenang, dan akses perpustakaan digital (e-library).</p>
+            </article>
 
-            <!-- 4. Lapangan Olahraga & Futsal -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-warning">
-                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-dribbble fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Lapangan Olahraga Multifungsi</h5>
-                    <p class="text-muted fs-7 mb-0">Lapangan serbaguna luar ruangan untuk aktivitas senam kesegaran jasmani, bola basket, futsal, bulu tangkis, dan upacara bendera mingguan.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-4">
+                <div class="tk-kartu__ikon tk-kartu__ikon--hijau">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#57B979" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Lapangan Olahraga</h3>
+                <p>Lapangan serbaguna luar ruangan untuk senam jasmani, basket, futsal, bulu tangkis, dan upacara bendera.</p>
+            </article>
 
-            <!-- 5. Ruang Musik & Seni Budaya -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-music-note-beamed fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Studio Musik & Seni Budaya</h5>
-                    <p class="text-muted fs-7 mb-0">Ruang kedap suara dilengkapi alat musik tradisional NTT (Sasando), keyboard, drum set mini, gitar akustik, dan perlengkapan paduan suara anak.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-5">
+                <div class="tk-kartu__ikon tk-kartu__ikon--ungu">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#9B7EDE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Studio Musik & Seni</h3>
+                <p>Ruang kedap suara dilengkapi alat musik tradisional (Sasando), drum set mini, gitar, dan perlengkapan paduan suara.</p>
+            </article>
 
-            <!-- 6. Laboratorium Sains & Eksperimen -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-warning">
-                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-eyedropper fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Lab Sains Cilik (IPA Eksperimental)</h5>
-                    <p class="text-muted fs-7 mb-0">Sarana praktikum sains ramah anak: mikroskop pemula, model anatomi tubuh manusia, peraga tata surya, dan eksperimen sederhana sains lingkungan.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-6">
+                <div class="tk-kartu__ikon tk-kartu__ikon--merah">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#EE5D4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Lab Sains Cilik</h3>
+                <p>Sarana praktikum sains ramah anak: mikroskop pemula, model anatomi tubuh manusia, peraga tata surya, dan eksperimen sederhana.</p>
+            </article>
 
-            <!-- 7. Ruang UKS Terpadu -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="700">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-heart-pulse-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Ruang UKS & Konsultasi Kesehatan</h5>
-                    <p class="text-muted fs-7 mb-0">Layanan pertolongan pertama pada kecelakaan (P3K), tempat tidur istirahat siswa sakit, obat-obatan standar, dan pemeriksaan kesehatan berkala.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-1">
+                <div class="tk-kartu__ikon tk-kartu__ikon--kuning">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#E0A81E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Ruang UKS Terpadu</h3>
+                <p>Layanan P3K, tempat tidur istirahat siswa sakit, obat-obatan standar, dan pemeriksaan kesehatan berkala.</p>
+            </article>
 
-            <!-- 8. Kantin Sehat & Bersih -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="800">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-warning">
-                    <div class="rounded-3 bg-warning bg-opacity-10 text-warning p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-cup-hot-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">Kantin Sehat Higienis</h5>
-                    <p class="text-muted fs-7 mb-0">Menyajikan makanan dan minuman bergizi seimbang yang bebas dari bahan pengawet dan pewarna berbahaya, diawasi oleh tim gizi sekolah.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-2">
+                <div class="tk-kartu__ikon tk-kartu__ikon--biru">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#2E9BD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Kantin Sehat</h3>
+                <p>Menyajikan makanan dan minuman bergizi seimbang bebas pengawet, diawasi oleh tim gizi sekolah.</p>
+            </article>
 
-            <!-- 9. Keamanan & CCTV 24 Jam -->
-            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="900">
-                <div class="card card-sd h-100 p-4 border-top border-4 border-danger">
-                    <div class="rounded-3 bg-danger bg-opacity-10 text-danger p-3 d-inline-block mb-3" style="width: max-content;">
-                        <i class="bi bi-camera-video-fill fs-2"></i>
-                    </div>
-                    <h5 class="fw-bold text-dark mb-2 brand-font">CCTV & Sistem Akses Keamanan 24 Jam</h5>
-                    <p class="text-muted fs-7 mb-0">Kamera pengawas di titik strategis lingkungan sekolah, petugas keamanan siaga, dan sistem kartu penjemputan siswa yang teratur.</p>
+            <article class="tk-kartu tk-muncul tk-tunda-3">
+                <div class="tk-kartu__ikon tk-kartu__ikon--hijau">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#57B979" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><circle cx="12" cy="13" r="3"/><line x1="12" y1="16" x2="12" y2="19"/>
+                    </svg>
                 </div>
-            </div>
+                <h3>Keamanan & CCTV</h3>
+                <p>Kamera pengawas di titik strategis lingkungan sekolah, petugas keamanan siaga, dan sistem kartu penjemputan.</p>
+            </article>
         </div>
     </div>
 </section>
+
+</main>

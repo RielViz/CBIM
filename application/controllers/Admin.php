@@ -62,7 +62,7 @@ class Admin extends CI_Controller
         if ($this->input->method() === 'post') {
             $nama_pejabat = htmlspecialchars($this->input->post('nama_pejabat'));
             $jabatan = htmlspecialchars($this->input->post('jabatan'));
-            $config['upload_path'] = FCPATH . '/assets/templates/media/avatars/';
+            $config['upload_path'] = FCPATH . '/uploads/avatars/';
             $config['allowed_types'] = 'jpg|jpeg|png';
             $this->load->library('upload', $config);
 
@@ -97,13 +97,13 @@ class Admin extends CI_Controller
 
             if (!empty($_FILES['foto']['name'])) {
                 $foto_lama = htmlspecialchars($this->input->post('foto_lama'));
-                $old_photo_path = FCPATH . '/assets/templates/media/avatars/' . $foto_lama;
+                $old_photo_path = FCPATH . '/uploads/avatars/' . $foto_lama;
                 if (file_exists($old_photo_path)) {
                     unlink($old_photo_path);
                 }
 
                 
-                $config['upload_path'] = FCPATH . '/assets/templates/media/avatars/';
+                $config['upload_path'] = FCPATH . '/uploads/avatars/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
                 $this->load->library('upload', $config);
 
@@ -330,7 +330,7 @@ class Admin extends CI_Controller
             $tanggal_post = date('Y-m-d H:i:s', now('Asia/Taipei'));
 
             // Upload photo
-            $config['upload_path'] = FCPATH . '/assets/templates/media/news/';
+            $config['upload_path'] = FCPATH . '/uploads/berita/';
             $config['allowed_types'] = 'jpg|jpeg|png';
             $this->load->library('upload', $config);
 
@@ -371,12 +371,12 @@ class Admin extends CI_Controller
             if (!empty($_FILES['gambar']['name'])) {
 
                 $gambar_lama = htmlspecialchars($this->input->post('gambar_lama'));
-                $old_photo_path = FCPATH . '/assets/templates/media/news/' . $gambar_lama;
+                $old_photo_path = FCPATH . '/uploads/berita/' . $gambar_lama;
                 if (file_exists($old_photo_path)) {
                     unlink($old_photo_path);
                 }
 
-                $config['upload_path'] = FCPATH . '/assets/templates/media/news/';
+                $config['upload_path'] = FCPATH . '/uploads/berita/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
                 $this->load->library('upload', $config);
 
@@ -449,7 +449,7 @@ class Admin extends CI_Controller
         $this->check_rbac(['administrator']);
         if ($this->input->method() === 'post') {
             $judul_foto = htmlspecialchars($this->input->post('judul_foto'));
-            $config['upload_path'] = FCPATH . '/assets/templates/media/galeri/';
+            $config['upload_path'] = FCPATH . '/uploads/galeri/';
             $config['allowed_types'] = 'jpg|jpeg|png';
             $this->load->library('upload', $config);
 
@@ -479,12 +479,12 @@ class Admin extends CI_Controller
 
             if (!empty($_FILES['foto']['name'])) {
                 $foto_lama = htmlspecialchars($this->input->post('foto_lama'));
-                $old_photo_path = FCPATH . '/assets/templates/media/galeri/' . $foto_lama;
+                $old_photo_path = FCPATH . '/uploads/galeri/' . $foto_lama;
                 if (file_exists($old_photo_path)) {
                     unlink($old_photo_path);
                 }
 
-                $config['upload_path'] = FCPATH . '/assets/templates/media/galeri/';
+                $config['upload_path'] = FCPATH . '/uploads/galeri/';
                 $config['allowed_types'] = 'jpg|jpeg|png';
                 // $config['overwrite'] = true;
                 $this->load->library('upload', $config);

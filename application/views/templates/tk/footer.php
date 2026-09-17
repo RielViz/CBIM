@@ -1,98 +1,101 @@
-    <!-- Footer TK & PAUD K Citra Bangsa Mandiri (Unified UCB & Yayasan CBIM Theme) -->
-    </main>
-    <!-- /FE-05 (PATCH): penutup landmark <main> -->
 
-    <footer class="pt-5 pb-4 mt-5 text-light" style="background-color: var(--cbim-secondary); border-top: 5px solid var(--cbim-primary);">
-        <div class="container">
-            <div class="row g-4 pb-4 border-bottom border-secondary border-opacity-25">
-                <!-- Foundation & School Identity -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <img src="<?= base_url(); ?>assets/templates/media/logos/paud-tk.png" alt="Logo TK K Citra Bangsa" height="54" class="bg-white p-1 rounded-circle shadow-sm" loading="lazy" decoding="async">
-                        <div>
-                            <h5 class="mb-0 text-white brand-font fw-bold">TK & PAUD K CITRA BANGSA</h5>
-                            <small class="fw-bold" style="color: var(--cbim-gold);">Belajar, Bermain & Tumbuh dengan Kasih Kristus</small>
-                        </div>
-                    </div>
-                    <p class="fs-7 text-secondary leading-relaxed mb-3">
-                        TK & PAUD Kristen Citra Bangsa Mandiri berada di bawah naungan <strong>Yayasan Citra Bina Insan Mandiri (YCBIM) Kupang</strong> yang menaungi <strong>Universitas Citra Bangsa (UCB)</strong>. Tempat terbaik dan ternyaman untuk mengoptimalkan masa emas (*Golden Age*) tumbuh kembang si kecil.
-                    </p>
-                    <div class="d-flex gap-2">
-                        <a href="https://www.facebook.com/profile.php?id=100086189573438" target="_blank" class="btn btn-outline-light btn-sm rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;" title="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="https://www.youtube.com/@CBIMYayasan" target="_blank" class="btn btn-outline-light btn-sm rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;" title="YouTube"><i class="bi bi-youtube"></i></a>
-                        <a href="https://www.instagram.com/yayasan_cbim" target="_blank" class="btn btn-outline-light btn-sm rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;" title="Instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="https://api.whatsapp.com/send?phone=6281234567890" target="_blank" class="btn btn-outline-success btn-sm rounded-circle" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-                    </div>
-                </div>
+</main>
 
-                <!-- Navigation Quicklinks -->
-                <div class="col-lg-2 col-6">
-                    <h5 class="mb-3 fs-6 text-white brand-font fw-bold" style="border-left: 3px solid var(--cbim-primary); padding-left: 8px;">Menu Utama</h5>
-                    <ul class="list-unstyled fs-7">
-                        <li class="mb-2"><a href="<?= base_url('tk'); ?>" class="text-secondary text-decoration-none hover-red"><i class="bi bi-chevron-right text-danger me-1"></i> Beranda</a></li>
-                        <li class="mb-2"><a href="<?= base_url('tk/profil'); ?>" class="text-secondary text-decoration-none hover-red"><i class="bi bi-chevron-right text-danger me-1"></i> Profil & Kurikulum</a></li>
-                        <li class="mb-2"><a href="<?= base_url('tk/fasilitas'); ?>" class="text-secondary text-decoration-none hover-red"><i class="bi bi-chevron-right text-danger me-1"></i> Sarana Bermain</a></li>
-                        <li class="mb-2"><a href="<?= base_url('tk/kegiatan'); ?>" class="text-secondary text-decoration-none hover-red"><i class="bi bi-chevron-right text-danger me-1"></i> Kegiatan Ceria</a></li>
-                        <li class="mb-2"><a href="<?= base_url('tk/ppdb'); ?>" class="text-secondary text-decoration-none hover-red"><i class="bi bi-chevron-right text-warning me-1"></i> PPDB Online TK</a></li>
-                    </ul>
-                </div>
-
-                <!-- YCBIM Network -->
-                <div class="col-lg-3 col-6">
-                    <h5 class="mb-3 fs-6 text-white brand-font fw-bold" style="border-left: 3px solid var(--cbim-gold); padding-left: 8px;">Jejaring Yayasan CBIM</h5>
-                    <ul class="list-unstyled fs-7">
-                        <li class="mb-2"><a href="https://ucb.ac.id/" target="_blank" class="text-secondary text-decoration-none hover-gold"><i class="bi bi-mortarboard-fill text-warning me-1"></i> Universitas Citra Bangsa (UCB)</a></li>
-                        <li class="mb-2"><a href="https://smakcitrabangsa.sch.id/" target="_blank" class="text-secondary text-decoration-none hover-gold"><i class="bi bi-building text-warning me-1"></i> SMA K Citra Bangsa Mandiri</a></li>
-                        <li class="mb-2"><a href="http://smpkcitrabangsa.com/" target="_blank" class="text-secondary text-decoration-none hover-gold"><i class="bi bi-journal-bookmark text-warning me-1"></i> SMP K Citra Bangsa Mandiri</a></li>
-                        <li class="mb-2"><a href="<?= base_url('sd'); ?>" class="text-secondary text-decoration-none hover-gold"><i class="bi bi-book text-warning me-1"></i> SD K Citra Bangsa Mandiri</a></li>
-                        <li class="mb-2"><a href="<?= base_url('tk'); ?>" class="text-white fw-bold text-decoration-none"><i class="bi bi-check-circle-fill text-danger me-1"></i> TK & PAUD K Citra Bangsa</a></li>
-                        <li class="mb-2"><a href="<?= base_url(); ?>" class="text-secondary text-decoration-none hover-gold"><i class="bi bi-house-door text-warning me-1"></i> Portal Pusat Yayasan</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact & Location -->
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="mb-3 fs-6 text-white brand-font fw-bold" style="border-left: 3px solid var(--cbim-primary); padding-left: 8px;">Sekretariat & Kontak</h5>
-                    <p class="fs-7 text-secondary mb-2 d-flex align-items-start gap-2">
-                        <i class="bi bi-geo-alt-fill text-danger mt-1"></i>
-                        <span>Jl. Manafe No.17, Kel. Kayu Putih, Kec. Oebobo, Kota Kupang, Nusa Tenggara Timur 85111</span>
-                    </p>
-                    <p class="fs-7 text-secondary mb-2 d-flex align-items-center gap-2">
-                        <i class="bi bi-telephone-fill text-danger"></i>
-                        <span><?= !empty($data_kontak[0]['isi_konten']) ? strip_tags($data_kontak[0]['isi_konten']) : '(0380) 8553978 / 0812-3456-7890'; ?></span>
-                    </p>
-                    <p class="fs-7 text-secondary mb-3 d-flex align-items-center gap-2">
-                        <i class="bi bi-envelope-fill text-danger"></i>
-                        <span>tk.citrabangsa@cbim.or.id</span>
-                    </p>
-                    <a href="https://api.whatsapp.com/send?phone=6281234567890&text=Halo%20Bunda%20Guru%20TK%20Citra%20Bangsa%2C%20saya%20ingin%20tanya%20informasi%20pendaftaran" target="_blank" class="btn btn-cbim-primary btn-sm rounded-pill w-100 fw-bold py-2">
-                        <i class="bi bi-whatsapp me-1"></i> Tanya Bunda Guru via WhatsApp
-                    </a>
-                </div>
+<!-- ============================ FOOTER ============================ -->
+<footer class="tk-footer">
+    <div class="tk-wadah">
+        <div class="tk-footer__grid">
+            <div>
+                <h4>Alamat sekolah</h4>
+                <p>Kupang, Nusa Tenggara Timur.<br>Alamat lengkap dan nomor telepon menyusul.</p>
+                <p style="margin-bottom:0">Jam sekolah: Senin–Jumat, 07.30–11.30 WITA.</p>
             </div>
 
-            <!-- Copyright Bar -->
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center pt-3 fs-7 text-secondary">
-                <p class="mb-2 mb-sm-0">&copy; <?= date('Y'); ?> <strong>TK & PAUD K Citra Bangsa Mandiri</strong> — Yayasan Citra Bina Insan Mandiri (YCBIM).</p>
-                <p class="mb-0">Pendidikan Usia Dini Unggul & Berkarakter Kasih</p>
+            <div>
+                <h4>Unit lain</h4>
+                <a href="https://ucb.ac.id/" target="_blank" rel="noopener">Universitas Citra Bangsa</a>
+                <a href="https://smakcitrabangsa.sch.id/" target="_blank" rel="noopener">SMA K Citra Bangsa</a>
+                <a href="http://smpkcitrabangsa.com/" target="_blank" rel="noopener">SMP K Citra Bangsa</a>
+                <a href="<?= base_url('sd'); ?>">SD K Citra Bangsa</a>
+                <a href="<?= base_url('tk'); ?>">TK K Citra Bangsa</a>
+            </div>
+
+            <div>
+                <h4>Ikuti kami</h4>
+                <a href="https://www.facebook.com/profile.php?id=100086189573438" target="_blank" rel="noopener">
+                    <img class="tk-ikon-sosial" src="<?= base_url(); ?>assets/templates/media/svg/brand-logos/facebook-4.svg" alt=""> Citra Bina Insan Mandiri
+                </a>
+                <a href="https://www.youtube.com/@CBIMYayasan" target="_blank" rel="noopener">
+                    <img class="tk-ikon-sosial" src="<?= base_url(); ?>assets/templates/media/svg/brand-logos/youtube-play.svg" alt=""> Yayasan CBIM
+                </a>
+                <a href="https://www.instagram.com/yayasan_cbim?igsh=MTNwamlmZnl1dmo2" target="_blank" rel="noopener">
+                    <img class="tk-ikon-sosial" src="<?= base_url(); ?>assets/templates/media/svg/brand-logos/instagram-2-1.svg" alt=""> yayasan_cbim
+                </a>
             </div>
         </div>
-    </footer>
 
-    <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AOS JS -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50
+        <div class="tk-footer__bawah">
+            <a href="<?= base_url(); ?>" style="margin:0"><img src="<?= base_url(); ?>assets/templates/media/logos/logo-cbim.png" alt="Logo Yayasan CBIM"></a>
+            <span>&copy; <?= date('Y'); ?> Yayasan Citra Bina Insan Mandiri — Kupang. Seluruh hak cipta dilindungi.</span>
+        </div>
+    </div>
+</footer>
+
+<button class="tk-keatas" id="keatas" aria-label="Kembali ke atas">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>
+    </svg>
+</button>
+
+<script>
+(function () {
+    /* ---------- menu di layar kecil ---------- */
+    var burger = document.getElementById('burger');
+    var nav = document.getElementById('nav');
+    if (burger && nav) {
+        burger.addEventListener('click', function () {
+            var buka = nav.classList.toggle('terbuka');
+            burger.setAttribute('aria-expanded', buka);
+            burger.setAttribute('aria-label', buka ? 'Tutup menu' : 'Buka menu');
         });
-    </script>
+    }
 
-    <!-- BE-10 (PATCH): banner persetujuan cookie untuk subsite -->
-    <?php $this->load->view('templates/subsite/cookie_banner'); ?>
+    /* ---------- bayangan header saat digulir ---------- */
+    var header = document.getElementById('header');
+    var keatas = document.getElementById('keatas');
+    window.addEventListener('scroll', function () {
+        if (header) header.classList.toggle('melayang', window.scrollY > 12);
+        if (keatas) keatas.classList.toggle('tampil', window.scrollY > 500);
+    }, { passive: true });
 
+    if (keatas) {
+        keatas.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    /* ---------- Animasi Scroll (Intersection Observer) ---------- */
+    var animasiKelas = '.tk-naik, .tk-muncul, .tk-kiri, .tk-kanan, .tk-zoom';
+    var gerakOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (gerakOk && 'IntersectionObserver' in window) {
+        var pengamat = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('tk-tampil');
+                    pengamat.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll(animasiKelas).forEach(function (el) {
+            pengamat.observe(el);
+        });
+    } else {
+        document.querySelectorAll(animasiKelas).forEach(function (el) {
+            el.classList.add('tk-tampil');
+        });
+    }
+})();
+</script>
 </body>
 </html>

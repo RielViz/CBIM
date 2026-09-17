@@ -69,6 +69,32 @@ class Tk extends CI_Controller
         $this->load->view('templates/tk/footer', $data);
     }
 
+    public function program()
+    {
+        $where_kontak = "jenis_konten='kontak'";
+        $where_alamat = "jenis_konten='alamat'";
+        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
+        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
+
+        $data = [
+            'title' => 'Program & Kurikulum - TK K Citra Bangsa Mandiri',
+            'active_menu' => 'program',
+            'subsite_meta' => [
+                'unit'      => 'tk',
+                'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
+                'deskripsi' => 'Program pendidikan, kegiatan harian, kurikulum terpadu, dan ekstrakurikuler di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.',
+                'logo'      => 'paud-tk.png',
+                'jenjang'   => 'Taman Kanak-Kanak / PAUD',
+            ],
+            'data_kontak' => $data_kontak,
+            'data_alamat' => $data_alamat
+        ];
+
+        $this->load->view('templates/tk/header', $data);
+        $this->load->view('tk/program', $data);
+        $this->load->view('templates/tk/footer', $data);
+    }
+
     public function ppdb()
     {
         $where_kontak = "jenis_konten='kontak'";
