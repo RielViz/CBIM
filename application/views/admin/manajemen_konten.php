@@ -1,261 +1,170 @@
-<!--begin::Root-->
-<div class="d-flex flex-column flex-root">
-    <!--begin::Content-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Container-->
-        <div id="kt_content_container" class="container-xxl">
-            <!--begin::Row-->
-            <div class="g-5 gx-xxl-8">
-                <!--begin::Tables Widget 10-->
-                <div class="card">
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                        <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">Manajemen Konten</span>
-                        </h3>
-                        <div class="card-toolbar">
-                            <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="Klik untuk tambah data">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#addKonten" class="btn btn-sm btn-light btn-active-primary">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
-                                            <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->Konten
-                                </button>
-                            </div>
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px" data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-start">
-                                    <!--begin::Menu item-->
-                                    <a href="#" class="menu-link px-3">
-                                        <span class="menu-title">New Group</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Admin Group</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Staff Group</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Member Group</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">New Contact</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu separator-->
-                                <div class="separator mt-3 opacity-75"></div>
-                                <!--end::Menu separator-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <div class="menu-content px-3 py-3">
-                                        <a class="btn btn-primary btn-sm px-4" href="#">Generate Reports</a>
-                                    </div>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu 2-->
-                            <!--end::Menu-->
-                        </div>
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body pt-3">
-                        <!--begin::Table container-->
-                        <div class="table-responsive">
-                            <!--begin::Table-->
-                            <table id="myTable" class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-                                <!--begin::Table head-->
-                                <thead>
-                                    <tr class="border-0">
-                                        <th class="p-0"></th>
-                                        <th class="p-0 min-w-150px"></th>
-                                        <th class="p-0 min-w-150px"></th>
-                                        <th class="p-0 min-w-150px"></th>
-                                        <th class="p-0 min-w-150px"></th>
-                                        <th class="p-0 min-w-100px text-end"></th>
-                                    </tr>
-                                </thead>
-                                <!--end::Table head-->
-                                <!--begin::Table body-->
-                                <tbody>
-                                    <?php foreach ($data_konten as $key => $konten) : ?>
-                                        <tr>
-                                            <td>
-                                                <?= ++$key; ?>
-                                            </td>
-                                            <td>
-                                                <?= $konten['judul_konten']; ?>
-                                            </td>
-                                            <td>
-                                                <?= $konten['sub_judul_konten']; ?>
-                                            </td>
-                                            <td>
-                                                <?= substr($konten['isi_konten'], 0, 50); ?> ...
-                                            </td>
-                                            <td class="text-muted fw-bold">
-                                                <?= ucfirst($konten['jenis_konten']); ?>
-                                            </td>
-                                            <td class="text-end">
-                                                <a href="#" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
-                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </a>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#updateKonten<?= $konten['id_konten']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
-                                                    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
-                                                            <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </button>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteKonten<?= $konten['id_konten']; ?>" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                                    <span class="svg-icon svg-icon-3">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black" />
-                                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black" />
-                                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black" />
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                                <!--end::Table body-->
-                            </table>
-                            <!--end::Table-->
-                        </div>
-                        <!--end::Table container-->
-                    </div>
-                    <!--begin::Body-->
-                </div>
-                <!--end::Tables Widget 10-->
-            </div>
-            <!--end::Row-->
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Content-->
-</div>
-<?php foreach ($data_konten as $key => $konten) : ?>
-    <!-- begin::modal update konten -->
-    <div class="modal fade" id="updateKonten<?= $konten['id_konten']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="<?= base_url('admin/update_konten/'); ?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Konten</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <div class="mb-3">
-                                <input type="hidden" name="id_konten" value="<?= $konten['id_konten']; ?>">
-                                <label for="judul_konten" class="form-label">Judul Konten <small class="text-danger">*</small></label>
-                                <input type="text" name="judul_konten" value="<?= $konten['judul_konten']; ?>" placeholder="Judul Konten ..." class="form-control form-control-sm" required id="judul_konten">
-                            </div>
-                            <div class="mb-3">
-                                <label for="sub_judul_konten" class="form-label">Sub Judul Konten <small class="text-danger">*</small></label>
-                                <input type="text" name="sub_judul_konten" value="<?= $konten['sub_judul_konten']; ?>" placeholder="Judul Konten ..." class="form-control form-control-sm" required id="sub_judul_konten">
-                            </div>
-                            <div class="mb-3">
-                                <label for="editor<?= $key ?>" class="form-label">Isi Konten <small class="text-danger">*</small></label>
-                                <textarea class="form-control form-control-sm" name="isi_konten" id="editor<?= $key ?>" cols="30" rows="10"><?= $konten['isi_konten']; ?></textarea>
-                            </div>
-                            <div class="fmb-3">
-                                <label class="form-label" for="jenis_konten">
-                                    Jenis Konten
-                                </label>
-                                <select class="form-control form-control-sm" name="jenis_konten" id="jenis_konten">
-                                    <option value="">-- Pilih --</option>
-                                    <option <?= $konten['jenis_konten'] == "legalitas" ? "selected" : ""; ?> value="legalitas">Legalitas</option>
-                                    <option <?= $konten['jenis_konten'] == "visi" ? "selected" : ""; ?> value="visi">Visi</option>
-                                    <option <?= $konten['jenis_konten'] == "misi" ? "selected" : ""; ?> value="misi">Misi</option>
-                                    <option <?= $konten['jenis_konten'] == "nilai" ? "selected" : ""; ?> value="nilai">Nilai</option>
-                                    <option <?= $konten['jenis_konten'] == "operasional" ? "selected" : ""; ?> value="operasional">Operasional</option>
-                                    <option <?= $konten['jenis_konten'] == "kontak" ? "selected" : ""; ?> value="kontak">Kontak</option>
-                                    <option <?= $konten['jenis_konten'] == "alamat" ? "selected" : ""; ?> value="alamat">Alamat</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" name="update_konten" class="btn btn-sm btn-primary">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-    <!-- begin::Ckeditor -->
-    <script>
-        ClassicEditor
-            .create(document.querySelector('#editor<?= $key ?>'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-    <!-- end::Ckeditor -->
-    <!-- end::modal hapus struktur -->
-<?php endforeach; ?>
-<?php foreach ($data_konten as $key => $konten) : ?>
-    <!-- begin::modal delete struktur -->
-    <div class="modal fade" id="deleteKonten<?= $konten['id_konten']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="<?= base_url('admin/delete_konten/'); ?>" method="post" enctype="multipart/form-data">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Konten</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+/* ============================================================================
+   PROFIL YAYASAN (MANAJEMEN KONTEN)
+   Data: $data_konten (id_konten, judul_konten, sub_judul_konten, isi_konten,
+   jenis_konten). Aksi: admin/add_konten, admin/update_konten,
+   admin/delete_konten.
+
+   Kolom jenis_konten di database bertipe ENUM dengan tujuh nilai persis di
+   bawah ini, dan controller menolak dua konten dengan jenis yang sama. Karena
+   itu halaman ini disusun per jenis: tujuh kartu tetap, masing-masing terisi
+   atau kosong. Admin langsung melihat bagian mana yang belum diisi, dan tidak
+   akan tersandung pesan "jenis konten sudah ada".
+   ========================================================================== */
+
+$jenis = [
+    'legalitas'   => ['Legalitas',   'Akta pendirian, pengesahan, dan perubahannya', 'Halaman Profil'],
+    'visi'        => ['Visi',        'Arah jangka panjang yayasan',                  'Halaman Profil'],
+    'misi'        => ['Misi',        'Langkah untuk mewujudkan visi',                'Halaman Profil'],
+    'nilai'       => ['Nilai',       'Nilai-nilai yang dipegang, misalnya TESIS',    'Halaman Profil'],
+    'operasional' => ['Operasional', 'Tata kelola dan cara yayasan dijalankan',      'Halaman Profil'],
+    'kontak'      => ['Kontak',      'Telepon, surel, dan jam layanan',              'Halaman Kontak'],
+    'alamat'      => ['Alamat',      'Alamat kantor yayasan',                        'Halaman Kontak'],
+];
+
+$per_jenis = [];
+$rekam = [];
+foreach ($data_konten as $k) {
+    $per_jenis[$k['jenis_konten']] = $k;
+    $rekam['k' . $k['id_konten']] = [
+        'id_konten'        => $k['id_konten'],
+        'judul_konten'     => html_entity_decode($k['judul_konten'], ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+        'sub_judul_konten' => html_entity_decode((string) $k['sub_judul_konten'], ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+        'isi_konten'       => $k['isi_konten'],
+        'jenis_konten'     => $k['jenis_konten'],
+    ];
+}
+$terisi = count(array_intersect_key($per_jenis, $jenis));
+?>
+
+<div class="kepala">
+    <div class="kepala__teks">
+        <p>Isi halaman Profil dan Kontak situs yayasan. Setiap bagian hanya boleh punya satu isi —
+           <strong><?= $terisi; ?> dari <?= count($jenis); ?></strong> bagian sudah terisi.</p>
+    </div>
+</div>
+
+<div class="daftar-konten">
+    <?php foreach ($jenis as $kunci => $j):
+        $k = isset($per_jenis[$kunci]) ? $per_jenis[$kunci] : NULL; ?>
+        <?php if ($k): ?>
+            <article class="konten">
+                <div class="konten__kepala">
+                    <span class="konten__ikon"><?= adm_ikon('konten', 17); ?></span>
+                    <div style="min-width:0">
+                        <small><?= adm_e($j[0]); ?> &middot; <?= adm_e($j[2]); ?></small>
+                        <h3><?= adm_e($k['judul_konten']); ?></h3>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <div class="mb-3">
-                                <input type="hidden" name="id_konten" value="<?= $konten['id_konten']; ?>">
-                                <p>Apakah anda yakin ingin hapus <strong><?= $konten['judul_konten']; ?></strong>?</p>
-                            </div>
-                        </div>
+                </div>
+                <div class="konten__isi">
+                    <?php if (!in_array(trim((string) $k['sub_judul_konten']), ['', '-', '—'], TRUE)): ?>
+                        <p style="margin:0 0 6px;color:var(--navy);font-weight:600"><?= adm_e($k['sub_judul_konten']); ?></p>
+                    <?php endif; ?>
+                    <p class="potong-2" style="margin:0;-webkit-line-clamp:4"><?= adm_e(adm_ringkas($k['isi_konten'], 260)); ?></p>
+                </div>
+                <div class="konten__kaki">
+                    <span class="cap cap--hijau">Terisi</span>
+                    <div class="aksi">
+                        <button type="button" class="tbl tbl--garis tbl--kecil" data-buka="dialogUbah" data-rekam="k<?= (int) $k['id_konten']; ?>"><?= adm_ikon('ubah', 14); ?> Ubah</button>
+                        <button type="button" class="ikon-tbl ikon-tbl--hapus" title="Hapus" aria-label="Hapus konten <?= adm_e($j[0]); ?>"
+                                data-hapus="<?= base_url('admin/delete_konten/'); ?>"
+                                data-kirim='<?= adm_e(adm_json(['id_konten' => $k['id_konten']])); ?>'
+                                data-judul="Hapus isi bagian <?= adm_e($j[0]); ?>?"
+                                data-ket="Bagian ini akan kosong di situs sampai diisi lagi."
+                                data-nama="<?= adm_e($k['judul_konten']); ?>"><?= adm_ikon('hapus', 15); ?></button>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Kembali</button>
-                        <button type="submit" name="hapus_struktur" class="btn btn-sm btn-primary">Hapus</button>
+                </div>
+            </article>
+        <?php else: ?>
+            <article class="konten konten--kosong">
+                <div class="konten__kepala">
+                    <span class="konten__ikon"><?= adm_ikon('konten', 17); ?></span>
+                    <div>
+                        <small><?= adm_e($j[2]); ?></small>
+                        <h3><?= adm_e($j[0]); ?></h3>
                     </div>
-                </form>
+                </div>
+                <div class="konten__isi"><p style="margin:0"><?= adm_e($j[1]); ?>. Bagian ini belum diisi, jadi tidak tampil di situs.</p></div>
+                <div class="konten__kaki">
+                    <span class="cap">Belum diisi</span>
+                    <button type="button" class="tbl tbl--utama tbl--kecil" data-buka="dialogTambah"
+                            data-isi='<?= adm_e(adm_json(['jenis_konten' => $kunci, 'judul_konten' => $j[0]])); ?>'><?= adm_ikon('tambah', 14); ?> Isi sekarang</button>
+                </div>
+            </article>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+
+<script type="application/json" id="data-halaman"><?= adm_json($rekam); ?></script>
+
+<dialog class="dialog dialog--lebar" id="dialogTambah" aria-labelledby="judulTambah">
+    <form action="<?= base_url('admin/add_konten/'); ?>" method="post" data-kosongkan data-sukses="Bagian profil sudah diisi.">
+        <?= adm_kepala_dialog('Isi bagian profil', '', 'judulTambah'); ?>
+        <div class="dialog__isi">
+            <div class="baris-bidang">
+                <div class="bidang">
+                    <label for="t_jenis">Bagian <span class="wajib">*</span></label>
+                    <select id="t_jenis" name="jenis_konten" required>
+                        <option value="">— Pilih bagian —</option>
+                        <?php foreach ($jenis as $kunci => $j): ?>
+                            <option value="<?= $kunci; ?>"<?= isset($per_jenis[$kunci]) ? ' disabled' : ''; ?>><?= adm_e($j[0]); ?><?= isset($per_jenis[$kunci]) ? ' (sudah terisi)' : ''; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="bidang">
+                    <label for="t_judul">Judul <span class="wajib">*</span></label>
+                    <input type="text" id="t_judul" name="judul_konten" required maxlength="250">
+                </div>
+            </div>
+            <div class="bidang">
+                <label for="t_sub">Subjudul <span class="wajib">*</span></label>
+                <input type="text" id="t_sub" name="sub_judul_konten" required maxlength="250" placeholder="Kalimat singkat di bawah judul">
+            </div>
+            <div class="bidang">
+                <label for="editorKonten">Isi <span class="wajib">*</span></label>
+                <textarea id="editorKonten" name="isi_konten" data-editor data-wajib="Isi konten" rows="10"></textarea>
             </div>
         </div>
-    </div>
-    <!-- end::modal hapus struktur -->
-<?php endforeach; ?>
+        <div class="dialog__kaki">
+            <button type="button" class="tbl tbl--garis" data-tutup>Batal</button>
+            <button type="submit" class="tbl tbl--utama">Simpan</button>
+        </div>
+    </form>
+</dialog>
+
+<dialog class="dialog dialog--lebar" id="dialogUbah" aria-labelledby="judulUbah">
+    <form action="<?= base_url('admin/update_konten/'); ?>" method="post" data-sukses="Perubahan profil sudah disimpan.">
+        <?= adm_kepala_dialog('Ubah bagian profil', '', 'judulUbah'); ?>
+        <div class="dialog__isi">
+            <input type="hidden" name="id_konten">
+            <div class="baris-bidang">
+                <div class="bidang">
+                    <label for="u_jenis">Bagian <span class="wajib">*</span></label>
+                    <select id="u_jenis" name="jenis_konten" required>
+                        <?php foreach ($jenis as $kunci => $j): ?>
+                            <option value="<?= $kunci; ?>"><?= adm_e($j[0]); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="bidang">
+                    <label for="u_judul">Judul <span class="wajib">*</span></label>
+                    <input type="text" id="u_judul" name="judul_konten" required maxlength="250">
+                </div>
+            </div>
+            <div class="bidang">
+                <label for="u_sub">Subjudul <span class="wajib">*</span></label>
+                <input type="text" id="u_sub" name="sub_judul_konten" required maxlength="250">
+            </div>
+            <div class="bidang">
+                <label for="editorKontenUbah">Isi <span class="wajib">*</span></label>
+                <textarea id="editorKontenUbah" name="isi_konten" data-editor data-wajib="Isi konten" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="dialog__kaki">
+            <button type="button" class="tbl tbl--garis" data-tutup>Batal</button>
+            <button type="submit" class="tbl tbl--utama">Simpan perubahan</button>
+        </div>
+    </form>
+</dialog>

@@ -9,119 +9,112 @@ class Tk extends CI_Controller
         $this->load->model('m_data');
         $this->load->model('visitors_log');
         $this->load->library('form_validation');
+        $this->load->helper('yayasan');
         $ip_address = $this->input->ip_address();
         $this->visitors_log->log_visitor($ip_address);
     }
 
-    public function index()
+    /**
+     * Data dasar yang dipakai di semua halaman TK (kontak, alamat, subsite_meta).
+     */
+    private function _base_data($title, $active_menu, $deskripsi)
     {
-        $where_kontak = "jenis_konten='kontak'";
-        $where_alamat = "jenis_konten='alamat'";
-        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
-        $data_galeri = $this->m_data->get_data('galeri')->result_array();
-
-        $data = [
-            'title' => 'TK & PAUD K Citra Bangsa Mandiri - Kupang',
-            'active_menu' => 'home',
-            // PATCH 2026-09-07: dibaca templates/subsite/head_shared.php
+        return [
+            'title'        => $title,
+            'active_menu'  => $active_menu,
+            'data_kontak'  => $this->m_data->get_data_where("jenis_konten='kontak'", 'konten')->result_array(),
+            'data_alamat'  => $this->m_data->get_data_where("jenis_konten='alamat'", 'konten')->result_array(),
             'subsite_meta' => [
                 'unit'      => 'tk',
                 'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
-                'deskripsi' => 'TK & PAUD Kristen Citra Bangsa Mandiri Kupang di bawah naungan Yayasan CBIM. Pendidikan anak usia dini yang ramah anak, kreatif, dan berlandaskan kasih.',
+                'deskripsi' => $deskripsi,
                 'logo'      => 'paud-tk.png',
                 'jenjang'   => 'Taman Kanak-Kanak / PAUD',
             ],
-            'data_kontak' => $data_kontak,
-            'data_alamat' => $data_alamat,
-            'data_galeri' => $data_galeri
         ];
+    }
 
+    private function _render($view, $data)
+    {
         $this->load->view('templates/tk/header', $data);
-        $this->load->view('tk/index', $data);
+        $this->load->view('tk/' . $view, $data);
         $this->load->view('templates/tk/footer', $data);
+    }
+
+    /**
+     * Mapping data berita mentah ke format yang dipakai view.
+     */
+    private function _map_berita($data_berita)
+    {
+        $mapped = [];
+        foreach ($data_berita as $b) {
+            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $b['judul_berita'])));
+            $mapped[] = [
+                'id'           => $b['id_berita'],
+                'slug'         => $slug,
+                'gambar'       => $b['gambar'],
+                'kategori'     => 'umum',
+                'judul'        => $b['judul_berita'],
+                'ringkasan'    => strip_tags(substr($b['isi_berita'], 0, 150)),
+                'isi'          => $b['isi_berita'],
+                'tanggal_post' => $b['tanggal_post'],
+                'penulis'      => ''
+            ];
+        }
+        return $mapped;
+    }
+
+    // =========================================================================
+    // Halaman-halaman utama (yang sudah ada)
+    // =========================================================================
+
+    public function index()
+    {
+        $data = $this->_base_data(
+            'TK & PAUD K Citra Bangsa Mandiri - Kupang',
+            'home',
+            'TK & PAUD Kristen Citra Bangsa Mandiri Kupang di bawah naungan Yayasan CBIM. Pendidikan anak usia dini yang ramah anak, kreatif, dan berlandaskan kasih.'
+        );
+
+        $data['data_galeri'] = $this->m_data->get_data('galeri')->result_array();
+
+        $this->_render('index', $data);
     }
 
     public function profil()
     {
-        $where_kontak = "jenis_konten='kontak'";
-        $where_alamat = "jenis_konten='alamat'";
-        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
+        $data = $this->_base_data(
+            'Profil & Kurikulum - TK K Citra Bangsa Mandiri',
+            'profil',
+            'Sejarah, visi, misi, dan nilai pembiasaan TK & PAUD Kristen Citra Bangsa Mandiri Kupang di bawah naungan Yayasan Citra Bina Insan Mandiri.'
+        );
 
-        $data = [
-            'title' => 'Profil & Kurikulum - TK K Citra Bangsa Mandiri',
-            'active_menu' => 'profil',
-            // PATCH 2026-09-07: dibaca templates/subsite/head_shared.php
-            'subsite_meta' => [
-                'unit'      => 'tk',
-                'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
-                'deskripsi' => 'Sejarah, visi, misi, dan nilai pembiasaan TK & PAUD Kristen Citra Bangsa Mandiri Kupang di bawah naungan Yayasan Citra Bina Insan Mandiri.',
-                'logo'      => 'paud-tk.png',
-                'jenjang'   => 'Taman Kanak-Kanak / PAUD',
-            ],
-            'data_kontak' => $data_kontak,
-            'data_alamat' => $data_alamat
-        ];
-
-        $this->load->view('templates/tk/header', $data);
-        $this->load->view('tk/profil', $data);
-        $this->load->view('templates/tk/footer', $data);
+        $this->_render('profil', $data);
     }
 
     public function program()
     {
-        $where_kontak = "jenis_konten='kontak'";
-        $where_alamat = "jenis_konten='alamat'";
-        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
+        $data = $this->_base_data(
+            'Program & Kurikulum - TK K Citra Bangsa Mandiri',
+            'program',
+            'Program pendidikan, kegiatan harian, kurikulum terpadu, dan ekstrakurikuler di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.'
+        );
 
-        $data = [
-            'title' => 'Program & Kurikulum - TK K Citra Bangsa Mandiri',
-            'active_menu' => 'program',
-            'subsite_meta' => [
-                'unit'      => 'tk',
-                'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
-                'deskripsi' => 'Program pendidikan, kegiatan harian, kurikulum terpadu, dan ekstrakurikuler di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.',
-                'logo'      => 'paud-tk.png',
-                'jenjang'   => 'Taman Kanak-Kanak / PAUD',
-            ],
-            'data_kontak' => $data_kontak,
-            'data_alamat' => $data_alamat
-        ];
-
-        $this->load->view('templates/tk/header', $data);
-        $this->load->view('tk/program', $data);
-        $this->load->view('templates/tk/footer', $data);
+        $this->_render('program', $data);
     }
 
     public function ppdb()
     {
-        $where_kontak = "jenis_konten='kontak'";
-        $where_alamat = "jenis_konten='alamat'";
-        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
+        $data = $this->_base_data(
+            'Pendaftaran Siswa Baru - TK K Citra Bangsa Mandiri',
+            'ppdb',
+            'Pendaftaran Peserta Didik Baru TK & PAUD Kristen Citra Bangsa Mandiri Kupang TA 2026/2027. Formulir online, alur pendaftaran, dan berkas yang dibutuhkan.'
+        );
 
-        $data = [
-            'title' => 'Pendaftaran Siswa Baru - TK K Citra Bangsa Mandiri',
-            'active_menu' => 'ppdb',
-            // PATCH 2026-09-07: dibaca templates/subsite/head_shared.php
-            'subsite_meta' => [
-                'unit'      => 'tk',
-                'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
-                'deskripsi' => 'Pendaftaran Peserta Didik Baru TK & PAUD Kristen Citra Bangsa Mandiri Kupang TA 2026/2027. Formulir online, alur pendaftaran, dan berkas yang dibutuhkan.',
-                'logo'      => 'paud-tk.png',
-                'jenjang'   => 'Taman Kanak-Kanak / PAUD',
-            ],
-            'data_kontak' => $data_kontak,
-            'data_alamat' => $data_alamat,
-            'success_msg' => $this->session->flashdata('success'),
-            'error_msg' => $this->session->flashdata('error')
-        ];
+        $data['success_msg'] = $this->session->flashdata('success');
+        $data['error_msg']   = $this->session->flashdata('error');
 
-        $this->load->view('templates/tk/header', $data);
-        $this->load->view('tk/ppdb', $data);
-        $this->load->view('templates/tk/footer', $data);
+        $this->_render('ppdb', $data);
     }
 
     /**
@@ -241,57 +234,165 @@ class Tk extends CI_Controller
 
     public function fasilitas()
     {
-        $where_kontak = "jenis_konten='kontak'";
-        $where_alamat = "jenis_konten='alamat'";
-        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
+        $data = $this->_base_data(
+            'Fasilitas Bermain & Belajar - TK K Citra Bangsa Mandiri',
+            'fasilitas',
+            'Sarana dan prasarana TK & PAUD Kristen Citra Bangsa Mandiri Kupang: ruang kelas ramah anak, area bermain, sentra belajar, dan lingkungan yang aman.'
+        );
 
-        $data = [
-            'title' => 'Fasilitas Bermain & Belajar - TK K Citra Bangsa Mandiri',
-            'active_menu' => 'fasilitas',
-            // PATCH 2026-09-07: dibaca templates/subsite/head_shared.php
-            'subsite_meta' => [
-                'unit'      => 'tk',
-                'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
-                'deskripsi' => 'Sarana dan prasarana TK & PAUD Kristen Citra Bangsa Mandiri Kupang: ruang kelas ramah anak, area bermain, sentra belajar, dan lingkungan yang aman.',
-                'logo'      => 'paud-tk.png',
-                'jenjang'   => 'Taman Kanak-Kanak / PAUD',
-            ],
-            'data_kontak' => $data_kontak,
-            'data_alamat' => $data_alamat
-        ];
-
-        $this->load->view('templates/tk/header', $data);
-        $this->load->view('tk/fasilitas', $data);
-        $this->load->view('templates/tk/footer', $data);
+        $this->_render('fasilitas', $data);
     }
 
     public function kegiatan()
     {
-        $where_kontak = "jenis_konten='kontak'";
-        $where_alamat = "jenis_konten='alamat'";
-        $data_kontak = $this->m_data->get_data_where($where_kontak, 'konten')->result_array();
-        $data_alamat = $this->m_data->get_data_where($where_alamat, 'konten')->result_array();
-        $data_galeri = $this->m_data->get_data('galeri')->result_array();
+        $data = $this->_base_data(
+            'Kegiatan & Ceria Anak - TK K Citra Bangsa Mandiri',
+            'kegiatan',
+            'Dokumentasi kegiatan bermain sambil belajar, pentas seni, dan keseharian anak di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.'
+        );
 
-        $data = [
-            'title' => 'Kegiatan & Ceria Anak - TK K Citra Bangsa Mandiri',
-            'active_menu' => 'kegiatan',
-            // PATCH 2026-09-07: dibaca templates/subsite/head_shared.php
-            'subsite_meta' => [
-                'unit'      => 'tk',
-                'nama'      => 'TK & PAUD Kristen Citra Bangsa Mandiri',
-                'deskripsi' => 'Dokumentasi kegiatan bermain sambil belajar, pentas seni, dan keseharian anak di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.',
-                'logo'      => 'paud-tk.png',
-                'jenjang'   => 'Taman Kanak-Kanak / PAUD',
-            ],
-            'data_kontak' => $data_kontak,
-            'data_alamat' => $data_alamat,
-            'data_galeri' => $data_galeri
+        $data['data_galeri'] = $this->m_data->get_data('galeri')->result_array();
+
+        $this->_render('kegiatan', $data);
+    }
+
+    // =========================================================================
+    // Berita TK
+    // =========================================================================
+
+    public function berita($id = null, $slug = null)
+    {
+        // Jika ada parameter ID, tampilkan detail berita
+        if ($id !== null && is_numeric($id)) {
+            $this->_baca_berita((int) $id);
+            return;
+        }
+
+        $data = $this->_base_data(
+            'Berita - TK K Citra Bangsa Mandiri',
+            'berita',
+            'Berita, kabar kegiatan, prestasi, dan pengumuman dari TK & PAUD Kristen Citra Bangsa Mandiri Kupang.'
+        );
+
+        $hal = (int)($this->input->get('hal') ?? 1);
+        if ($hal < 1) $hal = 1;
+        $limit  = 9;
+        $offset = ($hal - 1) * $limit;
+
+        $semua_berita = $this->_map_berita($this->m_data->get_data('berita')->result_array());
+
+        $total_hal = max(1, ceil(count($semua_berita) / $limit));
+        $data['berita']    = array_slice($semua_berita, $offset, $limit);
+        $data['hal']       = $hal;
+        $data['total_hal'] = $total_hal;
+
+        $this->_render('berita', $data);
+    }
+
+    /**
+     * Detail berita (dipanggil dari berita() ketika ada parameter $id).
+     */
+    private function _baca_berita($id)
+    {
+        $row = $this->db->get_where('berita', ['id_berita' => $id])->row_array();
+
+        if (empty($row)) {
+            show_404();
+            return;
+        }
+
+        $data = $this->_base_data(
+            htmlspecialchars($row['judul_berita']) . ' - TK K Citra Bangsa Mandiri',
+            'berita',
+            strip_tags(substr($row['isi_berita'], 0, 160))
+        );
+
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $row['judul_berita'])));
+        $data['berita'] = [
+            'id'           => $row['id_berita'],
+            'slug'         => $slug,
+            'gambar'       => $row['gambar'],
+            'kategori'     => 'umum',
+            'judul'        => $row['judul_berita'],
+            'isi'          => $row['isi_berita'],
+            'tanggal_post' => $row['tanggal_post'],
+            'penulis'      => ''
         ];
 
-        $this->load->view('templates/tk/header', $data);
-        $this->load->view('tk/kegiatan', $data);
-        $this->load->view('templates/tk/footer', $data);
+        // Berita lainnya (3 terakhir, kecuali yang sedang dibaca)
+        $this->db->where('id_berita !=', $id)->order_by('id_berita', 'DESC')->limit(3);
+        $data['lain'] = $this->_map_berita($this->db->get('berita')->result_array());
+
+        $this->_render('baca', $data);
+    }
+
+    // =========================================================================
+    // Video Kegiatan TK
+    // =========================================================================
+
+    public function video_kegiatan()
+    {
+        $data = $this->_base_data(
+            'Video Kegiatan - TK K Citra Bangsa Mandiri',
+            'video',
+            'Kumpulan video kegiatan bermain, belajar, dan acara di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.'
+        );
+
+        $data_all_video = $this->m_data->get_data('video_kegiatan')->result_array();
+        $video_mapped = [];
+        foreach ($data_all_video as $v) {
+            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $v['link'], $match);
+            $ytId = isset($match[1]) ? $match[1] : '';
+            $video_mapped[] = [
+                'id'         => $v['id_video'],
+                'youtube_id' => $ytId,
+                'thumb'      => $ytId ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg" : '',
+                'judul'      => $v['judul_video'],
+                'deskripsi'  => $v['deskripsi'],
+                'tanggal'    => ''
+            ];
+        }
+        $data['video'] = $video_mapped;
+
+        // Galeri foto untuk section bawah
+        $data_galeri = $this->m_data->get_data('galeri')->result_array();
+        $galeri_mapped = [];
+        foreach ($data_galeri as $g) {
+            $galeri_mapped[] = [
+                'foto'  => $g['foto'],
+                'judul' => $g['judul_foto']
+            ];
+        }
+        $data['galeri'] = $galeri_mapped;
+
+        $this->_render('video_kegiatan', $data);
+    }
+
+    // =========================================================================
+    // Galeri Foto TK
+    // =========================================================================
+
+    public function galeri()
+    {
+        $data = $this->_base_data(
+            'Galeri Foto - TK K Citra Bangsa Mandiri',
+            'galeri',
+            'Dokumentasi foto kegiatan bermain, belajar, dan acara di TK & PAUD Kristen Citra Bangsa Mandiri Kupang.'
+        );
+
+        $data_galeri = $this->m_data->get_data('galeri')->result_array();
+        $galeri_mapped = [];
+        foreach ($data_galeri as $g) {
+            $galeri_mapped[] = [
+                'foto'       => $g['foto'],
+                'judul'      => $g['judul_foto'],
+                'keterangan' => '',
+                'tanggal'    => ''
+            ];
+        }
+        $data['galeri'] = $galeri_mapped;
+
+        $this->_render('galeri', $data);
     }
 }
+

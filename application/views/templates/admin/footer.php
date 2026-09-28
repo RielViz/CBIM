@@ -1,170 +1,44 @@
-  <!--begin::Footer-->
-  <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">
-      <!--begin::Container-->
-      <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-          <!--begin::Copyright-->
-          <div class="text-dark order-2 order-md-1">
-              <span class="text-muted fw-bold me-1">© <?= date('Y'); ?></span>
-              <a href="<?= base_url(); ?>" class="text-gray-800 text-hover-primary fw-bold">Yayasan Citra Bina Insan Mandiri (CBIM) Kupang</a>
-          </div>
-          <!--end::Copyright-->
-      </div>
-      <!--end::Container-->
-  </div>
-  <!--end::Footer-->
-  </div>
-  <!--end::Wrapper-->
-  </div>
-  <!--begin::Scrolltop-->
-  <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-      <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-      <span class="svg-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
-              <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
-          </svg>
-      </span>
-      <!--end::Svg Icon-->
-  </div>
-  <!--end::Scrolltop-->
-  <!--end::Page-->
-  <!--end::Main-->
-  <script>
-      var hostUrl = "<?= base_url(); ?>assets/templates/";
-  </script>
-  <!--begin::Javascript-->
-  <!--begin::Global Javascript Bundle(used by all pages)-->
-  <script src="<?= base_url(); ?>assets/templates/plugins/global/plugins.bundle.js"></script>
-  <script src="<?= base_url(); ?>assets/templates/js/scripts.bundle.js"></script>
-  <!--end::Global Javascript Bundle-->
-  <!--begin::Page Vendors Javascript(used by this page)-->
-  <script src="<?= base_url(); ?>assets/templates/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
-  <!--end::Page Vendors Javascript-->
-  <!--begin::Page Custom Javascript(used by this page)-->
-  <script src="<?= base_url(); ?>assets/templates/js/custom/widgets.js"></script>
-  <script src="<?= base_url(); ?>assets/templates/js/custom/apps/chat/chat.js"></script>
-  <script src="<?= base_url(); ?>assets/templates/js/custom/modals/create-app.js"></script>
-  <script src="<?= base_url(); ?>assets/templates/js/custom/modals/upgrade-plan.js"></script>
-  <!-- Script untuk highlight.js dari CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
-  <!-- begin:Datables -->
-  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-  <!-- end:Datables -->
-  <!-- begin::Alert -->
-  <?php if ($this->session->flashdata('success')) : ?>
-      <script>
-          var successfuly = '<?= $this->session->flashdata('success'); ?>';
-          Swal.fire({
-              title: 'Sukses!',
-              text: successfuly,
-              icon: 'success',
-              confirmButtonText: 'OK'
-          }).then(function(result) {
-              if (result.isConfirmed) {
-                  window.location.href = '';
-              }
-          });
-      </script>
-      <?php $this->session->unset_userdata('success'); // Menghapus session setelah ditampilkan 
-        ?>
-  <?php endif; ?>
+<?php
+defined('BASEPATH') or exit('No direct script access allowed');
 
-  <?php if ($this->session->flashdata('error')) : ?>
-      <script>
-          Swal.fire({
-              title: 'Error!',
-              text: '<?= $this->session->flashdata('error'); ?>',
-              icon: 'error',
-              confirmButtonText: 'OK'
-          }).then(function(result) {
-              if (result.isConfirmed) {
-                  window.location.href = '';
-              }
-          });
-      </script>
-      <?php $this->session->unset_userdata('error'); // Menghapus session setelah ditampilkan 
-        ?>
-  <?php endif; ?>
-  <!-- end::Alert -->
-  <script>
-      // Function to check if the textarea with a specific ID exists
-      function isTextareaExist(textareaId) {
-          return document.getElementById(textareaId) !== null;
-      }
+/* ============================================================================
+   KERANGKA PANEL ADMIN — BAGIAN BAWAH
+   ----------------------------------------------------------------------------
+   Pesan sukses dan gagal dari controller (flashdata 'success' dan 'error')
+   ditampilkan sebagai notifikasi melayang.
 
-      // Function to create ClassicEditor if the textarea exists
-      function createEditorIfExist(textareaId) {
-          if (isTextareaExist(textareaId)) {
-              ClassicEditor
-                  .create(document.querySelector('#' + textareaId))
-                  .then(editor => {
-                      console.log(editor);
-                  })
-                  .catch(error => {
-                      console.error(error);
-                  });
-          }
-      }
+   Versi lama menaruh pesan itu langsung di dalam string JavaScript tanpa
+   di-escape. Pesan galat unggahan dari CodeIgniter berisi tag <p>, sehingga
+   skripnya rusak dan notifikasinya tidak pernah muncul — dan pesan berisi
+   tanda kutip bisa menyuntikkan skrip. Sekarang dikirim lewat json_encode().
+   ========================================================================== */
 
-      // Check and create editor for each textarea
-      createEditorIfExist('editor');
-      createEditorIfExist('editorKonten');
-      createEditorIfExist('editorVideo');
-      createEditorIfExist('editorBerita');
-  </script>
+$pesan_sukses = (string) $this->session->flashdata('success');
+$pesan_galat  = (string) $this->session->flashdata('error');
+$this->session->unset_userdata(['success', 'error']);
 
-  <!-- end::Ckeditor -->
+$bersih = function ($s) {
+    return trim(preg_replace('/\s+/u', ' ', html_entity_decode(strip_tags($s), ENT_QUOTES, 'UTF-8')));
+};
 
-  <!-- begin:DataTable -->
-  <script>
-      if (document.querySelector('#myTable')) {
-          new DataTable('#myTable', {
-              "scrollX": true,
-              "scrollY": true,
-          });
-      }
-      if (document.querySelector('#tablePendaftaranSd')) {
-          new DataTable('#tablePendaftaranSd', {
-              "language": {
-                  "search": "Cari Calon Siswa:",
-                  "lengthMenu": "Tampilkan _MENU_ data",
-                  "info": "Menampilkan _START_ s/d _END_ dari _TOTAL_ pendaftar",
-                  "paginate": {
-                      "first": "Awal",
-                      "last": "Akhir",
-                      "next": "Lanjut",
-                      "previous": "Sebelumnya"
-                  }
-              }
-          });
-      }
-      if (document.querySelector('#tablePendaftaranTk')) {
-          new DataTable('#tablePendaftaranTk', {
-              "language": {
-                  "search": "Cari Calon Murid:",
-                  "lengthMenu": "Tampilkan _MENU_ data",
-                  "info": "Menampilkan _START_ s/d _END_ dari _TOTAL_ pendaftar",
-                  "paginate": {
-                      "first": "Awal",
-                      "last": "Akhir",
-                      "next": "Lanjut",
-                      "previous": "Sebelumnya"
-                  }
-              }
-          });
-      }
-  </script>
-  <!-- end:DataTable -->
-  <!-- Inisialisasi highlight.js -->
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          hljs.initHighlightingOnLoad();
-      });
-  </script>
-  <!--end::Page Custom Javascript-->
-  <!--end::Javascript-->
-  </body>
-  <!--end::Body-->
+$menu = isset($menu) ? $menu : '';
+$pakai_editor = in_array($menu, ['berita', 'manajemen_konten', 'video_kegiatan'], TRUE);
+$v_js = @filemtime(FCPATH . 'assets/admin/admin.js') ?: '1';
+?>
+        </main>
 
-  </html>
+        <footer class="kaki">
+            &copy; <?= date('Y'); ?> Yayasan Citra Bina Insan Mandiri &middot; Kupang, Nusa Tenggara Timur
+        </footer>
+    </div>
+</div>
+
+<script>
+window.ADMIN_PESAN = <?= json_encode(['sukses' => $bersih($pesan_sukses), 'galat' => $bersih($pesan_galat)], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+</script>
+<?php if ($pakai_editor): ?>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+<?php endif; ?>
+<script src="<?= base_url('assets/admin/admin.js?v=' . $v_js); ?>"></script>
+</body>
+</html>

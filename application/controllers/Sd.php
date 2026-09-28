@@ -44,6 +44,7 @@ class Sd extends CI_Controller
         $this->load->model('m_data');
         $this->load->model('visitors_log');
         $this->load->library('form_validation');
+        $this->load->helper('yayasan');
 
         $ip_address = $this->input->ip_address();
         $this->visitors_log->log_visitor($ip_address);
@@ -326,4 +327,168 @@ class Sd extends CI_Controller
             'ppdb_sd_start' => $start,
         ]);
     }
+
+    // =========================================================================
+    // Mapping berita
+    // =========================================================================
+
+    private function _map_berita($data_berita)
+    {
+        $mapped = [];
+        foreach ($data_berita as $b) {
+            $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $b['judul_berita'])));
+            $mapped[] = [
+                'id'           => $b['id_berita'],
+                'slug'         => $slug,
+                'gambar'       => $b['gambar'],
+                'kategori'     => 'umum',
+                'judul'        => $b['judul_berita'],
+                'ringkasan'    => strip_tags(substr($b['isi_berita'], 0, 150)),
+                'isi'          => $b['isi_berita'],
+                'tanggal_post' => $b['tanggal_post'],
+                'penulis'      => ''
+            ];
+        }
+        return $mapped;
+    }
+
+    // =========================================================================
+    // Berita SD
+    // =========================================================================
+
+    public function berita($id = null, $slug = null)
+    {
+        // Jika ada parameter ID, tampilkan detail berita
+        if ($id !== null && is_numeric($id)) {
+            $this->_baca_berita((int) $id);
+            return;
+        }
+
+        $data = $this->base_data(
+            'Berita - SD K Citra Bangsa Mandiri',
+            'berita',
+            'Berita, kabar kegiatan, prestasi, dan pengumuman dari SD Kristen Citra Bangsa Mandiri Kupang.'
+        );
+
+        $hal = (int)($this->input->get('hal') ?? 1);
+        if ($hal < 1) $hal = 1;
+        $limit  = 9;
+        $offset = ($hal - 1) * $limit;
+
+        $semua_berita = $this->_map_berita($this->m_data->get_data('berita')->result_array());
+
+        $total_hal = max(1, ceil(count($semua_berita) / $limit));
+        $data['berita']    = array_slice($semua_berita, $offset, $limit);
+        $data['hal']       = $hal;
+        $data['total_hal'] = $total_hal;
+
+        $this->render('berita', $data);
+    }
+
+    /**
+     * Detail berita (dipanggil dari berita() ketika ada parameter $id).
+     */
+    private function _baca_berita($id)
+    {
+        $row = $this->db->get_where('berita', ['id_berita' => $id])->row_array();
+
+        if (empty($row)) {
+            show_404();
+            return;
+        }
+
+        $data = $this->base_data(
+            htmlspecialchars($row['judul_berita']) . ' - SD K Citra Bangsa Mandiri',
+            'berita',
+            strip_tags(substr($row['isi_berita'], 0, 160))
+        );
+
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $row['judul_berita'])));
+        $data['berita'] = [
+            'id'           => $row['id_berita'],
+            'slug'         => $slug,
+            'gambar'       => $row['gambar'],
+            'kategori'     => 'umum',
+            'judul'        => $row['judul_berita'],
+            'isi'          => $row['isi_berita'],
+            'tanggal_post' => $row['tanggal_post'],
+            'penulis'      => ''
+        ];
+
+        // Berita lainnya (3 terakhir, kecuali yang sedang dibaca)
+        $this->db->where('id_berita !=', $id)->order_by('id_berita', 'DESC')->limit(3);
+        $data['lain'] = $this->_map_berita($this->db->get('berita')->result_array());
+
+        $this->render('baca', $data);
+    }
+
+    // =========================================================================
+    // Video Kegiatan SD
+    // =========================================================================
+
+    public function video_kegiatan()
+    {
+        $data = $this->base_data(
+            'Video Kegiatan - SD K Citra Bangsa Mandiri',
+            'video',
+            'Kumpulan video kegiatan belajar, ekstrakurikuler, dan acara siswa SD Kristen Citra Bangsa Mandiri Kupang.'
+        );
+
+        $data_all_video = $this->m_data->get_data('video_kegiatan')->result_array();
+        $video_mapped = [];
+        foreach ($data_all_video as $v) {
+            preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/\s]{11})%i', $v['link'], $match);
+            $ytId = isset($match[1]) ? $match[1] : '';
+            $video_mapped[] = [
+                'id'         => $v['id_video'],
+                'youtube_id' => $ytId,
+                'thumb'      => $ytId ? "https://img.youtube.com/vi/{$ytId}/hqdefault.jpg" : '',
+                'judul'      => $v['judul_video'],
+                'deskripsi'  => $v['deskripsi'],
+                'tanggal'    => ''
+            ];
+        }
+        $data['video'] = $video_mapped;
+
+        // Galeri foto untuk section bawah
+        $data_galeri = $this->m_data->get_data('galeri')->result_array();
+        $galeri_mapped = [];
+        foreach ($data_galeri as $g) {
+            $galeri_mapped[] = [
+                'foto'  => $g['foto'],
+                'judul' => $g['judul_foto']
+            ];
+        }
+        $data['galeri'] = $galeri_mapped;
+
+        $this->render('video_kegiatan', $data);
+    }
+
+    // =========================================================================
+    // Galeri Foto SD
+    // =========================================================================
+
+    public function galeri()
+    {
+        $data = $this->base_data(
+            'Galeri Foto - SD K Citra Bangsa Mandiri',
+            'galeri',
+            'Dokumentasi foto kegiatan belajar, ekstrakurikuler, dan acara siswa SD Kristen Citra Bangsa Mandiri Kupang.'
+        );
+
+        $data_galeri = $this->m_data->get_data('galeri')->result_array();
+        $galeri_mapped = [];
+        foreach ($data_galeri as $g) {
+            $galeri_mapped[] = [
+                'foto'       => $g['foto'],
+                'judul'      => $g['judul_foto'],
+                'keterangan' => '',
+                'tanggal'    => ''
+            ];
+        }
+        $data['galeri'] = $galeri_mapped;
+
+        $this->render('galeri', $data);
+    }
 }
+

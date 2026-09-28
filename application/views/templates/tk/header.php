@@ -778,11 +778,14 @@
             <a href="<?= base_url('tk'); ?>" <?= (isset($active_menu) && $active_menu == 'home') ? 'aria-current="page"' : ''; ?>>Beranda</a>
             <a href="<?= base_url('tk/profil'); ?>" <?= (isset($active_menu) && $active_menu == 'profil') ? 'aria-current="page"' : ''; ?>>Profil</a>
             <a href="<?= base_url('tk/program'); ?>" <?= (isset($active_menu) && $active_menu == 'program') ? 'aria-current="page"' : ''; ?>>Program</a>
+            <a href="<?= base_url('tk/berita'); ?>" <?= (isset($active_menu) && $active_menu == 'berita') ? 'aria-current="page"' : ''; ?>>Berita</a>
+            <a href="<?= base_url('tk/video_kegiatan'); ?>" <?= (isset($active_menu) && $active_menu == 'video') ? 'aria-current="page"' : ''; ?>>Video</a>
+            <a href="<?= base_url('tk/galeri'); ?>" <?= (isset($active_menu) && $active_menu == 'galeri') ? 'aria-current="page"' : ''; ?>>Galeri</a>
             <a href="<?= base_url('tk/ppdb'); ?>" <?= (isset($active_menu) && $active_menu == 'ppdb') ? 'aria-current="page"' : ''; ?>>Pendaftaran</a>
         </nav>
 
         <div class="tk-header__aksi">
-            <a href="<?= base_url('tk/ppdb'); ?>" class="tk-tombol tk-tombol--utama">Daftar</a>
+            <a href="<?= base_url('admin-tk/login'); ?>" class="tk-tombol tk-tombol--utama">Login Admin</a>
             <a href="<?= base_url(); ?>" class="tk-tombol tk-tombol--kedua">Yayasan</a>
             <button class="tk-burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="nav">
                 <span></span><span></span><span></span>
