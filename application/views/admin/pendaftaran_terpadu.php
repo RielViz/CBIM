@@ -60,7 +60,6 @@ foreach ($data_pendaftaran as $r) {
         'asal_sekolah'   => $r['asal_sekolah'],
         'catatan'        => $r['catatan'],
         'tanggal_daftar' => adm_tgl($r['tanggal_daftar']),
-        '_wa'            => adm_wa($r['no_hp']),
         '_email'         => $r['email'],
     ]);
 }
@@ -140,7 +139,6 @@ foreach ($data_pendaftaran as $r) {
                         <td data-nilai="<?= (int) array_search($r['status'], array_keys($status_semua)); ?>"><span class="cap cap--<?= adm_warna_status($r['status']); ?>"><?= adm_e($r['status']); ?></span></td>
                         <td>
                             <div class="aksi">
-                                <a class="ikon-tbl ikon-tbl--wa" href="https://wa.me/<?= adm_wa($r['no_hp']); ?>" target="_blank" rel="noopener" title="Hubungi lewat WhatsApp" aria-label="WhatsApp orang tua"><?= adm_ikon('wa', 16); ?></a>
                                 <button type="button" class="ikon-tbl" data-buka="dialogRincian" data-rekam="p<?= (int) $r['id_pendaftaran']; ?>" title="Lihat dan ubah status" aria-label="Lihat data lengkap"><?= adm_ikon('lihat', 16); ?></button>
                                 <?php if ($super): ?>
                                     <button type="button" class="ikon-tbl ikon-tbl--hapus" title="Hapus" aria-label="Hapus pendaftar"
@@ -165,6 +163,7 @@ foreach ($data_pendaftaran as $r) {
 
 <dialog class="dialog dialog--lebar" id="dialogRincian" aria-labelledby="judulRincian">
     <form action="<?= base_url('admin/update_status_pendaftaran'); ?>" method="post">
+        <?= csrf_field(); ?>
         <div class="dialog__kepala">
             <div>
                 <p style="margin:0 0 2px"><span data-tampil="no_registrasi"></span> &middot; <span data-tampil="jenjang"></span></p>
@@ -209,8 +208,7 @@ foreach ($data_pendaftaran as $r) {
             </div>
         </div>
         <div class="dialog__kaki">
-            <a class="tbl tbl--garis kiri" href="#" target="_blank" rel="noopener" data-href="_wa" data-awalan="https://wa.me/"><?= adm_ikon('wa', 16); ?> WhatsApp</a>
-            <a class="tbl tbl--garis" href="#" data-href="_email" data-awalan="mailto:"><?= adm_ikon('pesan', 16); ?> Surel</a>
+            <a class="tbl tbl--garis kiri" href="#" data-href="_email" data-awalan="mailto:"><?= adm_ikon('pesan', 16); ?> Surel</a>
             <button type="submit" class="tbl tbl--utama">Simpan status</button>
         </div>
     </form>

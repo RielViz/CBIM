@@ -76,6 +76,7 @@ foreach ($data_struktur as $s) {
 
 <dialog class="dialog" id="dialogTambah" aria-labelledby="judulTambah">
     <form action="<?= base_url('admin/add_struktur/'); ?>" method="post" enctype="multipart/form-data" data-kosongkan data-sukses="Pengurus baru sudah ditambahkan.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Tambah pengurus', '', 'judulTambah'); ?>
         <div class="dialog__isi">
             <div class="bidang">
@@ -100,6 +101,7 @@ foreach ($data_struktur as $s) {
 
 <dialog class="dialog" id="dialogUbah" aria-labelledby="judulUbah">
     <form action="<?= base_url('admin/update_struktur/'); ?>" method="post" enctype="multipart/form-data" data-sukses="Data pengurus sudah diperbarui.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Ubah data pengurus', '', 'judulUbah'); ?>
         <div class="dialog__isi">
             <input type="hidden" name="id_struktur">

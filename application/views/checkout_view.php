@@ -383,6 +383,7 @@
         <div class="checkout-wrapper">
             <!-- Checkout Form -->
             <form method="post" action="<?= site_url('katalog/proses_checkout') ?>" class="checkout-form">
+                <?= csrf_field(); ?>
                 <h3 class="form-title"><i class="fas fa-user"></i> Informasi Pembeli</h3>
                 
                 <div class="form-group">

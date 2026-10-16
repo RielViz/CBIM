@@ -6,7 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
    ----------------------------------------------------------------------------
    Controller hanya mengirim tiga angka kunjungan ($daily_visits,
    $monthly_visits, $yearly_visits). Ringkasan lainnya — grafik 14 hari,
-   pendaftar baru, pesan belum dibaca, berita terakhir — dihitung langsung di
+   pendaftar baru, pelanggan newsletter, berita terakhir — dihitung langsung di
    sini dengan kueri ringan, supaya Admin.php tidak perlu diubah.
    Setiap kueri memeriksa dulu apakah tabelnya ada.
    ========================================================================== */
@@ -40,7 +40,6 @@ $jml = [
 // Hanya dari tabel `pendaftaran`. Tabel lama pendaftaran_sd dan pendaftaran_tk
 // tidak lagi dihitung karena halamannya sudah tidak ada di panel.
 $daftar_baru = (int) adm_hitung('pendaftaran', $jenjang_unit ? ['status' => 'Baru', 'jenjang' => $jenjang_unit] : ['status' => 'Baru']);
-$pesan_baru = $super ? (int) adm_hitung('pesan_kontak', ['status' => 'Belum Dibaca']) : 0;
 $pelanggan  = $super ? (int) adm_hitung('newsletter_subscribers', ['status' => 'Aktif']) : 0;
 
 /* ---- Pendaftar terbaru ---- */
@@ -67,10 +66,10 @@ $hari_ini = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][(in
         <div class="sapa__tanggal"><?= adm_e($hari_ini); ?></div>
         <h1><?= adm_e($salam); ?>, <?= adm_e($CI->session->userdata('username')); ?></h1>
         <p>
-            <?php if ($daftar_baru || $pesan_baru): ?>
-                Ada <?= $daftar_baru ? '<strong style="color:#fff">' . $daftar_baru . ' pendaftar baru</strong>' : ''; ?><?= $daftar_baru && $pesan_baru ? ' dan ' : ''; ?><?= $pesan_baru ? '<strong style="color:#fff">' . $pesan_baru . ' pesan belum dibaca</strong>' : ''; ?> yang menunggu.
+            <?php if ($daftar_baru): ?>
+                Ada <strong style="color:#fff"><?= $daftar_baru; ?> pendaftar baru</strong> yang menunggu.
             <?php else: ?>
-                Tidak ada pendaftar atau pesan yang menunggu. Semuanya sudah ditangani.
+                Tidak ada pendaftar yang menunggu. Semuanya sudah ditangani.
             <?php endif; ?>
         </p>
     </div>
@@ -106,10 +105,10 @@ $hari_ini = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'][(in
         </a>
     <?php endif; ?>
     <?php if ($super): ?>
-        <a class="angka__item" href="<?= base_url('admin/pesan_kontak'); ?>">
-            <span class="angka__label"><?= adm_ikon('pesan', 15); ?> Pesan belum dibaca</span>
-            <span class="angka__nilai"><?= $pesan_baru; ?></span>
-            <span class="angka__catatan"><?= $pelanggan; ?> pelanggan newsletter aktif</span>
+        <a class="angka__item" href="<?= base_url('admin/newsletter'); ?>">
+            <span class="angka__label"><?= adm_ikon('surat', 15); ?> Pelanggan newsletter</span>
+            <span class="angka__nilai"><?= $pelanggan; ?></span>
+            <span class="angka__catatan">berlangganan aktif</span>
         </a>
     <?php endif; ?>
 </div>

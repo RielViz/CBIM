@@ -104,11 +104,13 @@ $grup = [];
 $grup['Utama'] = [
     'dashboard' => ['Dasbor', 'admin-tk', 'dasbor'],
     'profil'    => ['Kelola Profil', 'admin-tk/profil', 'konten'],
+    'gelombang' => ['Gelombang Pendaftaran', 'admin-tk/gelombang', 'daftar'],
 ];
 
 $judul_halaman = [
     'dashboard' => 'Dasbor',
     'profil'    => 'Kelola Profil TK',
+    'gelombang' => 'Gelombang Pendaftaran TK',
 ];
 $judul = isset($judul_halaman[$menu]) ? $judul_halaman[$menu] : 'Panel Admin TK';
 $kelompok = '';

@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="<?= base_url(); ?>assets/templates/media/logos/logo-cbim.png" />
     <meta name="description" content="<?= isset($subsite_meta['deskripsi']) ? html_escape($subsite_meta['deskripsi']) : 'SD K Citra Bangsa, Kupang. Di bawah naungan Yayasan Citra Bina Insan Mandiri (YCBIM).'; ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <?= csrf_meta(); ?>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

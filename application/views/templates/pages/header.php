@@ -39,6 +39,7 @@ $menu = [
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<?= csrf_meta(); ?>
 <title><?= html_escape($judul_hal); ?></title>
 
 <meta name="description" content="<?= html_escape($deskripsi); ?>">

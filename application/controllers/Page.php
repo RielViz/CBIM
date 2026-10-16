@@ -129,8 +129,13 @@ class Page extends CI_Controller
         $this->load->view('templates/pages/footer', $data);
     }
 
-    public function berita()
+    public function berita($id = null, $slug = null)
     {
+        if ($id !== null && ctype_digit((string) $id)) {
+            $this->_baca_berita((int) $id);
+            return;
+        }
+
         $data = $this->_get_common_data('berita', 'Berita - Yayasan CBIM', 'Berita dan informasi terbaru');
 
         $kat_aktif = $this->input->get('kategori') ?? '';
@@ -169,6 +174,31 @@ class Page extends CI_Controller
 
         $this->load->view('templates/pages/header', $data);
         $this->load->view('pages/berita', $data);
+        $this->load->view('templates/pages/footer', $data);
+    }
+
+    private function _baca_berita($id)
+    {
+        $row = $this->db->get_where('berita', ['id_berita' => $id])->row_array();
+        if (empty($row)) {
+            show_404();
+            return;
+        }
+
+        $data = $this->_get_common_data(
+            'berita',
+            $row['judul_berita'] . ' - Yayasan CBIM',
+            strip_tags(substr($row['isi_berita'], 0, 160))
+        );
+
+        $mapped = $this->_map_berita([$row]);
+        $data['berita'] = $mapped[0];
+
+        $this->db->where('id_berita !=', $id)->order_by('id_berita', 'DESC')->limit(3);
+        $data['lain'] = $this->_map_berita($this->db->get('berita')->result_array());
+
+        $this->load->view('templates/pages/header', $data);
+        $this->load->view('pages/baca', $data);
         $this->load->view('templates/pages/footer', $data);
     }
 

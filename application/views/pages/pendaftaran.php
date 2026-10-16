@@ -44,6 +44,7 @@
             <!-- Form Card -->
             <div class="card shadow-sm border p-8 p-lg-12 bg-white rounded-3">
                 <form action="<?= base_url('pendaftaran/submit'); ?>" method="POST" id="ppdbForm">
+                    <?= csrf_field(); ?>
                     <!-- ============================================== -->
                     <!-- STEP 1: Jenjang & Data Calon Siswa             -->
                     <!-- ============================================== -->
@@ -56,35 +57,35 @@
                             <label class="form-label fw-bold required text-dark">Pilih Jenjang Pendidikan</label>
                             <div class="row g-3">
                                 <div class="col-6 col-md">
-                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangTK" value="TK" checked>
+                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangTK" value="TK"<?= (isset($jenjang_pilih) ? $jenjang_pilih : 'TK') === 'TK' ? ' checked' : ''; ?>>
                                     <label class="btn btn-outline btn-outline-dashed btn-outline-primary p-4 d-flex flex-column align-items-center w-100" for="jenjangTK">
                                         <i class="bi bi-stars fs-2x mb-1"></i>
                                         <span class="fw-bolder">PAUD / TK</span>
                                     </label>
                                 </div>
                                 <div class="col-6 col-md">
-                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangSD" value="SD">
+                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangSD" value="SD"<?= (isset($jenjang_pilih) ? $jenjang_pilih : 'TK') === 'SD' ? ' checked' : ''; ?>>
                                     <label class="btn btn-outline btn-outline-dashed btn-outline-primary p-4 d-flex flex-column align-items-center w-100" for="jenjangSD">
                                         <i class="bi bi-book fs-2x mb-1"></i>
                                         <span class="fw-bolder">SD K</span>
                                     </label>
                                 </div>
                                 <div class="col-6 col-md">
-                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangSMP" value="SMP">
+                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangSMP" value="SMP"<?= (isset($jenjang_pilih) ? $jenjang_pilih : 'TK') === 'SMP' ? ' checked' : ''; ?>>
                                     <label class="btn btn-outline btn-outline-dashed btn-outline-primary p-4 d-flex flex-column align-items-center w-100" for="jenjangSMP">
                                         <i class="bi bi-mortarboard fs-2x mb-1"></i>
                                         <span class="fw-bolder">SMP K</span>
                                     </label>
                                 </div>
                                 <div class="col-6 col-md">
-                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangSMA" value="SMA">
+                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangSMA" value="SMA"<?= (isset($jenjang_pilih) ? $jenjang_pilih : 'TK') === 'SMA' ? ' checked' : ''; ?>>
                                     <label class="btn btn-outline btn-outline-dashed btn-outline-primary p-4 d-flex flex-column align-items-center w-100" for="jenjangSMA">
                                         <i class="bi bi-building fs-2x mb-1"></i>
                                         <span class="fw-bolder">SMA K</span>
                                     </label>
                                 </div>
                                 <div class="col-6 col-md">
-                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangUCB" value="UCB">
+                                    <input type="radio" class="btn-check" name="jenjang" id="jenjangUCB" value="UCB"<?= (isset($jenjang_pilih) ? $jenjang_pilih : 'TK') === 'UCB' ? ' checked' : ''; ?>>
                                     <label class="btn btn-outline btn-outline-dashed btn-outline-primary p-4 d-flex flex-column align-items-center w-100" for="jenjangUCB">
                                         <i class="bi bi-award fs-2x mb-1"></i>
                                         <span class="fw-bolder">UCB (Univ)</span>
@@ -162,7 +163,7 @@
 
                         <div class="row g-4 mb-5">
                             <div class="col-md-6">
-                                <label class="form-label fw-bold text-dark required">Nomor HP / WhatsApp Aktif</label>
+                                <label class="form-label fw-bold text-dark required">Nomor HP / Telepon Aktif</label>
                                 <input type="text" name="no_hp" id="inputNoHp" class="form-control form-control-solid" placeholder="Contoh: 08123456789" required />
                                 <small class="text-muted">Untuk konfirmasi dan notifikasi status pendaftaran.</small>
                             </div>
@@ -252,7 +253,7 @@
                                         <td id="revOrtu"></td>
                                     </tr>
                                     <tr>
-                                        <th class="bg-light fw-bold">Nomor HP / WhatsApp</th>
+                                        <th class="bg-light fw-bold">Nomor HP / Telepon</th>
                                         <td id="revNoHp" class="fw-bold text-success"></td>
                                     </tr>
                                     <tr>
@@ -299,7 +300,7 @@ function nextStep(current) {
         var hp = document.getElementById('inputNoHp').value.trim();
         var alamat = document.getElementById('inputAlamat').value.trim();
         if (!ortu || !hp || !alamat) {
-            alert('Silakan lengkapi nama orang tua, nomor HP/WhatsApp, dan alamat domisili.');
+            alert('Silakan lengkapi nama orang tua, nomor HP/telepon, dan alamat domisili.');
             return;
         }
     } else if (current === 3) {

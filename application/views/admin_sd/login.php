@@ -79,6 +79,7 @@ body{
     <?php endif; ?>
 
     <form method="post" action="<?= $url; ?>">
+        <?= csrf_field(); ?>
         <div class="bidang">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required autocomplete="username" placeholder="Masukkan username">

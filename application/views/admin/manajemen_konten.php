@@ -101,6 +101,7 @@ $terisi = count(array_intersect_key($per_jenis, $jenis));
 
 <dialog class="dialog dialog--lebar" id="dialogTambah" aria-labelledby="judulTambah">
     <form action="<?= base_url('admin/add_konten/'); ?>" method="post" data-kosongkan data-sukses="Bagian profil sudah diisi.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Isi bagian profil', '', 'judulTambah'); ?>
         <div class="dialog__isi">
             <div class="baris-bidang">
@@ -136,6 +137,7 @@ $terisi = count(array_intersect_key($per_jenis, $jenis));
 
 <dialog class="dialog dialog--lebar" id="dialogUbah" aria-labelledby="judulUbah">
     <form action="<?= base_url('admin/update_konten/'); ?>" method="post" data-sukses="Perubahan profil sudah disimpan.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Ubah bagian profil', '', 'judulUbah'); ?>
         <div class="dialog__isi">
             <input type="hidden" name="id_konten">

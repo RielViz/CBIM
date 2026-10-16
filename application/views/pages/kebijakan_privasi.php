@@ -28,8 +28,7 @@
                         Kami dapat mengumpulkan data dari Anda melalui beberapa saluran di situs ini:
                     </p>
                     <ul class="text-gray-700 fs-5 lh-lg">
-                        <li><strong>Data Pendaftaran Siswa/Mahasiswa Baru (PPDB Online):</strong> Nama lengkap, NIK/NISN, tanggal lahir, jenis kelamin, nama orang tua/wali, nomor telepon/WhatsApp, alamat rumah, dan riwayat asal sekolah.</li>
-                        <li><strong>Formulir Kontak & Pertanyaan:</strong> Nama, alamat email, subjek, serta pesan yang dikirimkan kepada tim kami.</li>
+                        <li><strong>Data Pendaftaran Siswa/Mahasiswa Baru (PPDB Online):</strong> Nama lengkap, NIK/NISN, tanggal lahir, jenis kelamin, nama orang tua/wali, nomor telepon/HP, alamat rumah, dan riwayat asal sekolah.</li>
                         <li><strong>Langganan Newsletter:</strong> Alamat email dan preferensi unit informasi yang Anda pilih.</li>
                         <li><strong>Data Teknis & Analitik (Cookie):</strong> Alamat IP teranonimkan, jenis browser, halaman yang dikunjungi, dan waktu akses untuk tujuan optimasi performa melalui Google Analytics 4.</li>
                     </ul>

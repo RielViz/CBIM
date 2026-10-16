@@ -414,6 +414,7 @@
        
 <?php foreach ($this->cart->contents() as $item): ?>
   <form method="post" action="<?= base_url('katalog/update_cart') ?>">
+      <?= csrf_field(); ?>
     <div class="qty-control">
       <input type="hidden" name="rowid" value="<?= $item['rowid'] ?>">
       <?php if($item['qty'] > 1): ?>
@@ -439,6 +440,7 @@
                         <td>Rp<?= number_format($item['subtotal'],0,',','.') ?></td>
                         <td>
                             <form action="<?= site_url('katalog/remove_from_cart') ?>" method="post" onsubmit="return confirm('Hapus item ini?');">
+                                <?= csrf_field(); ?>
     <input type="hidden" name="rowid" value="<?= $item['rowid'] ?>">
     <button  class="remove-btn" onclick="removeItem('<?= $item['rowid'] ?>' type="submit"><i class="fas fa-trash-alt"></i>Hapus</button>
 </form>     </td>

@@ -47,7 +47,7 @@ $v_js  = @filemtime(FCPATH . 'assets/admin/admin.js') ?: '1';
         <div class="masuk__kutip">
             <span></span>
             <h1>Panel pengelola situs yayasan</h1>
-            <p>Berita, galeri, video kegiatan, struktur organisasi, pendaftaran, dan pesan masuk — semuanya dikelola dari sini.</p>
+            <p>Berita, galeri, video kegiatan, struktur organisasi, dan pendaftaran — semuanya dikelola dari sini.</p>
         </div>
         <div class="masuk__kaki">&copy; <?= date('Y'); ?> Yayasan Citra Bina Insan Mandiri</div>
     </aside>
@@ -58,6 +58,7 @@ $v_js  = @filemtime(FCPATH . 'assets/admin/admin.js') ?: '1';
             <p>Gunakan akun admin yang diberikan pengurus yayasan.</p>
 
             <form action="<?= base_url('auth/login'); ?>" method="post" id="formMasuk" data-tanpa-kunci>
+                <?= csrf_field(); ?>
                 <div class="bidang">
                     <label for="username">Nama pengguna</label>
                     <input type="text" id="username" name="username" required autocomplete="username"

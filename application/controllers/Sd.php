@@ -44,7 +44,6 @@ class Sd extends CI_Controller
         $this->load->model('m_data');
         $this->load->model('visitors_log');
         $this->load->library('form_validation');
-        $this->load->helper('yayasan');
 
         $ip_address = $this->input->ip_address();
         $this->visitors_log->log_visitor($ip_address);
@@ -135,8 +134,10 @@ class Sd extends CI_Controller
             'Pendaftaran Peserta Didik Baru SD Kristen Citra Bangsa Mandiri Kupang TA 2026/2027. Isi formulir online, lihat alur pendaftaran dan berkas yang dibutuhkan.'
         );
 
-        $data['success_msg'] = $this->session->flashdata('success');
-        $data['error_msg']   = $this->session->flashdata('error');
+        $this->load->model('gelombang_model');
+        $data['jenjang']        = 'SD';
+        $data['nama_unit']      = 'SD K Citra Bangsa Mandiri';
+        $data['data_gelombang'] = $this->gelombang_model->daftar('SD', TRUE);
 
         $this->render('ppdb', $data);
     }
@@ -178,7 +179,7 @@ class Sd extends CI_Controller
         $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required|callback_valid_tanggal');
         $this->form_validation->set_rules('nisn', 'NISN / NIK', 'trim|alpha_numeric|max_length[20]');
         $this->form_validation->set_rules('nama_ortu', 'Nama Orang Tua / Wali', 'required|trim|min_length[3]|max_length[200]');
-        $this->form_validation->set_rules('no_hp', 'No. WhatsApp / HP', 'required|trim|min_length[8]|max_length[25]|callback_valid_nomor_hp');
+        $this->form_validation->set_rules('no_hp', 'No. HP / Telepon', 'required|trim|min_length[8]|max_length[25]|callback_valid_nomor_hp');
         $this->form_validation->set_rules('alamat', 'Alamat Lengkap', 'required|trim|min_length[10]');
         // UU PDP: data anak wajib disertai persetujuan orang tua/wali.
         $this->form_validation->set_rules('persetujuan_ortu', 'Persetujuan Orang Tua/Wali', 'required');
@@ -252,8 +253,8 @@ class Sd extends CI_Controller
             $this->session->set_flashdata(
                 'success',
                 "Terima kasih ({$nama}), pendaftaran PPDB SD K Citra Bangsa Mandiri berhasil tersimpan. "
-                . "Nomor registrasi Anda: {$no_registrasi} — mohon disimpan. "
-                . "Tim administrasi akan menghubungi Anda melalui WhatsApp/Telepon ({$no_hp})."
+                . "Nomor registrasi Anda: {$no_registrasi} â€” mohon disimpan. "
+                . "Tim administrasi akan menghubungi Anda melalui telepon ({$no_hp})."
             );
         } else {
             log_message('error', 'Gagal menyimpan pendaftaran SD: ' . $this->db->error()['message']);
@@ -491,4 +492,3 @@ class Sd extends CI_Controller
         $this->render('galeri', $data);
     }
 }
-

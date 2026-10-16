@@ -17,6 +17,10 @@ class Pendaftaran extends CI_Controller
             'data_alamat' => $this->m_data->get_data_where("jenis_konten='alamat'", 'konten')->result_array()
         ];
 
+        // Pilihan jenjang awal dari tautan /sd/ppdb atau /tk/ppdb (?jenjang=SD)
+        $jp = strtoupper((string) $this->input->get('jenjang'));
+        $data['jenjang_pilih'] = in_array($jp, ['TK','SD','SMP','SMA','UCB'], TRUE) ? $jp : 'TK';
+
         $this->load->view('./templates/pages/header');
         $this->load->view('./pages/pendaftaran', $data);
         $this->load->view('./templates/pages/footer');
@@ -28,7 +32,7 @@ class Pendaftaran extends CI_Controller
         $this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap Calon Siswa', 'required|trim|min_length[3]|max_length[200]');
         $this->form_validation->set_rules('jenis_kelamin', 'Jenis Kelamin', 'required|in_list[Laki-laki,Perempuan]');
         $this->form_validation->set_rules('nama_ortu', 'Nama Orang Tua / Wali', 'required|trim|min_length[3]|max_length[200]');
-        $this->form_validation->set_rules('no_hp', 'Nomor HP / WhatsApp', 'required|trim|min_length[8]|max_length[25]');
+        $this->form_validation->set_rules('no_hp', 'Nomor HP / Telepon', 'required|trim|min_length[8]|max_length[25]');
         $this->form_validation->set_rules('alamat', 'Alamat Domisili', 'required|trim|min_length[5]');
 
         if ($this->form_validation->run() == FALSE) {

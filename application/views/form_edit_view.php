@@ -372,6 +372,7 @@
         <h2 class="form-page-title"><i class="fas fa-edit"></i> Edit Buku</h2>
         
         <form method="post" action="<?= site_url('katalog/edit_buku/' . $buku->id) ?>" enctype="multipart/form-data" class="book-form">
+            <?= csrf_field(); ?>
             <div class="form-header">
                 <i class="fas fa-info-circle"></i>
                 <h2>Informasi Buku</h2>

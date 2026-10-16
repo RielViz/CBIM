@@ -701,7 +701,10 @@
                                 <i class="fas fa-pencil"></i> Edit
                             </a>
             
-<a href="<?= site_url('katalog/hapus_buku/' . $b->id) ?>"  class="btn btn-danger" onclick="return confirm('Yakin hapus buku ini?')">🗑️ Hapus</a>
+<form action="<?= site_url('katalog/hapus_buku/' . $b->id) ?>" method="post" style="display:contents" onsubmit="return confirm('Yakin hapus buku ini?')">
+    <?= csrf_field(); ?>
+    <button type="submit" class="btn btn-danger" style="border:0;cursor:pointer;font:inherit">🗑️ Hapus</button>
+</form>
 <?php }?>
                         </div>
                     </div>

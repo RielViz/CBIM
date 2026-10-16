@@ -99,6 +99,7 @@ foreach ($data_berita as $b) {
 <!-- ============================ TULIS BERITA ============================ -->
 <dialog class="dialog dialog--lebar" id="dialogTambah" aria-labelledby="judulTambah">
     <form action="<?= base_url('admin/add_berita/'); ?>" method="post" enctype="multipart/form-data" data-kosongkan data-sukses="Berita baru sudah diterbitkan.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Tulis berita', 'Berita langsung tampil di situs begitu disimpan.', 'judulTambah'); ?>
         <div class="dialog__isi">
             <div class="bidang">
@@ -124,6 +125,7 @@ foreach ($data_berita as $b) {
 <!-- ============================ UBAH BERITA ============================ -->
 <dialog class="dialog dialog--lebar" id="dialogUbah" aria-labelledby="judulUbah">
     <form action="<?= base_url('admin/update_berita/'); ?>" method="post" enctype="multipart/form-data" data-sukses="Perubahan berita sudah disimpan.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Ubah berita', 'Tanggal terbit tetap, tanggal diperbarui diisi otomatis.', 'judulUbah'); ?>
         <div class="dialog__isi">
             <input type="hidden" name="id_berita">

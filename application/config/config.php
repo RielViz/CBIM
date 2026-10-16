@@ -24,9 +24,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 */
 if (isset($_SERVER['HTTP_HOST'])) {
-    $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
-    $newurl = $http . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
-    $config['base_url'] = $newurl;
+    $is_https = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+    $http = $is_https ? 'https://' : 'http://';
+    if (getenv('VERCEL') || (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'vercel.app') !== false)) {
+        $config['base_url'] = $http . $_SERVER['HTTP_HOST'] . '/';
+    } else {
+        $newurl = $http . $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+        $config['base_url'] = $newurl;
+    }
 } else {
     $config['base_url'] = 'http://localhost/yayasan/';
 }
@@ -393,7 +400,7 @@ $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_samesite'] = 'Lax';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = NULL;
+$config['sess_save_path'] = (getenv('VERCEL') || (isset($_SERVER['HTTP_HOST']) && strpos($_SERVER['HTTP_HOST'], 'vercel.app') !== false)) ? sys_get_temp_dir() : NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
@@ -417,8 +424,15 @@ $config['sess_regenerate_destroy'] = FALSE;
 $config['cookie_prefix']    = '';
 $config['cookie_domain']    = '';
 $config['cookie_path']        = '/';
-$config['cookie_secure']    = FALSE;
-$config['cookie_httponly']     = FALSE;
+/* Cookie Secure hanya boleh TRUE kalau permintaan memang lewat HTTPS. Jika
+   dipaksa TRUE di http://localhost, CodeIgniter tidak akan mengirim cookie CSRF
+   sama sekali dan semua formulir ditolak. Di Vercel, HTTPS dikenali dari
+   header X-Forwarded-Proto. */
+$cbim_https = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+    || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+    || (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443);
+$config['cookie_secure']    = $cbim_https;
+$config['cookie_httponly']     = TRUE;
 $config['cookie_samesite']     = 'Lax';
 
 /*
@@ -463,11 +477,16 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_regenerate' = Regenerate token on every submission
 | 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = FALSE;
-$config['csrf_token_name'] = 'csrf_test_name';
-$config['csrf_cookie_name'] = 'csrf_cookie_name';
+/* CSRF aktif untuk seluruh permintaan POST. Setiap <form method="post"> wajib
+   memuat <?= csrf_field(); ?> (helper di application/helpers/yayasan_helper.php).
+   csrf_regenerate sengaja FALSE: dengan TRUE token berganti setiap kali ada
+   POST sehingga tab lain / tombol Kembali / admin yang membuka dua halaman
+   sekaligus akan ditolak. Token tetap berlaku sampai csrf_expire habis. */
+$config['csrf_protection'] = TRUE;
+$config['csrf_token_name'] = 'csrf_cbim_token';
+$config['csrf_cookie_name'] = 'csrf_cbim_cookie';
 $config['csrf_expire'] = 7200;
-$config['csrf_regenerate'] = TRUE;
+$config['csrf_regenerate'] = FALSE;
 $config['csrf_exclude_uris'] = array();
 
 /*

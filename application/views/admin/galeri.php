@@ -76,6 +76,7 @@ foreach ($data_galeri as $g) {
 
 <dialog class="dialog" id="dialogTambah" aria-labelledby="judulTambah">
     <form action="<?= base_url('admin/add_foto/'); ?>" method="post" enctype="multipart/form-data" data-kosongkan data-sukses="Foto sudah diunggah ke galeri.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Unggah foto', 'Foto langsung tampil di halaman Galeri.', 'judulTambah'); ?>
         <div class="dialog__isi">
             <div class="bidang">
@@ -97,6 +98,7 @@ foreach ($data_galeri as $g) {
 
 <dialog class="dialog" id="dialogUbah" aria-labelledby="judulUbah">
     <form action="<?= base_url('admin/update_foto/'); ?>" method="post" enctype="multipart/form-data" data-sukses="Perubahan foto sudah disimpan.">
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog('Ubah foto', '', 'judulUbah'); ?>
         <div class="dialog__isi">
             <input type="hidden" name="id_foto">

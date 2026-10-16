@@ -94,12 +94,6 @@ if (!function_exists('adm_e')) {
         return $r;
     }
 
-    /** Nomor WhatsApp: 0812... menjadi 62812... */
-    function adm_wa($no)
-    {
-        return preg_replace('/^0/', '62', preg_replace('/[^0-9]/', '', (string) $no));
-    }
-
     /**
      * Kotak unggah gambar dengan pratinjau.
      * Nama field ($name) harus sama persis dengan yang dibaca controller.
@@ -151,8 +145,6 @@ if (!function_exists('adm_e')) {
             'cari'     => '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
             'tutup'    => '<path d="M6 6l12 12M18 6 6 18"/>',
             'unduh'    => '<path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 20h14"/>',
-            'wa'       => '<path d="M4 20l1.2-4.1A8 8 0 1 1 8.3 19z"/><path d="M9 9.2c0 3 2.8 5.8 5.8 5.8l1.2-1.4-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2z"/>',
-            'balas'    => '<path d="M10 8 5 12.5 10 17"/><path d="M5 12.5h9a5 5 0 0 1 5 5V19"/>',
             'foto'     => '<rect x="3" y="4.5" width="18" height="15" rx="1.5"/><circle cx="12" cy="12" r="3.5"/><path d="M8 4.5 9.5 2.5h5L16 4.5"/>',
             'awas'     => '<path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4.5M12 17.5h.01"/>',
             'salin'    => '<rect x="8.5" y="8.5" width="12" height="12" rx="1.5"/><path d="M15.5 8.5V5A1.5 1.5 0 0 0 14 3.5H5A1.5 1.5 0 0 0 3.5 5v9A1.5 1.5 0 0 0 5 15.5h3.5"/>',
@@ -184,15 +176,11 @@ $label_peran = [
 ];
 
 /* ------------------------------------------------------------ LENCANA MENU */
-/* Angka kecil di samping menu: berapa pendaftar yang belum diproses dan pesan
-   yang belum dibaca. Supaya admin langsung tahu ada pekerjaan tanpa membuka
-   halamannya satu per satu. */
+/* Angka kecil di samping menu: berapa pendaftar yang belum diproses. Supaya
+   admin langsung tahu ada pekerjaan tanpa membuka halamannya satu per satu. */
 $lencana = [];
 if ($peran_super || $peran_unit) {
     $lencana['pendaftaran_terpadu'] = adm_hitung('pendaftaran', ['status' => 'Baru']);
-}
-if ($peran_super) {
-    $lencana['pesan_kontak'] = adm_hitung('pesan_kontak', ['status' => 'Belum Dibaca']);
 }
 
 /* ------------------------------------------------------------------- MENU */
@@ -219,7 +207,6 @@ if ($peran_super) {
         'manajemen_konten'    => ['Profil Yayasan', 'admin/manajemen_konten', 'konten'],
     ];
     $grup['Komunikasi'] = [
-        'pesan_kontak' => ['Pesan Masuk', 'admin/pesan_kontak', 'pesan'],
         'newsletter'   => ['Newsletter', 'admin/newsletter', 'surat'],
     ];
     $grup['Sistem'] = [
@@ -238,7 +225,7 @@ $judul_halaman = [
     'dashboard' => 'Dasbor', 'berita' => 'Berita', 'galeri' => 'Galeri Foto', 'video_kegiatan' => 'Video Kegiatan',
     'struktur_organisasi' => 'Struktur Organisasi', 'manajemen_konten' => 'Profil Yayasan',
     'pendaftaran_terpadu' => 'Pendaftaran', 'pendaftaran_sd' => 'PPDB SD (lama)', 'pendaftaran_tk' => 'PPDB TK (lama)',
-    'pesan_kontak' => 'Pesan Masuk', 'newsletter' => 'Newsletter', 'backup' => 'Cadangan Data',
+    'newsletter' => 'Newsletter', 'backup' => 'Cadangan Data',
 ];
 $judul = isset($judul_halaman[$menu]) ? $judul_halaman[$menu] : 'Panel Admin';
 $kelompok = '';

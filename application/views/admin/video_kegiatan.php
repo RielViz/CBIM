@@ -89,6 +89,7 @@ foreach ($data_video as $v) {
 <?php foreach (['Tambah' => ['admin/add_video/', 'Tambah video', 'Tambah video'], 'Ubah' => ['admin/update_video/', 'Ubah video', 'Simpan perubahan']] as $jenis => $d): ?>
 <dialog class="dialog dialog--lebar" id="dialog<?= $jenis; ?>" aria-labelledby="judul<?= $jenis; ?>">
     <form action="<?= base_url($d[0]); ?>" method="post"<?= $jenis === 'Tambah' ? ' data-kosongkan data-sukses="Video baru sudah ditambahkan."' : ' data-sukses="Perubahan video sudah disimpan."'; ?>>
+        <?= csrf_field(); ?>
         <?= adm_kepala_dialog($d[1], '', 'judul' . $jenis); ?>
         <div class="dialog__isi">
             <?php if ($jenis === 'Ubah'): ?><input type="hidden" name="id_video"><?php endif; ?>

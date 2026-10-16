@@ -34,16 +34,12 @@
             <h4 class="fw-bolder text-dark mb-3">Langkah Selanjutnya:</h4>
             <ol class="fs-6 text-muted lh-lg ps-4 mb-0">
                 <li>Simpan atau catat <strong>Nomor Registrasi</strong> di atas sebagai bukti pendaftaran.</li>
-                <li>Petugas administrasi unit <strong><?= htmlspecialchars($pendaftaran['jenjang']); ?></strong> akan menghubungi Anda melalui WhatsApp/Telepon ke nomor <strong><?= htmlspecialchars($pendaftaran['no_hp']); ?></strong> untuk jadwal verifikasi berkas dan wawancara.</li>
-                <li>Anda juga dapat langsung melakukan konfirmasi cepat dengan mengklik tombol WhatsApp di bawah.</li>
+                <li>Petugas administrasi unit <strong><?= htmlspecialchars($pendaftaran['jenjang']); ?></strong> akan menghubungi Anda melalui telepon ke nomor <strong><?= htmlspecialchars($pendaftaran['no_hp']); ?></strong> untuk jadwal verifikasi berkas dan wawancara.</li>
             </ol>
         </div>
 
-        <!-- WhatsApp Quick Confirm -->
+        <!-- Aksi -->
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20PPDB%20Yayasan%20CBIM,%20saya%20telah%20mendaftar%20online%20dengan%20No%20Registrasi%20<?= urlencode($pendaftaran['no_registrasi']); ?>%20atas%20nama%20<?= urlencode($pendaftaran['nama_lengkap']); ?>" target="_blank" rel="noopener" class="btn btn-success fw-bolder py-3 px-6">
-                <i class="bi bi-whatsapp me-2"></i> Konfirmasi ke WhatsApp Admin
-            </a>
             <a href="<?= base_url(); ?>" class="btn btn-light py-3 px-6">
                 <i class="bi bi-house me-1"></i> Kembali ke Beranda
             </a>

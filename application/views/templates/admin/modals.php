@@ -15,6 +15,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <dialog class="dialog dialog--kecil dialog--bahaya" id="dialogHapus" aria-labelledby="dialogHapusJudul">
     <form method="post" action="">
+        <?= csrf_field(); ?>
         <div class="dialog__kepala">
             <span class="dialog__ikon-bahaya"><?= adm_ikon('hapus', 20); ?></span>
             <div>

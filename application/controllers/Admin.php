@@ -705,50 +705,6 @@ class Admin extends CI_Controller
     }
 
     // =========================================================================
-    // ============= BE-07: Pesan Masuk Kontak Management =======================
-    // =========================================================================
-    public function pesan_kontak()
-    {
-        $this->check_rbac(['administrator']);
-
-        $this->db->order_by('id_pesan', 'DESC');
-        $data_pesan = $this->db->get('pesan_kontak')->result_array();
-
-        $data = [
-            'menu' => 'pesan_kontak',
-            'data_pesan' => $data_pesan
-        ];
-
-        $this->load->view('./templates/admin/header', $data);
-        $this->load->view('./admin/pesan_kontak', $data);
-        $this->load->view('./templates/admin/modals');
-        $this->load->view('./templates/admin/footer');
-    }
-
-    public function update_status_pesan()
-    {
-        $this->check_rbac(['administrator']);
-        if ($this->input->method() === 'post') {
-            $id = (int)$this->input->post('id_pesan');
-            $status = htmlspecialchars($this->input->post('status'));
-            $this->db->where('id_pesan', $id)->update('pesan_kontak', ['status' => $status]);
-            $this->session->set_flashdata('success', 'Status pesan berhasil diperbarui.');
-            redirect('admin/pesan_kontak');
-        }
-    }
-
-    public function delete_pesan()
-    {
-        $this->check_rbac(['administrator']);
-        if ($this->input->method() === 'post') {
-            $id = (int)$this->input->post('id_pesan');
-            $this->db->where('id_pesan', $id)->delete('pesan_kontak');
-            $this->session->set_flashdata('success', 'Pesan berhasil dihapus.');
-            redirect('admin/pesan_kontak');
-        }
-    }
-
-    // =========================================================================
     // ============= INT-04: Newsletter Subscribers Management =================
     // =========================================================================
     public function newsletter()

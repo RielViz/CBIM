@@ -121,3 +121,31 @@ if (!function_exists('foto_struktur')) {
         return '';
     }
 }
+
+/* ---------------------------------------------------------------------------
+   CSRF. Dipakai di setiap formulir POST:  <?= csrf_field(); ?>
+   dan di <head> halaman publik (untuk fetch/AJAX):  <?= csrf_meta(); ?>
+   --------------------------------------------------------------------------- */
+if (!function_exists('csrf_field')) {
+    function csrf_field()
+    {
+        if (!config_item('csrf_protection')) {
+            return '';
+        }
+        $CI =& get_instance();
+        return '<input type="hidden" name="' . html_escape($CI->security->get_csrf_token_name())
+            . '" value="' . html_escape($CI->security->get_csrf_hash()) . '">';
+    }
+}
+
+if (!function_exists('csrf_meta')) {
+    function csrf_meta()
+    {
+        if (!config_item('csrf_protection')) {
+            return '';
+        }
+        $CI =& get_instance();
+        return '<meta name="csrf-name" content="' . html_escape($CI->security->get_csrf_token_name()) . '">'
+            . '<meta name="csrf-token" content="' . html_escape($CI->security->get_csrf_hash()) . '">';
+    }
+}

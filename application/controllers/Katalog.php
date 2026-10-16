@@ -184,6 +184,10 @@ public function hapus_buku($id) {
       if (!$this->session->userdata('role')) {
             redirect(base_url('auth'));
         }
+    // Penghapusan wajib lewat POST (formulir bertoken CSRF), bukan tautan GET.
+    if ($this->input->method() !== 'post') {
+        redirect('katalog');
+    }
     $buku = $this->Buku_model->get_by_id($id);
 
     // hapus file cover jika ada

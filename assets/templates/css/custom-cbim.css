@@ -414,7 +414,7 @@ section[id], div[id] {
     }
 }
 
-/* INT-05: Floating Chatbot FAQ & WhatsApp Connect */
+/* INT-05: Floating Chatbot FAQ */
 .cbim-float-container {
     position: fixed;
     bottom: 24px;

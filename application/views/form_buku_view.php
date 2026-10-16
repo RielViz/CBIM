@@ -362,6 +362,7 @@
         <h2 class="form-page-title"><i class="fas fa-book"></i> Tambah Buku Baru</h2>
         
         <form method="post" action="<?= site_url('katalog/tambah_buku') ?>" enctype="multipart/form-data" class="book-form">
+            <?= csrf_field(); ?>
             <div class="form-header">
                 <i class="fas fa-info-circle"></i>
                 <h2>Informasi Buku</h2>

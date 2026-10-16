@@ -284,7 +284,6 @@ a.angka__item:hover { border-color: var(--emas); transform: translateY(-1px); }
 }
 .ikon-tbl:hover { color: var(--navy); border-color: var(--navy); }
 .ikon-tbl--hapus:hover { color: var(--merah); border-color: var(--merah); background: var(--merah-p); }
-.ikon-tbl--wa:hover { color: var(--hijau); border-color: var(--hijau); background: var(--hijau-p); }
 .aksi { display: flex; gap: 6px; justify-content: flex-end; }
 
 /* ============================ LABEL STATUS =============================== */
@@ -432,19 +431,6 @@ td .sub-sel { display: block; font-size: .8rem; color: var(--samar); margin-top:
 .konten--kosong .konten__kaki { background: transparent; }
 
 /* ============================ PESAN ====================================== */
-.pesan-baris { display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-bottom: 1px solid var(--garis-t); cursor: pointer; transition: background .1s ease; }
-.pesan-baris:hover { background: #FCFBF8; }
-.pesan-baris:last-child { border-bottom: 0; }
-.pesan-baris--baru { background: #FFFDF7; }
-.pesan-baris--baru .pesan__subjek { font-weight: 700; }
-.pesan__bulat { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; background: var(--krem-tua); color: var(--navy); font-weight: 700; font-size: .86rem; }
-.pesan-baris--baru .pesan__bulat { background: var(--navy); color: var(--emas-muda); }
-.pesan__isi { flex: 1; min-width: 0; }
-.pesan__atas { display: flex; align-items: baseline; gap: 10px; }
-.pesan__nama { font-weight: 600; color: var(--navy); }
-.pesan__waktu { margin-left: auto; font-size: .76rem; color: var(--samar); white-space: nowrap; }
-.pesan__subjek { display: block; color: var(--teks); font-size: .9rem; }
-.pesan__potong { display: block; color: var(--samar); font-size: .84rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pesan__teks { white-space: pre-wrap; background: var(--krem); border: 1px solid var(--garis-t); border-radius: var(--r-kecil); padding: 14px 16px; font-size: .92rem; line-height: 1.7; max-height: 320px; overflow-y: auto; }
 
 /* ============================ FORMULIR =================================== */

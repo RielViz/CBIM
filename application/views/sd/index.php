@@ -173,7 +173,7 @@
             <p>Wujudkan masa depan buah hati yang cerdas berprestasi dan berlandaskan kasih Kristiani.</p>
             <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px">
                 <a href="<?= base_url('sd/ppdb'); ?>" class="tk-tombol tk-tombol--utama">Isi Formulir PPDB</a>
-                <a href="https://api.whatsapp.com/send?phone=6281234567890" target="_blank" class="tk-tombol tk-tombol--kuning">Tanya Panitia via WA</a>
+                <a href="<?= base_url('kontak'); ?>" class="tk-tombol tk-tombol--kuning">Hubungi Kami</a>
             </div>
         </div>
     </div>

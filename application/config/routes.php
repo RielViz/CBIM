@@ -63,6 +63,10 @@ $route['admin-tk/profil']    = 'admin_tk/profil';
 $route['admin-tk/add_konten']    = 'admin_tk/add_konten';
 $route['admin-tk/update_konten'] = 'admin_tk/update_konten';
 $route['admin-tk/delete_konten'] = 'admin_tk/delete_konten';
+$route['admin-tk/gelombang']        = 'admin_tk/gelombang';
+$route['admin-tk/add_gelombang']    = 'admin_tk/add_gelombang';
+$route['admin-tk/update_gelombang'] = 'admin_tk/update_gelombang';
+$route['admin-tk/delete_gelombang'] = 'admin_tk/delete_gelombang';
 
 $route['admin-sd']           = 'admin_sd/index';
 $route['admin-sd/login']     = 'admin_sd/login';
@@ -71,6 +75,10 @@ $route['admin-sd/profil']    = 'admin_sd/profil';
 $route['admin-sd/add_konten']    = 'admin_sd/add_konten';
 $route['admin-sd/update_konten'] = 'admin_sd/update_konten';
 $route['admin-sd/delete_konten'] = 'admin_sd/delete_konten';
+$route['admin-sd/gelombang']        = 'admin_sd/gelombang';
+$route['admin-sd/add_gelombang']    = 'admin_sd/add_gelombang';
+$route['admin-sd/update_gelombang'] = 'admin_sd/update_gelombang';
+$route['admin-sd/delete_gelombang'] = 'admin_sd/delete_gelombang';
 
 // Route SD K Citra Bangsa Mandiri
 $route['sd'] = 'sd';
@@ -90,6 +98,7 @@ $route['jejaring'] = 'page/jejaring';
 // Informasi
 $route['berita'] = 'page/berita';
 $route['berita/(:any)'] = 'page/berita/$1';
+$route['berita/(:num)/(:any)'] = 'page/berita/$1/$2';
 $route['kegiatan'] = 'page/kegiatan';
 $route['kegiatan/(:any)'] = 'page/kegiatan/$1';
 $route['galeri'] = 'page/galeri';

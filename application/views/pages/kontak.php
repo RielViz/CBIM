@@ -40,12 +40,6 @@ $peta = 'https://www.google.com/maps?q=' . rawurlencode($unit['alamat']) . '&out
             <?php endif; ?>
         </div>
 
-        <?php if (!empty($unit['whatsapp'])): ?>
-            <p style="text-align:center;margin-bottom:44px">
-                <a class="tbl tbl--utama" href="https://wa.me/<?= html_escape($unit['whatsapp']); ?>" target="_blank" rel="noopener">Kirim pesan WhatsApp</a>
-            </p>
-        <?php endif; ?>
-
         <!-- Peta dimuat lazy supaya tidak memperlambat halaman. -->
         <div class="peta masuk">
             <iframe src="<?= html_escape($peta); ?>" title="Peta lokasi kantor yayasan"

@@ -196,6 +196,74 @@ class Admin_sd extends CI_Controller
         }
     }
 
+    // =========================================================================
+    // KELOLA GELOMBANG PENDAFTARAN SD
+    // =========================================================================
+
+    public function gelombang()
+    {
+        $this->check_access();
+        $this->load->model('Gelombang_model');
+
+        $data = [
+            'menu'           => 'gelombang',
+            'unit_kode'      => 'sd',
+            'jenjang'        => 'SD',
+            'data_gelombang' => $this->Gelombang_model->daftar('SD'),
+        ];
+        $this->load->view('admin_sd/header', $data);
+        $this->load->view('templates/admin/gelombang', $data);
+        $this->load->view('admin_sd/modals');
+        $this->load->view('admin_sd/footer');
+    }
+
+    public function add_gelombang()
+    {
+        $this->check_access();
+        $this->load->model('Gelombang_model');
+
+        if ($this->input->method() === 'post') {
+            list($d, $err) = $this->Gelombang_model->dari_input($this->input, 'SD');
+            if ($err) {
+                $this->session->set_flashdata('error', $err);
+            } else {
+                $this->Gelombang_model->tambah($d);
+                $this->session->set_flashdata('success', 'Gelombang pendaftaran berhasil ditambahkan.');
+            }
+        }
+        redirect('admin-sd/gelombang');
+    }
+
+    public function update_gelombang()
+    {
+        $this->check_access();
+        $this->load->model('Gelombang_model');
+
+        if ($this->input->method() === 'post') {
+            list($d, $err) = $this->Gelombang_model->dari_input($this->input, 'SD');
+            if ($err) {
+                $this->session->set_flashdata('error', $err);
+            } else {
+                $this->Gelombang_model->ubah((int) $this->input->post('id_gelombang'), 'SD', $d);
+                $this->session->set_flashdata('success', 'Gelombang pendaftaran berhasil diperbarui.');
+            }
+        }
+        redirect('admin-sd/gelombang');
+    }
+
+    public function delete_gelombang()
+    {
+        $this->check_access();
+        $this->load->model('Gelombang_model');
+
+        $id = (int) $this->input->post('id_gelombang');
+        if ($id) {
+            $this->Gelombang_model->hapus($id, 'SD');
+            $this->session->set_flashdata('success', 'Gelombang pendaftaran berhasil dihapus.');
+        }
+        redirect('admin-sd/gelombang');
+    }
+
     public function delete_konten()
     {
         $this->check_access();

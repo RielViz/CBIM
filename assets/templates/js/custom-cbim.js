@@ -311,8 +311,14 @@
             formData.append('email', emailInput.value.trim());
             formData.append('preferensi', prefInput.value);
 
+            // Token CSRF dari <meta> di <head> (lihat csrf_meta() di helper).
+            var metaNama = document.querySelector('meta[name="csrf-name"]');
+            var metaToken = document.querySelector('meta[name="csrf-token"]');
+            if (metaNama && metaToken) { formData.append(metaNama.content, metaToken.content); }
+
             fetch((window.base_url || '/') + 'newsletter/subscribe', {
                 method: 'POST',
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' },
                 body: formData
             })
             .then(function(res) { return res.json(); })
@@ -414,7 +420,7 @@
     }
 
     // =========================================================================
-    // 8. INT-05: Floating Chatbot FAQ & WhatsApp Connect
+    // 8. INT-05: Floating Chatbot FAQ
     // =========================================================================
     function initChatbotWidget() {
         var toggleBtn = document.getElementById('cbimChatToggle');
